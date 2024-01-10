@@ -1,0 +1,1051 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Module 1: Fundamentals of Machine Learning &#8212; WSU ML in Cybersecurity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Module_1_Fundamentals_of_Machine_Learning';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 2: Supervised Learning" href="Module_2_Supervised_learning.html" />
+    <link rel="prev" title="Module 0: Introduction to Jupyter Notebook and Colab" href="Module_0_Introduction_to_Jupyter_Notebook_and_Colab.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="WSU ML in Cybersecurity - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="WSU ML in Cybersecurity - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Exploring Machine Learning in Cybersecurity Workshop
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Module_0_Introduction_to_Jupyter_Notebook_and_Colab.html"><strong>Module 0:</strong> Introduction to Jupyter Notebook and Colab</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Module 1:</strong> Fundamentals of Machine Learning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Module_2_Supervised_learning.html"><strong>Module 2:</strong> Supervised Learning</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/blob/main/notebooks/Module_1_Fundamentals_of_Machine_Learning.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/Module_1_Fundamentals_of_Machine_Learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 1: Fundamentals of Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Module 1:</strong> Fundamentals of Machine Learning</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-machine-learning-about">What is Machine Learning About?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-components-of-machine-learning">Key Components of Machine Learning:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-and-statisatical-analysis">Algorithms and Statisatical Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data">Training Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-and-adaptation">Learning and Adaptation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-machine-learning">Types of Machine Learning:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-machine-learning-in-cybersecurity">Exploring Machine Learning in Cybersecurity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spam-classification">Spam Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-visualise-the-number-of-genuine-and-spam-email">Let’s visualise the number of genuine and spam email</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminologies">Terminologies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labels">Labels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms">Algorithms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaulation-metrics">Evaulation Metrics</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-1-fundamentals-of-machine-learning">
+<h1><strong>Module 1:</strong> Fundamentals of Machine Learning<a class="headerlink" href="#module-1-fundamentals-of-machine-learning" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="machine-learning">
+<h1>Machine Learning<a class="headerlink" href="#machine-learning" title="Permalink to this heading">#</a></h1>
+<p>Machine Learning is a branch of artificial intelligence (AI) that centers on empowering computer systems to automatically learn and refine their performance over time without explicit programming instructions. The fundamental goal is to enable machines to recognize patterns, extract meaningful insights, and make predictions or decisions based on data.</p>
+<section id="what-is-machine-learning-about">
+<h2>What is Machine Learning About?<a class="headerlink" href="#what-is-machine-learning-about" title="Permalink to this heading">#</a></h2>
+<p>Machine Learning dedicated to empowering computer systems to autonomously refine their performance without explicit programming instructions. The essence lies in enabling machines to discern patterns, derive valuable insights, and autonomously predict outcomes or make informed decisions based on data analysis. By leveraging algorithms, Machine Learning endeavors to facilitate the understanding and extraction of meaningful information from datasets, fostering the capability of machines to learn from experience and adapt their behavior or predictions over time.</p>
+<p>At its core, Machine Learning revolves around the development and utilization of algorithms capable of perceiving patterns and leveraging these observations to make data-centric predictions or decisions. Through the process of training models on extensive datasets, Machine Learning endeavors to uncover correlations, trends, and underlying structures present within the data. This methodology allows computers to not only comprehend and analyze known examples but also to generalize from this knowledge, applying learned insights to novel, unseen data instances. The ultimate objective is to equip machines with the ability to extrapolate from past experiences, making informed conclusions and predictions when presented with unfamiliar scenarios, thereby enhancing their adaptability and problem-solving capabilities.</p>
+<center>
+    <img style="max-width: 670px" src="https://www.fsm.ac.in/blog/wp-content/uploads/2022/08/ml-e1610553826718.jpg" />
+</center>
+</section>
+<section id="key-components-of-machine-learning">
+<h2>Key Components of Machine Learning:<a class="headerlink" href="#key-components-of-machine-learning" title="Permalink to this heading">#</a></h2>
+<section id="algorithms-and-statisatical-analysis">
+<h3>Algorithms and Statisatical Analysis<a class="headerlink" href="#algorithms-and-statisatical-analysis" title="Permalink to this heading">#</a></h3>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 400px" src="https://cdn-images-1.medium.com/max/606/0*TaeBBAJBY2KbAuIu" />
+</center>
+<p>These are the foundational mathematical models or procedures that enable computers to learn from data. Algorithms are designed to identify patterns, correlations, and structures within the data to make predictions or decisions. This involves statisataical analysis on the data relationship to predict unseen values based on past observation.</p>
+<p>By examining historical data patterns and relationships, these algorithms can predict or estimate future outcomes or unseen values based on past observations. This predictive capability enables ML models to make informed decisions or generate accurate forecasts.</p>
+<p>Once the model has learned from the training data, it aims to generalize its learned patterns to new, unseen data. The goal is for the model to make accurate predictions or decisions when presented with examples it hasn’t encountered during training.</p>
+</section>
+<section id="training-data">
+<h3>Training Data<a class="headerlink" href="#training-data" title="Permalink to this heading">#</a></h3>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 400px" src="https://miro.medium.com/v2/resize:fit:720/format:webp/0*PWiJPO7psV_U4wDF.png" />
+</center>
+<p>Machine Learning algorithms require large volumes of data to learn from. This data, also known as training data, comprises examples, features, or attributes that the algorithm uses to understand relationships and patterns.</p>
+<p>Training data consists of a collection of examples or instances, each representing a specific data point. Each example in the training data is associated with a set of features or attributes. These features describe the characteristics or properties of the data. In an image, features might include pixel values, color histograms, or textures.</p>
+<p>Machine Learning algorithms learn from the patterns and relationships present in the training data. By analyzing these examples and their associated features, the algorithms discern correlations, dependencies, and structures.</p>
+</section>
+<section id="learning-and-adaptation">
+<h3>Learning and Adaptation<a class="headerlink" href="#learning-and-adaptation" title="Permalink to this heading">#</a></h3>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 400px" src="https://assets-global.website-files.com/61eeba8765031c95bb83b2ea/61fbec562cf81f62a255f192_61eeb99a54a67e18ce19d47c_0_nyBFE8lLgr8ePAJ_%20(1).jpeg" />
+</center>
+<p>The learning process involves training algorithms on datasets containing examples or instances with associated features and labels. During this training phase, the algorithms iteratively adjust their internal parameters or structures by analyzing the data relationships. Through optimization techniques like gradient descent or other optimization algorithms, these models learn to minimize errors or discrepancies between predicted outcomes and actual observations.</p>
+<p>Once trained, Machine Learning models generalize their acquired knowledge to new, unseen data. They apply the patterns and relationships learned during training to make predictions or decisions on previously unseen examples. This generalization ability is a critical aspect that determines the model’s performance in real-world scenarios.</p>
+</section>
+</section>
+<section id="types-of-machine-learning">
+<h2>Types of Machine Learning:<a class="headerlink" href="#types-of-machine-learning" title="Permalink to this heading">#</a></h2>
+<p>Machine learning uses programmed algorithms that receive and analyse input data to predict output values within an acceptable range. As new data is fed to these algorithms, they learn and optimise their operations to improve performance, developing <em>intelligence</em> over time.</p>
+<p>There are 3 main types of machine learning algorithms: supervised learning, unsupervised learning and reinforcement learning.</p>
+<center>
+    <img style="max-width: 800px" src="https://miro.medium.com/v2/resize:fit:720/format:webp/0*QYxNNYh6W9jO1b_-.png" />
+</center></section>
+<section id="supervised-learning">
+<h2>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Permalink to this heading">#</a></h2>
+<p>In supervised learning, the machine is taught by example. The operator provides the machine learning algorithm with a known dataset that includes desired inputs and outputs, and the algorithm must find a method to determine how to arrive at those inputs and outputs. While the operator knows the correct answers to the problem, the algorithm identifies patterns in data, learns from observations and makes predictions. The algorithm makes predictions and is corrected by the operator – and this process continues until the algorithm achieves a high level of accuracy/performance.</p>
+<p>Under the umbrella of supervised learning fall: <em>Classification</em>, <em>Regression</em> and <em>Forecasting</em>.</p>
+<ol class="arabic simple">
+<li><p>Classification: In classification tasks, the machine learning program must draw a conclusion from observed values and determine to what category new observations belong. For example, when filtering emails as ‘spam’ or ‘not spam’, the program must look at existing observational data and filter the emails accordingly.</p></li>
+<li><p>Regression: In regression tasks, the machine learning program must estimate – and understand – the relationships among variables. Regression analysis focuses on one dependent variable and a series of other changing variables – making it particularly useful for prediction and forecasting.</p></li>
+<li><p>Forecasting: Forecasting is the process of making predictions about the future based on the past and present data, and is commonly used to analyse trends.</p></li>
+</ol>
+</section>
+<section id="exploring-machine-learning-in-cybersecurity">
+<h2>Exploring Machine Learning in Cybersecurity<a class="headerlink" href="#exploring-machine-learning-in-cybersecurity" title="Permalink to this heading">#</a></h2>
+<p>As we embark on our exploration of machine learning, let’s begin with an illustrative example showcasing the potential impact of machine learning in cybersecurity.</p>
+<section id="spam-classification">
+<h3>Spam Classification<a class="headerlink" href="#spam-classification" title="Permalink to this heading">#</a></h3>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 400px" src="https://miro.medium.com/v2/resize:fit:1400/1*WA9aceQugVlBS81r2a7Snw.png" />
+</center>
+<p>In this example, we used text classification to determined whether the messages is spam or not. We used NLP methods to prepare and clean our text data (tokenization, remove stop words, stemming) and different machine learning algorithms to get more accurate predictions. The following classification algorithms have been used: Logistic Regression, Naive Bayes, Support Vector Machine (SVM), Random Forest, Stochastic Gradient Descent and Gradient Boosting.</p>
+</section>
+<section id="dataset">
+<h3>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h3>
+<p>The dataset comes from SMS Spam Collection that can be find at <a class="reference external" href="https://www.kaggle.com/uciml/sms-spam-collection-dataset">https://www.kaggle.com/uciml/sms-spam-collection-dataset</a>.</p>
+<p>This SMS Spam Collection is a set of SMS tagged messages that have been collected for SMS Spam research. It comprises one set of SMS messages in English of 5,574 messages, which is tagged acording being ham (legitimate) or spam.</p>
+<p>We begin by first importing several libraries for data analysis, natural language processing (NLP), and machine learning in Python. Some of the libraries imported include <code class="docutils literal notranslate"><span class="pre">pandas</span></code> for data manipulation, <code class="docutils literal notranslate"><span class="pre">numpy</span></code> for numerical operations, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> and <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> for data visualization, and <code class="docutils literal notranslate"><span class="pre">nltk</span></code> for natural language processing tasks like tokenization and stemming. Additionally, we import functions from <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> (<code class="docutils literal notranslate"><span class="pre">sklearn</span></code>) for machine learning tasks such as model selection, creating pipelines, feature extraction, and various classification algorithms.</p>
+<p>Moreover, we downloads the stopwords corpus from NLTK (Natural Language Toolkit), which contains a list of common words often considered irrelevant in text analysis tasks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">PorterStemmer</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">sent_tokenize</span><span class="p">,</span> <span class="n">word_tokenize</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">TfidfTransformer</span>
+
+<span class="c1"># from imblearn.over_sampling import SMOTE</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;stopwords&quot;</span><span class="p">)</span>
+<span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to
+[nltk_data]     /home/soraxas/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we read a CSV file containing spam-related data, preprocesses it by removing unnecessary columns, renaming columns, converting categorical labels to numerical values, and creates a copy of the preprocessed DataFrame for further analysis or manipulation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;spam.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span>
+<span class="n">spam</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Unnamed: 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Unnamed: 3&quot;</span><span class="p">,</span> <span class="s2">&quot;Unnamed: 4&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">spam</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;v1&quot;</span><span class="p">:</span> <span class="s2">&quot;Class&quot;</span><span class="p">,</span> <span class="s2">&quot;v2&quot;</span><span class="p">:</span> <span class="s2">&quot;Text&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">spam</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spam</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="s2">&quot;ham&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;spam&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+
+<span class="n">spam_ori</span> <span class="o">=</span> <span class="n">spam</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="let-s-visualise-the-number-of-genuine-and-spam-email">
+<h3>Let’s visualise the number of genuine and spam email<a class="headerlink" href="#let-s-visualise-the-number-of-genuine-and-spam-email" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Class&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">spam</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Class&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Number of normal and spam email messages&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Number of normal and spam email messages&#39;)
+</pre></div>
+</div>
+<img alt="../_images/b104bc84d31a3d585dee79d78bbb94d920dded4bca1fabc9577dada05d11da93.png" src="../_images/b104bc84d31a3d585dee79d78bbb94d920dded4bca1fabc9577dada05d11da93.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">spam</span><span class="p">[</span><span class="n">spam</span><span class="o">.</span><span class="n">Class</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Text</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+    <span class="n">bins</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span>
+<span class="p">)</span>
+<span class="n">spam</span><span class="p">[</span><span class="n">spam</span><span class="o">.</span><span class="n">Class</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">Text</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Spam&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Message Length Histogram&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Message Length Histogram&#39;)
+</pre></div>
+</div>
+<img alt="../_images/2051697a216b298bbbcd589b697dd4d271a4da998c6edab3228b2648c910705f.png" src="../_images/2051697a216b298bbbcd589b697dd4d271a4da998c6edab3228b2648c910705f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">clean_text</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The function to clean text&quot;&quot;&quot;</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[^a-zA-Z]&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">remove_stopwords</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The function to removing stopwords&quot;&quot;&quot;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">stemmer</span><span class="p">(</span><span class="n">stem_text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The function to apply stemming&quot;&quot;&quot;</span>
+    <span class="n">stem_text</span> <span class="o">=</span> <span class="p">[</span><span class="n">porter</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">stem_text</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stem_text</span><span class="p">)</span>
+
+
+<span class="n">stop_words</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
+<span class="n">porter</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
+
+<span class="n">spam</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spam</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">clean_text</span><span class="p">)</span>
+<span class="n">spam</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="n">spam</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spam</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">remove_stopwords</span><span class="p">)</span>
+<span class="n">spam</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spam</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">stemmer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">spam</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">spam</span><span class="p">[</span><span class="s2">&quot;Class&quot;</span><span class="p">]</span>
+<span class="n">vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">min_df</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X_vec</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_vec</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">model_lr</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;tfidf&quot;</span><span class="p">,</span> <span class="n">TfidfTransformer</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">()),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">model_lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">ytest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">pred_y</span> <span class="o">=</span> <span class="n">model_lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_nb</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;tfidf&quot;</span><span class="p">,</span> <span class="n">TfidfTransformer</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">MultinomialNB</span><span class="p">()),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">model_nb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">ytest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">model_nb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">map_bool_to_checkmark</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;✔&quot;</span> <span class="k">if</span> <span class="n">text</span> <span class="k">else</span> <span class="s2">&quot;✗&quot;</span>
+
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Email&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;Is span?&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;predicted&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">):</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Email&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spam_ori</span><span class="o">.</span><span class="n">Text</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Is span?&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">map_bool_to_checkmark</span><span class="p">(</span><span class="n">gt</span><span class="p">))</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;predicted&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">map_bool_to_checkmark</span><span class="p">(</span><span class="n">pred</span><span class="p">))</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=========================</span><span class="se">\n</span><span class="s2">First 15 results:</span><span class="se">\n</span><span class="s2">=========================&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=========================
+First 15 results:
+=========================
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Email</th>
+      <th>Is span?</th>
+      <th>predicted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Aight should I just plan to come up later toni...</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Was the farm open?</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>I sent my scores to sophas and i had to do sec...</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Was gr8 to see that message. So when r u leavi...</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>In that case I guess I'll see you at campus lodge</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Nothing will ever be easy. But don't be lookin...</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>If you were/are free i can give. Otherwise nal...</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Hey i will be late... i'm at amk. Need to drin...</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Hey are we going for the lo lesson or gym?</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>85233 FREE&gt;Ringtone!Reply REAL</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>\The world suffers a lot... Not because of the...</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Hey!!! I almost forgot ... Happy B-day babe ! ...</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>I wish u were here. I feel so alone</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>sports fans - get the latest sports news str* ...</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>LMAO where's your fish memory when I need it?</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Oh is it! Which brand?</td>
+      <td>✗</td>
+      <td>✗</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="terminologies">
+<h2>Terminologies<a class="headerlink" href="#terminologies" title="Permalink to this heading">#</a></h2>
+<p>Let us revisit some of the key terminology used in machine learning that we’ve glanced throught in our previous spam detection:</p>
+<section id="features">
+<h3>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h3>
+<p>In machine learning, <strong>features</strong> refer to the individual measurable properties or characteristics used to represent the data. These features are the variables or attributes that are fed into a machine learning algorithm as inputs for making predictions or classifications. For instance, in a <strong>spam detection task</strong> for emails, features might include the <u>frequency</u> of certain words, email <u>sender’s address</u>, <u>length</u> of the email, etc. Each piece of data is represented by its features, and the quality and relevance of features greatly influence the performance of machine learning models.</p>
+</section>
+<section id="labels">
+<h3>Labels<a class="headerlink" href="#labels" title="Permalink to this heading">#</a></h3>
+<p>In supervised machine learning, <strong>labels</strong> are the outcomes or target variables that the model aims to predict. These are the <u>answers</u> or expected results that the model tries to learn from the input data. In a classification task like spam detection, <strong>labels</strong> could be binary categories such as <u>spam</u> or <u>not spam</u> assigned to each data point. In regression tasks, <strong>labels</strong> might be continuous numerical values that the model predicts. The model learns patterns in the features to predict the corresponding labels accurately.</p>
+</section>
+<section id="algorithms">
+<h3>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this heading">#</a></h3>
+<p>Machine learning <strong>algorithms</strong> are computational procedures or techniques used by models to learn patterns and relationships from data. These algorithms are the core components that <u>enable machines to learn from experience</u> or data and make predictions or decisions without explicit programming. Various types of algorithms exist across machine learning, such as <strong>regression algorithms</strong> (linear regression, polynomial regression), <strong>classification algorithms</strong> (decision trees, support vector machines, logistic regression), <strong>clustering algorithms</strong> (k-means, hierarchical clustering), and more. Each algorithm has its strengths, weaknesses, and suitable use cases based on the nature of the data and the problem being addressed.</p>
+<center>
+    <img style="max-width: 600px" src="https://images.datacamp.com/image/upload/v1669223211/Machine_Learning_Text_Classification_2659dfc532.png" />
+</center>
+<p>Understanding these terminologies is fundamental in grasping the concepts and workflows in machine learning. <strong>Features</strong> represent the input data, <strong>labels</strong> denote the output or target to be predicted, and <strong>algorithms</strong> are the methods/models that learn from the input-output pairs to make predictions or uncover patterns in the data. We use these in both our training and prediction procedure in our ML pipeline.</p>
+</section>
+</section>
+<section id="evaulation-metrics">
+<h2>Evaulation Metrics<a class="headerlink" href="#evaulation-metrics" title="Permalink to this heading">#</a></h2>
+<p>One thing that we should always keep in our mind when building ML models is how to assess <strong>how good is my model?</strong></p>
+<p>Performance metrics in machine learning evaluate the effectiveness of a model’s predictions. They provide insights into how well a model performs in solving a particular problem. Here are some essential performance metrics:</p>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 380px" src="https://www.dcode.fr/tools/precision-recall/images/precision-recall.png" />
+</center>
+<ol class="arabic">
+<li><p><strong>Accuracy</strong>: This metric measures the overall correctness of predictions made by a model. It calculates the ratio of correctly predicted instances to the total number of instances. It’s represented as:</p>
+<div class="math notranslate nohighlight">
+\[\text{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}} \times 100\% \]</div>
+<p>While accuracy is a commonly used metric, it might not be suitable for imbalanced datasets where one class dominates the other. In such cases, other metrics become more informative.</p>
+</li>
+</ol>
+<br>
+<ol class="arabic" start="2">
+<li><p><strong>Precision</strong>: Precision measures the accuracy of positive predictions made by the model. It quantifies the ratio of correctly predicted positive instances (true positives) to the total predicted positive instances (true positives + false positives). Precision is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[\text{Precision} = \frac{\text{True Positives}}{\text{True Positives + False Positives}}\]</div>
+<p>Precision is valuable when the cost of false positives is high. For instance, in a spam detection system, precision indicates the proportion of correctly classified spam emails among all emails flagged as spam.</p>
+</li>
+</ol>
+<br>
+<ol class="arabic" start="3">
+<li><p><strong>Recall (Sensitivity)</strong>: Recall measures the model’s ability to correctly identify all positive instances. It calculates the ratio of correctly predicted positive instances (true positives) to the total actual positive instances (true positives + false negatives). Mathematically, recall is given by:</p>
+<div class="math notranslate nohighlight">
+\[\text{Recall} = \frac{\text{True Positives}}{\text{True Positives + False Negatives}}\]</div>
+<p>Recall is crucial when it’s important to capture all positive instances, even if some false positives occur. For example, in a medical diagnosis system, recall indicates the proportion of actual positive cases correctly identified among all positive cases.</p>
+</li>
+</ol>
+<br>
+<ol class="arabic" start="4">
+<li><p><strong>F1 Score</strong>: The F1 score is the harmonic mean of precision and recall. It provides a balanced measure between precision and recall, considering both false positives and false negatives. F1 score is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision + Recall}}\]</div>
+<p>F1 score is useful when you want to consider both precision and recall simultaneously. It’s a good metric for evaluating models on imbalanced datasets where one class significantly outnumbers the other.</p>
+</li>
+</ol>
+<br>
+<p>These metrics help in understanding different aspects of a model’s performance. Accuracy provides an overall view, while precision, recall, and F1 score offer insights into specific aspects of model behavior, aiding in making informed decisions about the model’s suitability for a particular task. Choosing the appropriate metric depends on the specific goals and requirements of the problem being addressed.</p>
+<center>
+    <img style="max-width: 600px" src="https://media.licdn.com/dms/image/C4D12AQHfkHbqyV6ebw/article-cover_image-shrink_720_1280/0/1623163137427?e=2147483647&v=beta&t=uuvm7tNCBLRZ3bOea2snzv6BHW1g_td_PIjOMbNI7CM" />
+</center><p>We can now to the pre-built function from <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> to compute these metric from our previous spam detection problem</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
+
+<span class="c1"># Calculate accuracy</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">\%&quot;</span><span class="p">))</span>
+
+<span class="c1"># Calculate precision</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision: </span><span class="si">{</span><span class="n">precision</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">\%&quot;</span><span class="p">))</span>
+
+<span class="c1"># Calculate recall</span>
+<span class="n">recall</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recall: </span><span class="si">{</span><span class="n">recall</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">\%&quot;</span><span class="p">))</span>
+
+<span class="c1"># Calculate F1 score</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-Score: </span><span class="si">{</span><span class="n">f1</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">\%&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle Accuracy: 96.86\%\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle Precision: 100.00\%\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle Recall: 78.92\%\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle F1-Score: 88.22\%\]</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Module_0_Introduction_to_Jupyter_Notebook_and_Colab.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Module 0:</strong> Introduction to Jupyter Notebook and Colab</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Module_2_Supervised_learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Module 2:</strong> Supervised Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Module 1:</strong> Fundamentals of Machine Learning</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-machine-learning-about">What is Machine Learning About?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-components-of-machine-learning">Key Components of Machine Learning:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms-and-statisatical-analysis">Algorithms and Statisatical Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data">Training Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-and-adaptation">Learning and Adaptation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-machine-learning">Types of Machine Learning:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-machine-learning-in-cybersecurity">Exploring Machine Learning in Cybersecurity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spam-classification">Spam Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-visualise-the-number-of-genuine-and-spam-email">Let’s visualise the number of genuine and spam email</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminologies">Terminologies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labels">Labels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms">Algorithms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaulation-metrics">Evaulation Metrics</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By WSU Staffs
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

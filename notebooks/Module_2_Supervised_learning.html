@@ -1,0 +1,2126 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Module 2: Supervised Learning &#8212; WSU ML in Cybersecurity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Module_2_Supervised_learning';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Module 1: Fundamentals of Machine Learning" href="Module_1_Fundamentals_of_Machine_Learning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="WSU ML in Cybersecurity - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="WSU ML in Cybersecurity - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Exploring Machine Learning in Cybersecurity Workshop
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Module_0_Introduction_to_Jupyter_Notebook_and_Colab.html"><strong>Module 0:</strong> Introduction to Jupyter Notebook and Colab</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Module_1_Fundamentals_of_Machine_Learning.html"><strong>Module 1:</strong> Fundamentals of Machine Learning</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Module 2:</strong> Supervised Learning</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/blob/main/notebooks/Module_2_Supervised_learning.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/Module_2_Supervised_learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 2: Supervised Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Module 2:</strong> Supervised Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-supervised-learning-in-cybersecurity">Introduction to Supervised Learning in Cybersecurity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-in-cybersecurity">Classification in Cybersecurity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#malware-detection">1. Malware Detection</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#static-analysis">Static Analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-analysis">Dynamic Analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-methods">Ensemble Methods</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intrusion-detection-systems-ids">2. Intrusion Detection Systems (IDS)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#signature-based-detection">Signature-based Detection</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#anomaly-based-detection">Anomaly-based Detection</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hybrid-approaches">Hybrid Approaches</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#email-filtering">3. Email Filtering</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#content-based-filtering">Content-Based Filtering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#header-and-metadata-analysis">Header and Metadata Analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behavioral-analysis">Behavioral Analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-exercise-on-visualising-decision-tree-model">An exercise on visualising Decision Tree Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up">Setting Up</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-k-nearest-neighbours">Task 1: <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implement-k-nearest-neighbours-prediction">1.1 Implement <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-1">→ Run Task 1</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-decision-trees">Task 2: Decision Trees</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-weighted-misclassification-error">2.1 Calculate a weighted misclassification error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-a-dataset-to-reduce-misclassification">2.2 Split a dataset to reduce misclassification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-a-decision-tree-classifier">2.3 Train a decision tree classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-from-a-decision-tree">2.4 Make predictions from a decision tree</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-2">→ Run Task 2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-random-forests">Task 3: Random Forests</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-a-simplified-random-forest-classifier">3.1 Train a (simplified) random forest classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-from-a-simplified-random-forest-classifier">3.2 Make predictions from a (simplified) random forest classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-3">→ Run Task 3</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-adaboost">Task 4: AdaBoost</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-an-adaboost-classifier">4.1 Train an AdaBoost classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-from-an-adaboost-classifier">4.2 Make predictions from an AdaBoost classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-4">→ Run Task 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-in-cybersecurity">Regression in Cybersecurity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-assessment">1. Risk Assessment</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantitative-risk-metrics">Quantitative Risk Metrics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-for-risk-trends">Time Series Analysis for Risk Trends</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-traffic-anomalies">2. Network Traffic Anomalies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-expected-behavior">Predicting Expected Behavior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-deviations-from-normal-behavior">Identifying Deviations from Normal Behavior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-anomaly-severity">Quantifying Anomaly Severity</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threat-severity-prediction">3.Threat Severity Prediction</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis-and-feature-extraction">Data Analysis and Feature Extraction</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-threat-impact">Quantifying Threat Impact</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prioritizing-threat-response">Prioritizing Threat Response</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-cyersecurity-intrusion-dataset">Real cyersecurity Intrusion Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisation-of-dataset">Visualisation of Dataset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-2-supervised-learning">
+<h1><strong>Module 2:</strong> Supervised Learning<a class="headerlink" href="#module-2-supervised-learning" title="Permalink to this heading">#</a></h1>
+<p>In the realm of cybersecurity, the utilization of supervised learning techniques—specifically classification and regression—serves as a linchpin for fortifying defenses, detecting potential threats, and orchestrating robust risk assessment strategies. <strong>Supervised learning</strong>, a key branch of machine learning, operates by learning patterns from labeled datasets to make predictions or decisions about unseen data, proving invaluable in the realm of cybersecurity due to its ability to learn from historical data and adapt to evolving threats.</p>
+<section id="introduction-to-supervised-learning-in-cybersecurity">
+<h2>Introduction to Supervised Learning in Cybersecurity<a class="headerlink" href="#introduction-to-supervised-learning-in-cybersecurity" title="Permalink to this heading">#</a></h2>
+<p>Cyber threats continue to proliferate, evolving in sophistication and diversity, necessitating advanced mechanisms to combat them. This is where supervised learning techniques come into play, bolstering cybersecurity efforts by leveraging historical data to fortify defenses against existing threats and predict potential vulnerabilities.</p>
+<center>
+    <img style="max-width: 600px" src="https://editor.analyticsvidhya.com/uploads/97744How.png" />
+</center>
+</section>
+<section id="classification-in-cybersecurity">
+<h2>Classification in Cybersecurity<a class="headerlink" href="#classification-in-cybersecurity" title="Permalink to this heading">#</a></h2>
+<p>Supervised learning algorithms, with their ability to learn from labeled historical data, assist in identifying known threats and patterns of attacks. They enable security systems to make informed decisions in real-time by predicting and classifying potential threats or vulnerabilities. Continual training and improvement of these models with updated data help in adapting to evolving cyber threats and attack methods.</p>
+<section id="malware-detection">
+<h3>1. Malware Detection<a class="headerlink" href="#malware-detection" title="Permalink to this heading">#</a></h3>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 400px" src="https://www.ayoub-benaissa.com/images/blog/malware-detection.png" />
+</center>
+<p>Malware detection stands as a critical component within cybersecurity, and supervised learning techniques play a pivotal role in identifying and mitigating the risks posed by malicious software.</p>
+<p>Techniques in Malware Detection Using Supervised Learning includes:</p>
+<section id="static-analysis">
+<h4>Static Analysis<a class="headerlink" href="#static-analysis" title="Permalink to this heading">#</a></h4>
+<p>Static analysis involves examining the code or file without executing it. Supervised learning models trained on static features, such as <strong>file attributes</strong>, <strong>file structure</strong>, or <strong>code snippets</strong>, help classify malware based on these extracted static features.</p>
+</section>
+<section id="dynamic-analysis">
+<h4>Dynamic Analysis<a class="headerlink" href="#dynamic-analysis" title="Permalink to this heading">#</a></h4>
+<p>Dynamic analysis involves observing the behavior of malware during execution in a controlled environment. Supervised learning models trained on <strong>behavioral patterns</strong> or <strong>API call sequences</strong> discern malicious behavior, aiding in real-time detection of malware.</p>
+</section>
+<section id="ensemble-methods">
+<h4>Ensemble Methods<a class="headerlink" href="#ensemble-methods" title="Permalink to this heading">#</a></h4>
+<p>Ensemble methods combine multiple models or classifiers to improve malware detection accuracy. Techniques like <strong>Random Forests</strong> or <strong>Gradient Boosting</strong> assemble multiple weaker models into a stronger, more accurate model for detecting malware.</p>
+</section>
+</section>
+<section id="intrusion-detection-systems-ids">
+<h3>2. Intrusion Detection Systems (IDS)<a class="headerlink" href="#intrusion-detection-systems-ids" title="Permalink to this heading">#</a></h3>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 400px" src="https://www.mdpi.com/sensors/sensors-21-01113/article_deploy/html/images/sensors-21-01113-g001.png" />
+</center>
+<p>Intrusion Detection Systems (IDS) are vital components of cybersecurity, aiming to identify and respond to unauthorized access, malicious activities, or potential security breaches within computer networks or systems. Supervised learning techniques play a significant role in building effective IDS by aiding in the identification of anomalous network behavior and patterns associated with cyber attacks.</p>
+<p>Techniques in Intrusion Detection Using Supervised Learning includes:</p>
+<section id="signature-based-detection">
+<h4>Signature-based Detection<a class="headerlink" href="#signature-based-detection" title="Permalink to this heading">#</a></h4>
+<p>Supervised learning models recognize known attack patterns or signatures by learning from labeled datasets containing known attack behaviors. These models can quickly identify known threats based on learned signatures.</p>
+</section>
+<section id="anomaly-based-detection">
+<h4>Anomaly-based Detection<a class="headerlink" href="#anomaly-based-detection" title="Permalink to this heading">#</a></h4>
+<p>Anomaly detection involves identifying deviations from normal network behavior. Supervised learning models trained on normal behavior patterns detect anomalies by flagging behaviors that significantly differ from the learned norm.</p>
+</section>
+<section id="hybrid-approaches">
+<h4>Hybrid Approaches<a class="headerlink" href="#hybrid-approaches" title="Permalink to this heading">#</a></h4>
+<p>Hybrid approaches combine signature-based and anomaly-based detection methods. They leverage supervised learning to detect known attack patterns while also identifying deviations from normal behavior.
+Challenges</p>
+</section>
+</section>
+<section id="email-filtering">
+<h3>3. Email Filtering<a class="headerlink" href="#email-filtering" title="Permalink to this heading">#</a></h3>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 400px" src="https://miro.medium.com/v2/resize:fit:1400/0*j1wMZQ2je5P5DHvN" />
+</center>
+<p>Email filtering is a critical aspect of cybersecurity, aimed at distinguishing legitimate emails from spam or malicious emails. Supervised learning techniques, particularly classification algorithms, are extensively utilized in email filtering to automatically categorize incoming emails and mitigate the risk of users being exposed to phishing attempts, malware, or other malicious content.</p>
+<p>Techniques in Email Filtering Using Supervised Learning inculdes</p>
+<section id="content-based-filtering">
+<h4>Content-Based Filtering<a class="headerlink" href="#content-based-filtering" title="Permalink to this heading">#</a></h4>
+<p>Supervised learning models analyze the content of emails, including text analysis of email bodies, headers, embedded URLs, or attachments. They learn patterns indicative of spam or phishing attempts, enabling effective content-based filtering.</p>
+</section>
+<section id="header-and-metadata-analysis">
+<h4>Header and Metadata Analysis<a class="headerlink" href="#header-and-metadata-analysis" title="Permalink to this heading">#</a></h4>
+<p>Metadata analysis, such as sender’s address, IP reputation, subject line analysis, or header information, aids in identifying suspicious or forged emails. Supervised learning models learn from metadata to detect email anomalies.</p>
+</section>
+<section id="behavioral-analysis">
+<h4>Behavioral Analysis<a class="headerlink" href="#behavioral-analysis" title="Permalink to this heading">#</a></h4>
+<p>Some models employ behavioral analysis, learning user-specific email behaviors to discern normal communication patterns. This helps in flagging anomalous emails that deviate from usual user interaction.</p>
+</section>
+</section>
+</section>
+<section id="an-exercise-on-visualising-decision-tree-model">
+<h2>An exercise on visualising Decision Tree Model<a class="headerlink" href="#an-exercise-on-visualising-decision-tree-model" title="Permalink to this heading">#</a></h2>
+<p>Let us now have a look at some <strong>non-parametric classification</strong> models and ensembles. These models have losses that are not smooth and aren’t suited to simple gradient-based optimisation. You are only asked to produce naïve, brute force implementations of these models, but do note that such implementations can scale really badly, so be cautious about running the algorithms with large sample sizes. You may find it interesting to think about what strategies could be used to speed things up.</p>
+<p>Examples of the kinds of plots that will be produced by your finished code are shown below. Plotting code is provided, so your plots should look pretty similar, but the default resolution is lower to avoid the code taking too long to run.</p>
+<p><img alt="example of completed plots" src="https://comp0088.github.io/assets/colab/week_3_small.jpg" /></p>
+<section id="setting-up">
+<h3>Setting Up<a class="headerlink" href="#setting-up" title="Permalink to this heading">#</a></h3>
+<p>As usual, we make use of the NumPy library for numerical computing and the Matplotlib library for plotting, so we need to import them. We will also use the <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html">Pandas</a> library for loading data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.random</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll also fetch some shared workshop code and data from the module GitHub</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we will clone workshop resources if they dont exists yet</span>
+<span class="o">![</span><span class="w"> </span>-d<span class="w"> </span>wsu_workshop_utils<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/wsu-ai-cyberSecurity/wsu_workshop_utils
+    
+<span class="kn">import</span> <span class="nn">wsu_workshop_utils.utils</span> <span class="k">as</span> <span class="nn">utils</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># finally, set up some items for use in later code</span>
+<span class="n">shared_rng</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+
+<span class="c1"># load the synthetic data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/WSU-AI-CyberSecurity/data/master/syn-data.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="task-1-k-nearest-neighbours">
+<h1>Task 1: <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours<a class="headerlink" href="#task-1-k-nearest-neighbours" title="Permalink to this heading">#</a></h1>
+<p>In a <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours classifier, test samples are compared directly against the samples in the training set and the <span class="math notranslate nohighlight">\(k\)</span> most similar (according to some chosen similarity or distance metric) vote on the class to predict. Training such a classifier consists simply of memorising the training set. For the implementation below, we will skip this step and just pass the training data directly to the prediction function.</p>
+<p>Although other distance metrics may be useful for real problem classes, for the purposes of this exercise you can stick to a simple Euclidean distance.</p>
+<p>You may find the function <code class="docutils literal notranslate"><span class="pre">vote</span></code> in the <code class="docutils literal notranslate"><span class="pre">utils</span></code> module useful.</p>
+<section id="implement-k-nearest-neighbours-prediction">
+<h2>1.1 Implement <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours prediction<a class="headerlink" href="#implement-k-nearest-neighbours-prediction" title="Permalink to this heading">#</a></h2>
+<p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">nearest_neighbours_predict</span></code> function in the cell below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nearest_neighbours_predict</span> <span class="p">(</span> <span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_X</span><span class="p">,</span> <span class="n">neighbours</span><span class="o">=</span><span class="mi">1</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predict labels for test data based on neighbourhood in</span>
+<span class="sd">    training set.</span>
+
+<span class="sd">    # Arguments:</span>
+<span class="sd">        train_X: an array of sample data for training, where rows</span>
+<span class="sd">            are samples and columns are features.</span>
+<span class="sd">        train_y: vector of class labels corresponding to the training</span>
+<span class="sd">            samples, must be same length as number of rows in X</span>
+<span class="sd">        test_X: an array of sample data to generate predictions for,</span>
+<span class="sd">            in same layout as train_X.</span>
+<span class="sd">        neighbours: how many neighbours to canvass at each test point</span>
+
+<span class="sd">    # Returns</span>
+<span class="sd">        test_y: predicted labels for the samples in test_X</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">test_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># TODO: implement the k-nearest neighbours algorithm</span>
+    <span class="c1">#return None</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="n">test_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">test_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">test_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">dists</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">test_X</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">-</span> <span class="n">train_X</span><span class="p">[</span><span class="n">jj</span><span class="p">]),</span> <span class="n">train_y</span><span class="p">[</span><span class="n">jj</span><span class="p">])</span> <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">]</span>
+        <span class="n">dists</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">test_y</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">([</span> <span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">dists</span><span class="p">[:</span><span class="n">neighbours</span><span class="p">]</span> <span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">test_y</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-task-1">
+<h2>→ Run Task 1<a class="headerlink" href="#run-task-1" title="Permalink to this heading">#</a></h2>
+<p>Execute the code cell below to run your k-NN function on the test data and plot the results.</p>
+<p>Feel free to try out different values for the configuration variables <code class="docutils literal notranslate"><span class="pre">NUM_SAMPLES</span></code>, <code class="docutils literal notranslate"><span class="pre">RESOLUTION</span></code> and <code class="docutils literal notranslate"><span class="pre">NEIGHBOURS</span></code> – but note that larger values can slow things down significantly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NUM_SAMPLES</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">RESOLUTION</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">NEIGHBOURS</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="s1">&#39;X2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,:]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Multi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># this just tests to see whether there&#39;s a functioning implementation</span>
+<span class="c1"># before attempting to pass it to the plotting utility</span>
+<span class="n">dummy</span> <span class="o">=</span> <span class="n">nearest_neighbours_predict</span> <span class="p">(</span> <span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:],</span> <span class="n">neighbours</span><span class="o">=</span><span class="n">NEIGHBOURS</span> <span class="p">)</span>
+<span class="k">if</span> <span class="n">dummy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">NEIGHBOURS</span><span class="si">}</span><span class="s1">-Nearest Neighbours&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">nn_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">nearest_neighbours_predict</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">neighbours</span><span class="o">=</span><span class="n">NEIGHBOURS</span> <span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">nn_cls</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">NEIGHBOURS</span><span class="si">}</span><span class="s1">-Nearest Neighbours&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/18698b02e85b7ace15ab0f03bb41ce0dea62f1717059ea022412cc5188d1bb5d.png" src="../_images/18698b02e85b7ace15ab0f03bb41ce0dea62f1717059ea022412cc5188d1bb5d.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="task-2-decision-trees">
+<h1>Task 2: Decision Trees<a class="headerlink" href="#task-2-decision-trees" title="Permalink to this heading">#</a></h1>
+<p>Decision trees are both a learning model in their own right and an important constituent model for the ensemble methods in subsequent tasks. The model consists of a recursive sequence of binary tests, typically of inequalities on single feature values. These effectively partition the feature space into separate regions, each of which is then assigned the class that occurs most often among training samples within it.(Equivalently, those training samples <em>vote</em> on the outcome. Once again, the <code class="docutils literal notranslate"><span class="pre">utils.vote</span></code> function may be useful here.)</p>
+<p>Trees can be trained by a greedy brute force search for the split that minimises some chosen loss. Various losses are possible, but for simplicity here (and compatibility with Task 4 later) we will use a <strong>weighted misclassification error</strong> throughout:</p>
+<div class="math notranslate nohighlight">
+\[
+L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \hat{y}_i)
+\]</div>
+<p>Trees are a naturally recursive data structure that almost cry out for a class-based implementation, but here we limit ourselves to using dicts to avoid adding syntactical distractions for students who may not be very familiar with Python classes.</p>
+<section id="calculate-a-weighted-misclassification-error">
+<h2>2.1 Calculate a weighted misclassification error<a class="headerlink" href="#calculate-a-weighted-misclassification-error" title="Permalink to this heading">#</a></h2>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">misclassification</span></code> function in the code cell below. Note that if <code class="docutils literal notranslate"><span class="pre">weights</span></code> is not provided you should default it to <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">misclassification</span> <span class="p">(</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate (optionally-weighted) misclassification error for</span>
+<span class="sd">    a given set of labels if assigned the given class.</span>
+
+<span class="sd">    # Arguments</span>
+<span class="sd">        y: a set of class labels</span>
+<span class="sd">        cls: a candidate classification for the set</span>
+<span class="sd">        weights: optional weights vector specifying relative</span>
+<span class="sd">            importance of the samples labelled by y</span>
+
+<span class="sd">    # Returns</span>
+<span class="sd">        err: the misclassification error of the candidate labels</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># TODO: implement weighted misclassification metric</span>
+    <span class="c1">#return 1</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">weights</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">!=</span> <span class="bp">cls</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="split-a-dataset-to-reduce-misclassification">
+<h2>2.2 Split a dataset to reduce misclassification<a class="headerlink" href="#split-a-dataset-to-reduce-misclassification" title="Permalink to this heading">#</a></h2>
+<p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">decision_node_split</span></code> function in the cell below.</p>
+<p>Remember to account for the number of points in each child node — the weights should help with this. You should decide on some tie-break policy for when multiple splits produce the same loss improvement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decision_node_split</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">3</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find (by brute force) a split point that best improves the weighted</span>
+<span class="sd">    misclassification error rate compared to the original one (or not, if</span>
+<span class="sd">    there is no improvement possible).</span>
+
+<span class="sd">    Features are assumed to be numeric and the test condition is</span>
+<span class="sd">    greater-or-equal.</span>
+
+<span class="sd">    # Arguments:</span>
+<span class="sd">        X: an array of sample data, where rows are samples</span>
+<span class="sd">            and columns are features.</span>
+<span class="sd">        y: vector of class labels corresponding to the samples,</span>
+<span class="sd">            must be same length as number of rows in X</span>
+<span class="sd">        cls: class label currently assigned to the whole set</span>
+<span class="sd">            (if not specified we use the most common class in y, or</span>
+<span class="sd">            the lowest such if 2 or more classes occur equally)</span>
+<span class="sd">        weights: optional weights vector specifying relevant importance</span>
+<span class="sd">            of the samples</span>
+<span class="sd">        min_size: don&#39;t create child nodes smaller than this</span>
+
+<span class="sd">    # Returns:</span>
+<span class="sd">        feature: index of the feature to test (or None, if no split)</span>
+<span class="sd">        thresh: value of the feature to test (or None, if no split)</span>
+<span class="sd">        c0: class assigned to the set with feature &lt; thresh (or None, if no split)</span>
+<span class="sd">        c1: class assigned to the set with feature &gt;= thresh (or None, if no split)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="c1"># TODO: implement this</span>
+    <span class="c1">#return None, None, None, None</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">g</span> <span class="o">=</span> <span class="n">misclassification</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">g</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="n">best_feat</span><span class="p">,</span> <span class="n">best_thresh</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="n">best_c0</span><span class="p">,</span> <span class="n">best_c1</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="n">best_improvement</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">thresh</span> <span class="ow">in</span> <span class="n">X</span><span class="p">[:,</span><span class="n">feat</span><span class="p">]:</span>
+            <span class="n">set1</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="n">feat</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">thresh</span>
+            <span class="n">set0</span> <span class="o">=</span> <span class="o">~</span><span class="n">set1</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">set0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_size</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_size</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="n">y0</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">set0</span><span class="p">]</span>
+            <span class="n">y1</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">set1</span><span class="p">]</span>
+
+            <span class="n">w0</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">set0</span><span class="p">]</span>
+            <span class="n">w1</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">set1</span><span class="p">]</span>
+
+            <span class="n">cc0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
+            <span class="n">cc1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
+
+            <span class="n">gg0</span> <span class="o">=</span> <span class="p">[</span><span class="n">misclassification</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">cc</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">w0</span><span class="p">)</span> <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">cc0</span><span class="p">]</span>
+            <span class="n">gg1</span> <span class="o">=</span> <span class="p">[</span><span class="n">misclassification</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">cc</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">w1</span><span class="p">)</span> <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">cc1</span><span class="p">]</span>
+
+            <span class="n">c0</span> <span class="o">=</span> <span class="n">cc0</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">gg0</span><span class="p">)]</span>
+            <span class="n">c1</span> <span class="o">=</span> <span class="n">cc1</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">gg1</span><span class="p">)]</span>
+
+            <span class="n">g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">gg0</span><span class="p">)</span>
+            <span class="n">g1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">gg1</span><span class="p">)</span>
+
+            <span class="n">improvement</span> <span class="o">=</span> <span class="n">g</span> <span class="o">-</span> <span class="p">(</span><span class="n">g0</span> <span class="o">+</span> <span class="n">g1</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">improvement</span> <span class="o">&gt;</span> <span class="n">best_improvement</span><span class="p">:</span>
+                <span class="n">best_feat</span> <span class="o">=</span> <span class="n">feat</span>
+                <span class="n">best_thresh</span> <span class="o">=</span> <span class="n">thresh</span>
+                <span class="n">best_improvement</span> <span class="o">=</span> <span class="n">improvement</span>
+                <span class="n">best_c0</span> <span class="o">=</span> <span class="n">c0</span>
+                <span class="n">best_c1</span> <span class="o">=</span> <span class="n">c1</span>
+
+    <span class="k">if</span> <span class="n">best_feat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">best_feat</span><span class="p">,</span> <span class="n">best_thresh</span><span class="p">,</span> <span class="n">best_c0</span><span class="p">,</span> <span class="n">best_c1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-a-decision-tree-classifier">
+<h2>2.3 Train a decision tree classifier<a class="headerlink" href="#train-a-decision-tree-classifier" title="Permalink to this heading">#</a></h2>
+<p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">decision_tree_train</span></code> function in the cell below.</p>
+<p>(You should find that most of the hard work is already done by your <code class="docutils literal notranslate"><span class="pre">decision_node_split</span></code> function, and this is just responsible for managing the recursion.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decision_tree_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Recursively choose split points for a training dataset</span>
+<span class="sd">    until no further improvement occurs.</span>
+
+<span class="sd">    # Arguments:</span>
+<span class="sd">        X: an array of sample data, where rows are samples</span>
+<span class="sd">            and columns are features.</span>
+<span class="sd">        y: vector of class labels corresponding to the samples,</span>
+<span class="sd">            must be same length as number of rows in X</span>
+<span class="sd">        cls: class label currently assigned to the whole set</span>
+<span class="sd">            (if not specified we use the most common class in y, or</span>
+<span class="sd">            the lowest such if 2 or more classes occur equally)</span>
+<span class="sd">        weights: optional weights vector specifying relevant importance</span>
+<span class="sd">            of the samples</span>
+<span class="sd">        min_size: don&#39;t create child nodes smaller than this</span>
+<span class="sd">        depth: current recursion depth</span>
+<span class="sd">        max_depth: maximum allowed recursion depth</span>
+
+<span class="sd">    # Returns:</span>
+<span class="sd">        tree: a dict containing (some of) the following keys:</span>
+<span class="sd">            &#39;kind&#39; : either &#39;leaf&#39; or &#39;decision&#39;</span>
+<span class="sd">            &#39;class&#39; : the class assigned to this node (for a leaf)</span>
+<span class="sd">            &#39;feature&#39; : index of feature on which to split (for a decision)</span>
+<span class="sd">            &#39;thresh&#39; : threshold at which to split the feature (for a decision)</span>
+<span class="sd">            &#39;below&#39; : a nested tree applicable when feature &lt; thresh</span>
+<span class="sd">            &#39;above&#39; : a nested tree applicable when feature &gt;= thresh</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: implement this</span>
+    <span class="c1">#return None</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">depth</span> <span class="o">==</span> <span class="n">max_depth</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;kind&#39;</span> <span class="p">:</span> <span class="s1">&#39;leaf&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span> <span class="p">:</span> <span class="bp">cls</span> <span class="p">}</span>
+
+    <span class="n">feat</span><span class="p">,</span> <span class="n">thresh</span><span class="p">,</span> <span class="n">cls0</span><span class="p">,</span> <span class="n">cls1</span> <span class="o">=</span> <span class="n">decision_node_split</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span> <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">feat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;kind&#39;</span> <span class="p">:</span> <span class="s1">&#39;leaf&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span> <span class="p">:</span> <span class="bp">cls</span> <span class="p">}</span>
+
+    <span class="n">set1</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="n">feat</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">thresh</span>
+    <span class="n">set0</span> <span class="o">=</span> <span class="o">~</span><span class="n">set1</span>
+
+    <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;kind&#39;</span> <span class="p">:</span> <span class="s1">&#39;decision&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;feature&#39;</span> <span class="p">:</span> <span class="n">feat</span><span class="p">,</span>
+             <span class="s1">&#39;thresh&#39;</span> <span class="p">:</span> <span class="n">thresh</span><span class="p">,</span>
+             <span class="s1">&#39;above&#39;</span> <span class="p">:</span> <span class="n">decision_tree_train</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">set1</span><span class="p">,:],</span> <span class="n">y</span><span class="p">[</span><span class="n">set1</span><span class="p">],</span> <span class="n">cls1</span><span class="p">,</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">weights</span><span class="p">[</span><span class="n">set1</span><span class="p">],</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">),</span>
+             <span class="s1">&#39;below&#39;</span> <span class="p">:</span> <span class="n">decision_tree_train</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">set0</span><span class="p">,:],</span> <span class="n">y</span><span class="p">[</span><span class="n">set0</span><span class="p">],</span> <span class="n">cls0</span><span class="p">,</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">weights</span><span class="p">[</span><span class="n">set0</span><span class="p">],</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="make-predictions-from-a-decision-tree">
+<h2>2.4 Make predictions from a decision tree<a class="headerlink" href="#make-predictions-from-a-decision-tree" title="Permalink to this heading">#</a></h2>
+<p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">decision_tree_predict</span></code> function in the cell below. You will need to walk the tree for each sample, testing decision nodes until you reach a leaf.</p>
+<p>You may find it helpful to define an auxiliary function to process a single sample.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decision_tree_predict</span> <span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">X</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predict labels for test data using a fitted decision tree.</span>
+
+<span class="sd">    # Arguments</span>
+<span class="sd">        tree: a decision tree dictionary returned by decision_tree_train</span>
+<span class="sd">        X: an array of sample data, where rows are samples</span>
+<span class="sd">            and columns are features.</span>
+
+<span class="sd">    # Returns</span>
+<span class="sd">        y: the predicted labels</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: implement this</span>
+    <span class="c1">#return None</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="c1"># auxiliary function to predict a single example</span>
+    <span class="k">def</span> <span class="nf">decision_tree_predict1</span> <span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">x</span> <span class="p">):</span>
+        <span class="c1"># descend the tree until we reach a leaf</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">tree</span><span class="p">[</span><span class="s1">&#39;kind&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;leaf&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="s1">&#39;above&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">]]</span> <span class="o">&gt;=</span> <span class="n">tree</span><span class="p">[</span><span class="s1">&#39;thresh&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="n">tree</span><span class="p">[</span><span class="s1">&#39;below&#39;</span><span class="p">]</span>
+
+    <span class="c1"># iterate the single predictor over all the data</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">decision_tree_predict1</span><span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">ii</span><span class="p">,:]</span> <span class="p">)</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-task-2">
+<h2>→ Run Task 2<a class="headerlink" href="#run-task-2" title="Permalink to this heading">#</a></h2>
+<p>Execute the code cell below to use your functions above to train and test a decision tree classifier and generate a plot.</p>
+<p>As in Task 1, try playing with different values for <code class="docutils literal notranslate"><span class="pre">NUM_SAMPLES</span></code> and <code class="docutils literal notranslate"><span class="pre">RESOLUTION</span></code> and see how this affects the results — and the running time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NUM_SAMPLES</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">RESOLUTION</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">MIN_SIZE</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="s1">&#39;X2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,:]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Multi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">decision_tree_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">MIN_SIZE</span> <span class="p">)</span>
+<span class="k">if</span> <span class="n">tree</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Decision Tree&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">tree_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">decision_tree_predict</span> <span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">z</span> <span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">tree_cls</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Decision Tree&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bc5f2443c63f794b209ddc12e83faa10f443ef9f95e9b4868fc8b19f808ea1d0.png" src="../_images/bc5f2443c63f794b209ddc12e83faa10f443ef9f95e9b4868fc8b19f808ea1d0.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="task-3-random-forests">
+<h1>Task 3: Random Forests<a class="headerlink" href="#task-3-random-forests" title="Permalink to this heading">#</a></h1>
+<p>Random forests<sup><small>TM</small></sup> are an ensemble model aggregating the predictions from multiple decision trees. Diversity is introduced into the ensemble by training the trees on <strong>bootstrap samples</strong> from the training set, and also by restricting the subset of features used by each tree.</p>
+<p>For the exercises below, we will forgo feature subsetting (we will only be using two features anyway) and focus on the <strong>bagging</strong> aspect.</p>
+<section id="train-a-simplified-random-forest-classifier">
+<h2>3.1 Train a (simplified) random forest classifier<a class="headerlink" href="#train-a-simplified-random-forest-classifier" title="Permalink to this heading">#</a></h2>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">random_forest_train</span></code> function in the code cell below.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">decision_tree_train</span></code> function you wrote in Task 2.3 to train the individual trees. The <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.choice.html">choice</a> method of the supplied <code class="docutils literal notranslate"><span class="pre">rng</span></code> object should help with bootstrap sampling.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_forest_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Train a (simplified) random forest of decision trees.</span>
+
+<span class="sd">    # Arguments:</span>
+<span class="sd">        X: an array of sample data, where rows are samples</span>
+<span class="sd">            and columns are features.</span>
+<span class="sd">        y: vector of binary class labels corresponding to the</span>
+<span class="sd">            samples, must be same length as number of rows in X</span>
+<span class="sd">        k: the number of trees in the forest</span>
+<span class="sd">        rng: an instance of numpy.random.Generator</span>
+<span class="sd">            from which to draw random numbers</span>
+<span class="sd">        min_size: don&#39;t create child nodes smaller than this</span>
+<span class="sd">        max_depth: maximum tree depth</span>
+
+<span class="sd">    # Returns:</span>
+<span class="sd">        forest: a list of tree dicts as returned by decision_tree_train</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># TODO: implement this</span>
+    <span class="c1">#return None</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="n">forest</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">boot_ix</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">X_i</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">boot_ix</span><span class="p">,:]</span>
+        <span class="n">y_i</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">boot_ix</span><span class="p">]</span>
+        <span class="n">forest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">decision_tree_train</span> <span class="p">(</span> <span class="n">X_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span> <span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">forest</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="make-predictions-from-a-simplified-random-forest-classifier">
+<h2>3.2 Make predictions from a (simplified) random forest classifier<a class="headerlink" href="#make-predictions-from-a-simplified-random-forest-classifier" title="Permalink to this heading">#</a></h2>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">random_forest_predict</span></code> function in the cell below.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">decision_tree_predict</span></code> function you wrote in Task 2.4 to predict from the individual trees.</p>
+<p>Once again, the <code class="docutils literal notranslate"><span class="pre">utils.vote</span></code> function may be useful here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_forest_predict</span> <span class="p">(</span> <span class="n">forest</span><span class="p">,</span> <span class="n">X</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predict labels for test data using a fitted random</span>
+<span class="sd">    forest of decision trees.</span>
+
+<span class="sd">    # Arguments</span>
+<span class="sd">        forest: a list of decision tree dicts</span>
+<span class="sd">        X: an array of sample data, where rows are samples</span>
+<span class="sd">            and columns are features.</span>
+
+<span class="sd">    # Returns</span>
+<span class="sd">        y: the predicted labels</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: implement this</span>
+    <span class="c1">#return None</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">decision_tree_predict</span><span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">X</span> <span class="p">)</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">forest</span> <span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="n">preds</span><span class="p">[:,</span><span class="n">ii</span><span class="p">])</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">preds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-task-3">
+<h2>→ Run Task 3<a class="headerlink" href="#run-task-3" title="Permalink to this heading">#</a></h2>
+<p>Execute the cell below to train and test simplified random forest classifier and produce a plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NUM_SAMPLES</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">RESOLUTION</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">NUM_TREES</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="s1">&#39;X2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,:]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Multi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">forest</span> <span class="o">=</span> <span class="n">random_forest_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">NUM_TREES</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">shared_rng</span> <span class="p">)</span>
+<span class="k">if</span> <span class="n">forest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Random Forest&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">forest_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">random_forest_predict</span> <span class="p">(</span> <span class="n">forest</span><span class="p">,</span> <span class="n">z</span> <span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">forest_cls</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Random Forest (</span><span class="si">{</span><span class="n">NUM_TREES</span><span class="si">}</span><span class="s1"> trees)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0e1282c5eda01b039560d1faca6ff8a0ec9f05fead72154f4f44c8137f35651f.png" src="../_images/0e1282c5eda01b039560d1faca6ff8a0ec9f05fead72154f4f44c8137f35651f.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="task-4-adaboost">
+<h1>Task 4: AdaBoost<a class="headerlink" href="#task-4-adaboost" title="Permalink to this heading">#</a></h1>
+<p>AdaBoost is a meta-algorithm that iteratively builds an ensemble of weak learners such that each new addition provides the best available marginal improvement in the ensemble performance. The new learner is chosen to minimise its weighted classification error on the training set, with the sample weights updated at each iteration to prioritise misclassified points. The training procedure is shown in pseudocode form below:</p>
+<ul class="simple">
+<li><p>Initialise sample weights <span class="math notranslate nohighlight">\(w_i = \frac{1}{n}, \quad i \in \{1, 2, \dots, n\}\)</span></p></li>
+<li><p><strong>for</strong> t = 1 to k <strong>do</strong>:</p>
+<ul>
+<li><p>fit classifier <span class="math notranslate nohighlight">\(h_t\)</span> to minimise misclassification error with weights <span class="math notranslate nohighlight">\(w_i\)</span></p></li>
+<li><p>set <span class="math notranslate nohighlight">\(\epsilon =\)</span> the weighted misclassification error of <span class="math notranslate nohighlight">\(h_t\)</span></p></li>
+<li><p>compute prediction weight: <span class="math notranslate nohighlight">\(\alpha_t = \log\big(\frac{1-\epsilon}{\epsilon}\big)\)</span></p></li>
+<li><p>update weights: <span class="math notranslate nohighlight">\(w_i \leftarrow w_i \exp(\alpha_t \mathbb{1}(y_i \neq h_i(x_i)))\)</span></p></li>
+<li><p>normalise weights: <span class="math notranslate nohighlight">\(w_i = \frac{w_i}{\sum_j w_j}\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p>Once the ensemble is trained, new samples are classified like this:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = \mathbb{1}\left(\sum_t \alpha_t h_t(\mathbf{x}) \ge 0\right)
+\]</div>
+<p>Note that the training algorithm has been expressed in terms that don’t require a particular binary labelling convention, but the prediction expression above assumes that the outputs of the classifiers <span class="math notranslate nohighlight">\(h_t\)</span> are <span class="math notranslate nohighlight">\(\{-1, 1\}\)</span>. This is <em>not</em> the case for the decision trees implemented in Task 2, nor for the synthetic data. So you will need to convert the <span class="math notranslate nohighlight">\(h_t\)</span> outputs appropriately within the prediction sum.</p>
+<p>AdaBoost is agnostic as to the class of weak learners used, but is commonly implemented using <strong>decision stumps</strong> — decision trees of depth 1 — and that is what you should do here, using the decision tree functions you implemented in Task 2.</p>
+<section id="train-an-adaboost-classifier">
+<h2>4.1 Train an AdaBoost classifier<a class="headerlink" href="#train-an-adaboost-classifier" title="Permalink to this heading">#</a></h2>
+<p>Provide an implementation body for the <code class="docutils literal notranslate"><span class="pre">adaboost_train</span></code> function defined in the cell below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adaboost_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-8</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Iteratively train a set of decision tree classifiers</span>
+<span class="sd">    using AdaBoost.</span>
+
+<span class="sd">    # Arguments:</span>
+<span class="sd">        X: an array of sample data, where rows are samples</span>
+<span class="sd">            and columns are features.</span>
+<span class="sd">        y: vector of binary class labels corresponding to the</span>
+<span class="sd">            samples, must be same length as number of rows in X</span>
+<span class="sd">        k: the maximum number of weak classifiers to train</span>
+<span class="sd">        min_size: don&#39;t create child nodes smaller than this</span>
+<span class="sd">        max_depth: maximum tree depth -- by default we just</span>
+<span class="sd">            use decision stumps</span>
+<span class="sd">        epsilon: threshold below which the error is considered 0</span>
+
+<span class="sd">    # Returns:</span>
+<span class="sd">        trees: a list of tree dicts as returned by decision_tree_train</span>
+<span class="sd">        alphas: a vector of weights indicating how much credence to</span>
+<span class="sd">            given each of the decision tree predictions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: implement this</span>
+<span class="c1">#    return None, None</span>
+
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">alphas</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">trees</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">trees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">decision_tree_train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">))</span>
+        <span class="n">pred_y</span> <span class="o">=</span> <span class="n">decision_tree_predict</span><span class="p">(</span><span class="n">trees</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="p">)</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">pred_y</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="c1"># bail if we&#39;re classifying perfectly</span>
+        <span class="k">if</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+            <span class="n">alphas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">break</span>
+
+        <span class="n">alphas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">err</span><span class="p">)</span><span class="o">/</span><span class="n">err</span><span class="p">))</span>
+
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">alphas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">pred_y</span> <span class="o">!=</span> <span class="n">y</span><span class="p">))</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">trees</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">alphas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="make-predictions-from-an-adaboost-classifier">
+<h2>4.2 Make predictions from an AdaBoost classifier<a class="headerlink" href="#make-predictions-from-an-adaboost-classifier" title="Permalink to this heading">#</a></h2>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">adaboost_predict</span></code> function in the code cell below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adaboost_predict</span> <span class="p">(</span> <span class="n">trees</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">X</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predict labels for test data using a fitted AdaBoost</span>
+<span class="sd">    ensemble of decision trees.</span>
+
+<span class="sd">    # Arguments</span>
+<span class="sd">        trees: a list of decision tree dicts</span>
+<span class="sd">        alphas: a vector of weights for the trees</span>
+<span class="sd">        X: an array of sample data, where rows are samples</span>
+<span class="sd">            and columns are features.</span>
+
+<span class="sd">    # Returns</span>
+<span class="sd">        y: the predicted labels</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: implement this</span>
+    <span class="c1">#return None</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">decision_tree_predict</span><span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">X</span> <span class="p">)</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">trees</span> <span class="p">])</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">weighted</span> <span class="o">=</span> <span class="n">preds</span> <span class="o">@</span> <span class="n">alphas</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">weighted</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-task-4">
+<h2>→ Run Task 4<a class="headerlink" href="#run-task-4" title="Permalink to this heading">#</a></h2>
+<p>Execute the code cell below to train and test an AdaBoost classifier and plot the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NUM_SAMPLES</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">RESOLUTION</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">NUM_TREES</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="s1">&#39;X2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,:]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Binary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">trees</span><span class="p">,</span> <span class="n">alphas</span> <span class="o">=</span> <span class="n">adaboost_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">NUM_TREES</span> <span class="p">)</span>
+<span class="k">if</span> <span class="n">forest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;AdaBoost&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">ada_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">adaboost_predict</span> <span class="p">(</span> <span class="n">trees</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">z</span> <span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ada_cls</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;AdaBoost (</span><span class="si">{</span><span class="n">NUM_TREES</span><span class="si">}</span><span class="s1"> stumps)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/000386c1b2903e307cf5a55b8e774a74e15de39444ab413c87bd5b1268e1cdca.png" src="../_images/000386c1b2903e307cf5a55b8e774a74e15de39444ab413c87bd5b1268e1cdca.png" />
+</div>
+</div>
+</section>
+<section id="regression-in-cybersecurity">
+<h2>Regression in Cybersecurity<a class="headerlink" href="#regression-in-cybersecurity" title="Permalink to this heading">#</a></h2>
+<p>Regression techniques in cybersecurity play a pivotal role in predicting and assessing various quantitative measures related to security risks, vulnerabilities, and potential threats. Here are some key applications of regression in cybersecurity</p>
+<p>Regression techniques assist in <strong>predicting and quantifying</strong> security risks, aiding in proactive risk management and incident mitigation strategies. By prioritizing and allocating resources effectively, regression models contribute to <strong>optimizing cybersecurity efforts</strong>, focusing on critical areas and vulnerabilities.</p>
+<section id="risk-assessment">
+<h3>1. Risk Assessment<a class="headerlink" href="#risk-assessment" title="Permalink to this heading">#</a></h3>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 400px" src="https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41598-023-35198-1/MediaObjects/41598_2023_35198_Fig3_HTML.png" />
+</center>
+<p>Risk assessment using regression models in cybersecurity involves predicting and quantifying potential security risks, vulnerabilities, and the likelihood of security incidents or breaches. Regression techniques aid in evaluating and estimating the impact and probability of various security threats, enabling organizations to prioritize and allocate resources effectively to mitigate these risks.</p>
+<section id="quantitative-risk-metrics">
+<h4>Quantitative Risk Metrics<a class="headerlink" href="#quantitative-risk-metrics" title="Permalink to this heading">#</a></h4>
+<p>Regression models create quantitative risk metrics by combining various factors such as vulnerability scores, threat intelligence, asset value, and historical incident data. These metrics assist in quantifying overall cybersecurity risk.</p>
+</section>
+<section id="time-series-analysis-for-risk-trends">
+<h4>Time Series Analysis for Risk Trends<a class="headerlink" href="#time-series-analysis-for-risk-trends" title="Permalink to this heading">#</a></h4>
+<p>Regression analysis of historical data helps in identifying trends in security incidents or vulnerabilities over time. It forecasts potential future risks based on past patterns.</p>
+</section>
+</section>
+<section id="network-traffic-anomalies">
+<h3>2. Network Traffic Anomalies<a class="headerlink" href="#network-traffic-anomalies" title="Permalink to this heading">#</a></h3>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 400px" src="https://d34smkdb128qfi.cloudfront.net/images/flowmonlibraries/blogs/10711c43-77a1-4066-bb93-4f7555055a42.png?sfvrsn=4a0f497f_4" />
+</center>
+<p>Network Traffic Anomalies refer to deviations or irregular patterns within network communication that differ significantly from the expected or “normal” behavior. Analyzing and identifying such anomalies is crucial in cybersecurity as they could indicate potential security breaches, intrusions, or suspicious activities within a network. Regression techniques are employed to predict, identify, and classify these anomalies, enabling proactive detection and response to potential security threats.</p>
+<section id="predicting-expected-behavior">
+<h4>Predicting Expected Behavior<a class="headerlink" href="#predicting-expected-behavior" title="Permalink to this heading">#</a></h4>
+<p>Regression models analyze historical network traffic data to learn and predict expected patterns or behaviors. They create baselines of normal traffic behavior based on various features such as packet sizes, protocols, or traffic flow.</p>
+</section>
+<section id="identifying-deviations-from-normal-behavior">
+<h4>Identifying Deviations from Normal Behavior<a class="headerlink" href="#identifying-deviations-from-normal-behavior" title="Permalink to this heading">#</a></h4>
+<p>Regression-based anomaly detection identifies deviations or outliers from the established baseline. It detects unusual network behavior that may indicate security threats like DoS attacks, intrusions, or malware communication.</p>
+</section>
+<section id="quantifying-anomaly-severity">
+<h4>Quantifying Anomaly Severity<a class="headerlink" href="#quantifying-anomaly-severity" title="Permalink to this heading">#</a></h4>
+<p>Regression models help in quantifying the severity of anomalies by assessing the deviation from normal traffic patterns. They categorize anomalies based on the degree of deviation and potential impact on the network.</p>
+</section>
+</section>
+<section id="threat-severity-prediction">
+<h3>3.Threat Severity Prediction<a class="headerlink" href="#threat-severity-prediction" title="Permalink to this heading">#</a></h3>
+<center style="float: right; margin: 10px;">
+    <img style="max-width: 400px" src="https://www.researchgate.net/publication/339121526/figure/fig1/AS:865822692110336@1583439624614/Cybersecurity-criticality-number-CSCN-in-terms-of-severity-vs-likelihood.png" />
+</center>
+Threat severity prediction involves assessing and quantifying the potential impact or seriousness of various security threats or vulnerabilities within an organization's IT infrastructure. Regression techniques are instrumental in predicting threat severity, enabling cybersecurity professionals to prioritize and allocate resources efficiently to mitigate the most critical security risks.
+<section id="data-analysis-and-feature-extraction">
+<h4>Data Analysis and Feature Extraction<a class="headerlink" href="#data-analysis-and-feature-extraction" title="Permalink to this heading">#</a></h4>
+<p>Regression models analyze historical security incident data, vulnerability scores, exploitability, and potential consequences to identify relevant features that contribute to threat severity prediction.</p>
+</section>
+<section id="quantifying-threat-impact">
+<h4>Quantifying Threat Impact<a class="headerlink" href="#quantifying-threat-impact" title="Permalink to this heading">#</a></h4>
+<p>Regression techniques help in quantifying the potential impact of identified threats by assigning severity scores or probabilities based on learned patterns and correlations from historical data.</p>
+</section>
+<section id="prioritizing-threat-response">
+<h4>Prioritizing Threat Response<a class="headerlink" href="#prioritizing-threat-response" title="Permalink to this heading">#</a></h4>
+<p>Regression-based severity prediction aids in prioritizing response efforts by categorizing threats according to their predicted impact, allowing organizations to focus on addressing high-risk vulnerabilities.</p>
+</section>
+</section>
+</section>
+<section id="real-cyersecurity-intrusion-dataset">
+<h2>Real cyersecurity Intrusion Dataset<a class="headerlink" href="#real-cyersecurity-intrusion-dataset" title="Permalink to this heading">#</a></h2>
+<p>We will now look at a real cybersecurity dataset available as a <a class="reference external" href="https://www.kaggle.com/datasets/galaxyh/kdd-cup-1999-data">Kaggle Dataset</a>, which was used for <strong>The Third International Knowledge Discovery and Data Mining Tools</strong> Competition.</p>
+<p><em>Some information about the dataset:</em></p>
+<p>The competition was held in conjunction with KDD-99 The Fifth International Conference on Knowledge Discovery and Data Mining. The competition task was to build a network intrusion detector, a predictive model capable of distinguishing between bad’’ connections, called intrusions or attacks, andgood’’ normal connections. This database contains a standard set of data to be audited, which includes a wide variety of intrusions simulated in a military network environment</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/WSU-AI-CyberSecurity/data/master/intrusion99.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="visualisation-of-dataset">
+<h3>Visualisation of Dataset<a class="headerlink" href="#visualisation-of-dataset" title="Permalink to this heading">#</a></h3>
+<p>Let’s have a look at the content of the dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>duration</th>
+      <th>protocol_type</th>
+      <th>flag</th>
+      <th>src_bytes</th>
+      <th>dst_bytes</th>
+      <th>land</th>
+      <th>wrong_fragment</th>
+      <th>urgent</th>
+      <th>hot</th>
+      <th>...</th>
+      <th>rerror_rate</th>
+      <th>same_srv_rate</th>
+      <th>diff_srv_rate</th>
+      <th>srv_diff_host_rate</th>
+      <th>dst_host_count</th>
+      <th>dst_host_srv_count</th>
+      <th>dst_host_diff_srv_rate</th>
+      <th>dst_host_same_src_port_rate</th>
+      <th>dst_host_srv_diff_host_rate</th>
+      <th>Attack Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>181</td>
+      <td>5450</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>9</td>
+      <td>9</td>
+      <td>0.0</td>
+      <td>0.11</td>
+      <td>0.0</td>
+      <td>normal</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>239</td>
+      <td>486</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>19</td>
+      <td>19</td>
+      <td>0.0</td>
+      <td>0.05</td>
+      <td>0.0</td>
+      <td>normal</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>235</td>
+      <td>1337</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>29</td>
+      <td>29</td>
+      <td>0.0</td>
+      <td>0.03</td>
+      <td>0.0</td>
+      <td>normal</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>219</td>
+      <td>1337</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>39</td>
+      <td>39</td>
+      <td>0.0</td>
+      <td>0.03</td>
+      <td>0.0</td>
+      <td>normal</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>217</td>
+      <td>2032</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>49</td>
+      <td>49</td>
+      <td>0.0</td>
+      <td>0.02</td>
+      <td>0.0</td>
+      <td>normal</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 32 columns</p>
+</div></div></div>
+</div>
+<p>It’s always good practice to visualise features correlation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># drop columns with NaN</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
+    <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span> <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">]</span>  <span class="c1"># keep columns where there are more than 1 unique values</span>
+
+<span class="n">corr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/61243075214d08ed942624ae5ae3c108cb31f78283d161ae86d730ae0a35e0f0.png" src="../_images/61243075214d08ed942624ae5ae3c108cb31f78283d161ae86d730ae0a35e0f0.png" />
+</div>
+</div>
+<p>We can also visualise some statisatics about the dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>duration</th>
+      <th>protocol_type</th>
+      <th>flag</th>
+      <th>src_bytes</th>
+      <th>dst_bytes</th>
+      <th>land</th>
+      <th>wrong_fragment</th>
+      <th>urgent</th>
+      <th>hot</th>
+      <th>...</th>
+      <th>serror_rate</th>
+      <th>rerror_rate</th>
+      <th>same_srv_rate</th>
+      <th>diff_srv_rate</th>
+      <th>srv_diff_host_rate</th>
+      <th>dst_host_count</th>
+      <th>dst_host_srv_count</th>
+      <th>dst_host_diff_srv_rate</th>
+      <th>dst_host_same_src_port_rate</th>
+      <th>dst_host_srv_diff_host_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>4.940210e+05</td>
+      <td>4.940210e+05</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>...</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+      <td>494021.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>247010.000000</td>
+      <td>47.979302</td>
+      <td>0.467132</td>
+      <td>0.297730</td>
+      <td>3.025610e+03</td>
+      <td>8.685324e+02</td>
+      <td>0.000045</td>
+      <td>0.006433</td>
+      <td>0.000014</td>
+      <td>0.034519</td>
+      <td>...</td>
+      <td>0.176687</td>
+      <td>0.057433</td>
+      <td>0.791547</td>
+      <td>0.020982</td>
+      <td>0.028997</td>
+      <td>232.470778</td>
+      <td>188.665670</td>
+      <td>0.030906</td>
+      <td>0.601935</td>
+      <td>0.006684</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>142611.723005</td>
+      <td>707.746472</td>
+      <td>0.575606</td>
+      <td>0.597424</td>
+      <td>9.882181e+05</td>
+      <td>3.304000e+04</td>
+      <td>0.006673</td>
+      <td>0.134805</td>
+      <td>0.005510</td>
+      <td>0.782103</td>
+      <td>...</td>
+      <td>0.380717</td>
+      <td>0.231623</td>
+      <td>0.388189</td>
+      <td>0.082205</td>
+      <td>0.142397</td>
+      <td>64.745380</td>
+      <td>106.040437</td>
+      <td>0.109259</td>
+      <td>0.481309</td>
+      <td>0.042133</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>123505.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>4.500000e+01</td>
+      <td>0.000000e+00</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>255.000000</td>
+      <td>46.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>247010.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>5.200000e+02</td>
+      <td>0.000000e+00</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>255.000000</td>
+      <td>255.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>370515.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.032000e+03</td>
+      <td>0.000000e+00</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>255.000000</td>
+      <td>255.000000</td>
+      <td>0.040000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>494020.000000</td>
+      <td>58329.000000</td>
+      <td>2.000000</td>
+      <td>10.000000</td>
+      <td>6.933756e+08</td>
+      <td>5.155468e+06</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>3.000000</td>
+      <td>30.000000</td>
+      <td>...</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>255.000000</td>
+      <td>255.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 31 columns</p>
+</div></div></div>
+</div>
+<p>The modelling compent begins here. Similar to our previous exercise, we needs to split out dataset into train and test set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="c1"># df = df.drop([&#39;target&#39;,], axis=1)</span>
+<span class="c1"># print(df.shape)</span>
+
+<span class="c1"># Target variable and train set</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Attack Type&quot;</span><span class="p">]]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;Attack Type&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">sc</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Split test and train data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(330994, 31) (163027, 31)
+(330994, 1) (163027, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can then create a loop to train each of our canidate models</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+
+<span class="n">results</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">train_time</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">pred_time</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">train_score</span><span class="o">=</span><span class="p">[],</span>
+    <span class="n">test_score</span><span class="o">=</span><span class="p">[],</span>
+<span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">model_Cls</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">GaussianNB</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">(</span><span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;entropy&quot;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">RandomForestClassifier</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">30</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">LogisticRegression</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">12000</span><span class="p">)),</span>
+<span class="p">]:</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">model_Cls</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt; Training model </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model_Cls</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+    <span class="n">toc</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">train_time</span> <span class="o">=</span> <span class="n">toc</span> <span class="o">-</span> <span class="n">tic</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  &gt;&gt; Training took   </span><span class="si">{</span><span class="n">train_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s...&quot;</span><span class="p">)</span>
+
+    <span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">toc</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">pred_time</span> <span class="o">=</span> <span class="n">toc</span> <span class="o">-</span> <span class="n">tic</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  &gt;&gt; Prediction took </span><span class="si">{</span><span class="n">pred_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s...&quot;</span><span class="p">)</span>
+
+    <span class="n">train_score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    &gt;&gt;&gt; Evaluation metric on train set: </span><span class="si">{</span><span class="n">train_score</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="n">test_score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    &gt;&gt;&gt; Evaluation metric on test set:  </span><span class="si">{</span><span class="n">test_score</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+    <span class="n">display</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="c1"># store results</span>
+    <span class="n">results</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s2">&quot;train_time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_time</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s2">&quot;pred_time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred_time</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s2">&quot;train_score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_score</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s2">&quot;test_score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; Training model GaussianNB...
+  &gt;&gt; Training took   0.41s...
+  &gt;&gt; Prediction took 0.11s...
+    &gt;&gt;&gt; Evaluation metric on train set: 87.98%
+    &gt;&gt;&gt; Evaluation metric on test set:  87.94%
+</pre></div>
+</div>
+<div class="output text_html"><style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GaussianNB()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">GaussianNB</label><div class="sk-toggleable__content"><pre>GaussianNB()</pre></div></div></div></div></div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; Training model DecisionTreeClassifier...
+  &gt;&gt; Training took   0.95s...
+  &gt;&gt; Prediction took 0.01s...
+    &gt;&gt;&gt; Evaluation metric on train set: 99.06%
+    &gt;&gt;&gt; Evaluation metric on test set:  99.05%
+</pre></div>
+</div>
+<div class="output text_html"><style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>DecisionTreeClassifier(criterion=&#x27;entropy&#x27;, max_depth=4)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">DecisionTreeClassifier</label><div class="sk-toggleable__content"><pre>DecisionTreeClassifier(criterion=&#x27;entropy&#x27;, max_depth=4)</pre></div></div></div></div></div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; Training model RandomForestClassifier...
+  &gt;&gt; Training took   5.48s...
+  &gt;&gt; Prediction took 0.23s...
+    &gt;&gt;&gt; Evaluation metric on train set: 100.00%
+    &gt;&gt;&gt; Evaluation metric on test set:  99.97%
+</pre></div>
+</div>
+<div class="output text_html"><style>#sk-container-id-3 {color: black;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(n_estimators=30)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(n_estimators=30)</pre></div></div></div></div></div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; Training model LogisticRegression...
+  &gt;&gt; Training took   16.03s...
+  &gt;&gt; Prediction took 0.01s...
+    &gt;&gt;&gt; Evaluation metric on train set: 99.36%
+    &gt;&gt;&gt; Evaluation metric on test set:  99.36%
+</pre></div>
+</div>
+<div class="output text_html"><style>#sk-container-id-4 {color: black;}#sk-container-id-4 pre{padding: 0;}#sk-container-id-4 div.sk-toggleable {background-color: white;}#sk-container-id-4 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-4 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-4 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-4 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-4 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-4 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-4 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-4 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-4 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-4 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-4 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-4 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-4 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-4 div.sk-item {position: relative;z-index: 1;}#sk-container-id-4 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-4 div.sk-item::before, #sk-container-id-4 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-4 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-4 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-4 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-4 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-4 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-4 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-4 div.sk-label-container {text-align: center;}#sk-container-id-4 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-4 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression(max_iter=12000)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" checked><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">LogisticRegression</label><div class="sk-toggleable__content"><pre>LogisticRegression(max_iter=12000)</pre></div></div></div></div></div></div></div>
+</div>
+<p>With the following results</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+<span class="n">results_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>train_time</th>
+      <th>pred_time</th>
+      <th>train_score</th>
+      <th>test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>GaussianNB</td>
+      <td>0.409727</td>
+      <td>0.114979</td>
+      <td>0.879823</td>
+      <td>0.879431</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>DecisionTreeClassifier</td>
+      <td>0.949978</td>
+      <td>0.007906</td>
+      <td>0.990583</td>
+      <td>0.990523</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>RandomForestClassifier</td>
+      <td>5.475606</td>
+      <td>0.227684</td>
+      <td>0.999997</td>
+      <td>0.999724</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>LogisticRegression</td>
+      <td>16.029800</td>
+      <td>0.009018</td>
+      <td>0.993586</td>
+      <td>0.993608</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>And We can visualise the Time it took to train our model</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;train_time&quot;</span><span class="p">,</span> <span class="s2">&quot;pred_time&quot;</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Model Name&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Time (second)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/01330cb3889f673cafb3f2e79effb294915b94c8fb4544c5f3808e7374fade5b.png" src="../_images/01330cb3889f673cafb3f2e79effb294915b94c8fb4544c5f3808e7374fade5b.png" />
+</div>
+</div>
+<p>And their corresponding prediction score:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;train_score&quot;</span><span class="p">,</span> <span class="s2">&quot;test_score&quot;</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.87</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Model Name&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Evaluation metric&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e7757f6ce37c3df230c6ed662a57bc5a7af5373cf3a2f86fa7a97d4ddc1e5386.png" src="../_images/e7757f6ce37c3df230c6ed662a57bc5a7af5373cf3a2f86fa7a97d4ddc1e5386.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Module_1_Fundamentals_of_Machine_Learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Module 1:</strong> Fundamentals of Machine Learning</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Module 2:</strong> Supervised Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-supervised-learning-in-cybersecurity">Introduction to Supervised Learning in Cybersecurity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-in-cybersecurity">Classification in Cybersecurity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#malware-detection">1. Malware Detection</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#static-analysis">Static Analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-analysis">Dynamic Analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-methods">Ensemble Methods</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intrusion-detection-systems-ids">2. Intrusion Detection Systems (IDS)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#signature-based-detection">Signature-based Detection</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#anomaly-based-detection">Anomaly-based Detection</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hybrid-approaches">Hybrid Approaches</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#email-filtering">3. Email Filtering</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#content-based-filtering">Content-Based Filtering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#header-and-metadata-analysis">Header and Metadata Analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behavioral-analysis">Behavioral Analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-exercise-on-visualising-decision-tree-model">An exercise on visualising Decision Tree Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up">Setting Up</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-k-nearest-neighbours">Task 1: <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implement-k-nearest-neighbours-prediction">1.1 Implement <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-1">→ Run Task 1</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-decision-trees">Task 2: Decision Trees</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-weighted-misclassification-error">2.1 Calculate a weighted misclassification error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-a-dataset-to-reduce-misclassification">2.2 Split a dataset to reduce misclassification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-a-decision-tree-classifier">2.3 Train a decision tree classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-from-a-decision-tree">2.4 Make predictions from a decision tree</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-2">→ Run Task 2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-random-forests">Task 3: Random Forests</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-a-simplified-random-forest-classifier">3.1 Train a (simplified) random forest classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-from-a-simplified-random-forest-classifier">3.2 Make predictions from a (simplified) random forest classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-3">→ Run Task 3</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4-adaboost">Task 4: AdaBoost</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-an-adaboost-classifier">4.1 Train an AdaBoost classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-from-an-adaboost-classifier">4.2 Make predictions from an AdaBoost classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-4">→ Run Task 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-in-cybersecurity">Regression in Cybersecurity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-assessment">1. Risk Assessment</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantitative-risk-metrics">Quantitative Risk Metrics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-analysis-for-risk-trends">Time Series Analysis for Risk Trends</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-traffic-anomalies">2. Network Traffic Anomalies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-expected-behavior">Predicting Expected Behavior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-deviations-from-normal-behavior">Identifying Deviations from Normal Behavior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-anomaly-severity">Quantifying Anomaly Severity</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threat-severity-prediction">3.Threat Severity Prediction</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis-and-feature-extraction">Data Analysis and Feature Extraction</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-threat-impact">Quantifying Threat Impact</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prioritizing-threat-response">Prioritizing Threat Response</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-cyersecurity-intrusion-dataset">Real cyersecurity Intrusion Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisation-of-dataset">Visualisation of Dataset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By WSU Staffs
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1209 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Module 0: Introduction to Jupyter Notebook and Colab &#8212; WSU ML in Cybersecurity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Module_0_Introduction_to_Jupyter_Notebook_and_Colab';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 1: Fundamentals of Machine Learning" href="Module_1_Fundamentals_of_Machine_Learning.html" />
+    <link rel="prev" title="Exploring Machine Learning in Cybersecurity Workshop" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="WSU ML in Cybersecurity - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="WSU ML in Cybersecurity - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Exploring Machine Learning in Cybersecurity Workshop
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Module 0:</strong> Introduction to Jupyter Notebook and Colab</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Module_1_Fundamentals_of_Machine_Learning.html"><strong>Module 1:</strong> Fundamentals of Machine Learning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Module_2_Supervised_learning.html"><strong>Module 2:</strong> Supervised Learning</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/blob/main/notebooks/Module_0_Introduction_to_Jupyter_Notebook_and_Colab.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/Module_0_Introduction_to_Jupyter_Notebook_and_Colab.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 0: Introduction to Jupyter Notebook and Colab</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Module 0:</strong> Introduction to Jupyter Notebook and Colab</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-colab-environment-and-basic-data-generation">Introduction to Colab Environment and Basic Data Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-colab">Using Colab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up">Setting Up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-plotting">Basic Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-scatter-plots">Line &amp; Scatter Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-data">3D Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-generating-linear-continuous-data">Task 1: Generating linear continuous data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-samples-from-a-linear-model-with-additive-gaussian-noise">1.1 Generate samples from a linear model with additive Gaussian noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-1d-linear-model">1.2 Plot a 1D linear model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-2d-linear-model">1.3 Plot a 2D linear model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-1">→ Run Task 1</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-generating-linearly-separable-binary-data">Task 2: Generating linearly separable binary data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-sample-data-with-binary-labels-that-are-linearly-separable-in-a-continuous-feature-space">2.1 Generate sample data with binary labels that are linearly separable in a continuous feature space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-set-of-labelled-2d-samples-and-their-boundary-line">2.2 Plot a set of labelled 2D samples and their boundary line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-2">→ Run Task 2</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-0-introduction-to-jupyter-notebook-and-colab">
+<h1><strong>Module 0:</strong> Introduction to Jupyter Notebook and Colab<a class="headerlink" href="#module-0-introduction-to-jupyter-notebook-and-colab" title="Permalink to this heading">#</a></h1>
+<section id="introduction-to-colab-environment-and-basic-data-generation">
+<h2>Introduction to Colab Environment and Basic Data Generation<a class="headerlink" href="#introduction-to-colab-environment-and-basic-data-generation" title="Permalink to this heading">#</a></h2>
+<p>This guide aims to familiarize you with working in the Colab environment and acquaint you with fundamental data generation and plotting techniques. While these tasks do not involve actual <strong>machine learning</strong>, they introduce essential models and mechanisms crucial for subsequent learning.</p>
+<p>Each task requires you to code functions, respecting the defined function interface and provided instructions on their functionality. Following each task, there’s a code cell that executes the functions, typically producing results in the form of plots. While your outputs need not precisely resemble the examples provided, they will likely follow a similar structure. (In our upcoming workshop, plotting functions might be provided, but in this introductory exercise, you’re encouraged to create the plots yourself, allowing customization.)</p>
+<p><img alt="example of completed plots" src="../_images/m0-example-plot.jpg" /></p>
+<p>If you’re already adept at using NumPy and Matplotlib, especially within the context of ML, some exercises might appear straightforward. In such cases, the <strong>Further Exploration</strong> section offers additional challenges to explore.</p>
+<p>Alternatively, if you lack experience in these areas, the exercises might seem intimidating. Don’t be concerned if certain concepts feel unfamiliar at this stage. For now, focus on grasping the foundational concepts. If you encounter difficulties, feel free to seek assistance from our WSU staffs.</p>
+<p>Before delving into the tasks, the subsections below introduce Colab and the notebook format, demonstrating basic plotting. If you’re already comfortable with these aspects, you can skip the <strong>Using Colab</strong> and <strong>Basic Plotting</strong> sections. However, ensure to execute all code cells in the <strong>Setting Up</strong> section, as they import necessary components essential for the remainder of the assignment.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">utils</span></code> module contains some utility functions that can aid in avoiding tedious manipulations, such as array axis ordering. While not mandatory, it’s beneficial to explore these functions as they can simplify certain exercises into concise one-liners through strategic utilization of <code class="docutils literal notranslate"><span class="pre">utils</span></code>.</p>
+</section>
+<section id="using-colab">
+<h2>Using Colab<a class="headerlink" href="#using-colab" title="Permalink to this heading">#</a></h2>
+<p>Google Colaboratory, commonly known as Colab, offers free access to computational resources through a web-based interface known as a <strong>notebook</strong>. While this approach has its advantages and disadvantages, it notably ensures a consistent software environment for all users, eliminating the need to grapple with installation and configuration issues across various, potentially incompatible laptops.</p>
+<p>Notebooks are structured into distinct <strong>cells</strong>, comprising two primary types:</p>
+<ul>
+<li><p><strong>Text</strong> cells (like this one) contain formatted text and can embed other media like images. It’s essential to <strong>read</strong> and understand the content in these cells!</p></li>
+<li><p><strong>Code</strong> cells (as seen below) contain Python program instructions and occasionally other system commands, often prefixed by an exclamation mark, such as <code class="docutils literal notranslate"><span class="pre">!ls</span> <span class="pre">-l</span></code>.</p>
+<p>Executing code within these cells occurs on a remote <strong>virtual machine</strong> by clicking the <strong>play</strong> ( ▶︎ ) button that appears in the cell’s top left corner when hovered over. Some code might take a while to execute—during execution, the play button transforms into a <strong>stop</strong> (◾️) button, with an animated progress wheel indicating activity. Any output generated by the code displays at the cell’s bottom. To halt execution, click the stop button.</p>
+<p>(For code cells to execute, the notebook must be <strong>connected</strong> to a virtual machine. This connection usually happens automatically the first time you attempt to run a cell, resulting in a brief delay.)</p>
+</li>
+</ul>
+<p>Feel free to try running the code in the cell below by clicking the play button.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># a very simple example of a code cell</span>
+<span class="c1"># running the cell will execute the statement below and generate output</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello world!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hello world!
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are two important caveats to be aware of, one to do with the Jupyter notebook interface and the other to do with Colab:</p>
+<ol class="arabic simple">
+<li><p>The notebook interface allows <strong>out of order execution</strong> of code cells. That is, it is possible to run later cells before earlier ones. This is really <strong>never what you want</strong> and can give rise to all kinds of problems with inconsistent state. Always be sure to run cells in order. If you need to go back and re-run earlier cells (eg, because you want to change something) always follow that up by re-running all the subsequent cells in order too, to make sure everything is consistent.</p></li>
+<li><p>The virtual machine environment that Colab runs behind this notebook interface is <strong>resource-limited</strong> and <strong>transient</strong>. If you don’t do anything for awhile, the notebook may disconnect from the virtual machine. If you use too much computation then your session may be halted — and what qualifies as “too much” is kept intentionally vague. VMs are purged daily: if you stop and come back to it tomorrow the VM will have been deleted and you will need to go back to the beginning and go through the setup steps again. If you generate something that you want to keep, you should download it to your local machine.</p></li>
+</ol>
+</section>
+<section id="setting-up">
+<h2>Setting Up<a class="headerlink" href="#setting-up" title="Permalink to this heading">#</a></h2>
+<p>This notebook makes use of the NumPy library for numerical computing and the Matplotlib library for plotting. These are both extremely standard and are installed by default on your Colab instance. We just need to tell the Python interpreter we want to use them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># this is probably the default, but just in case</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’re also going to bring in some shared WSU workshop code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we will clone workshop resources if they dont exists yet</span>
+<span class="o">![</span><span class="w"> </span>-d<span class="w"> </span>wsu_workshop_utils<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/wsu-ai-cyberSecurity/wsu_workshop_utils
+    
+<span class="kn">import</span> <span class="nn">wsu_workshop_utils.utils</span> <span class="k">as</span> <span class="nn">utils</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># finally, set up some items for use in later code</span>
+<span class="n">shared_rng</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+
+<span class="n">WEIGHTS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
+<span class="n">LIMITS</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_func</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simple example function of 2 variables for</span>
+<span class="sd">    testing grid &amp; random optimisation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">X</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">X</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="basic-plotting">
+<h2>Basic Plotting<a class="headerlink" href="#basic-plotting" title="Permalink to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://matplotlib.org">Matplotlib</a> library provides extensive plotting capabilities,
+originally modelled on those in Matlab. The library is big and
+complicated, and though there is <a class="reference external" href="https://matplotlib.org/stable/users/">extensive documentation online</a> it can be quite daunting at first.</p>
+<p>Here we provide a few simple example plots that you can use as
+starting points for some of the visualisations in the lab
+assignments. They are not intended to be exhaustive, nor to be
+perfect exemplars of best practice. If you are already familiar
+with Matplotlib or just want to dig into it on your own, feel free
+to ignore these examples.</p>
+<p>It is pretty common practice, especially in a notebook environment and when doing exploratory data analysis, to use the “implicit” <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> API for plotting. This does some behind the scenes object management for you, effectively maintaining global objects representing the current figure and graph axes. This API is slightly more succinct, allowing concise plotting commands like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create some simple data to plot</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">yy</span> <span class="o">=</span> <span class="n">xx</span> <span class="o">*</span> <span class="n">xx</span>
+
+<span class="c1"># plot it using the implicit pyplot API</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/07ed54bbdeb198738ee9d657ac8e259455fa375aae037c07a31818c5470e130c.png" src="../_images/07ed54bbdeb198738ee9d657ac8e259455fa375aae037c07a31818c5470e130c.png" />
+</div>
+</div>
+<p>However, the downside of this API is that it is less transparent and also less flexible. Here we will instead use the “explicit” (also referred to as the “object oriented”) API, where we create and manage figures and axes ourselves. This is a little bit more verbose, but allows us more control and is a bit more upfront about what is being done.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># explicitly create a figure object and graph axes with in it</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># plot the same data as before using the explicit API</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5ff661ffe484f901d441d72fe978ed34d34a5bfb601e3f92e9328a0407072ec3.png" src="../_images/5ff661ffe484f901d441d72fe978ed34d34a5bfb601e3f92e9328a0407072ec3.png" />
+</div>
+</div>
+<p>In this very simple example there’s not a whole lot of difference between the two approaches, but for more complex plots the explicit API is more versatile. For more on the differences between these APIs, see <a class="reference external" href="https://matplotlib.org/stable/users/explain/api_interfaces.html">this documentation page</a>.</p>
+<section id="line-scatter-plots">
+<h3>Line &amp; Scatter Plots<a class="headerlink" href="#line-scatter-plots" title="Permalink to this heading">#</a></h3>
+<p>The <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.plot.html"><code class="docutils literal notranslate"><span class="pre">plot</span></code></a> method produces a generic 2D line and/or scatter plot, with graphical details such as colour and marker specified as additional parameters. We can call it multiple times to add additional content to a plot, and can also use further methods on the Axes object to add things like axis labels and a legend, as in the example below.</p>
+<p>For more complex scatter plots, eg with variable marker size, there is also the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html"><code class="docutils literal notranslate"><span class="pre">scatter</span></code></a> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># generate a noiseless ideal cubic curve</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+<span class="n">yy</span> <span class="o">=</span> <span class="n">xx</span> <span class="o">*</span> <span class="n">xx</span> <span class="o">*</span> <span class="n">xx</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;teal&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ideal Curve&quot;</span><span class="p">)</span>
+
+<span class="c1"># generate some noisy sample points</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">shared_rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">-</span> <span class="mi">5</span>
+<span class="n">yy</span> <span class="o">=</span> <span class="n">xx</span> <span class="o">*</span> <span class="n">xx</span> <span class="o">*</span> <span class="n">xx</span> <span class="o">+</span> <span class="n">shared_rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">xx</span><span class="p">,</span>
+    <span class="n">yy</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkorchid&quot;</span><span class="p">,</span>
+    <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Noisy Sample&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># you can use (some) LaTeX formatting in text labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y = x^3$&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Simple Cubic Function&quot;</span><span class="p">)</span>
+
+<span class="c1"># add a legend</span>
+<span class="c1"># by default this includes whatever we have provide a label for above</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2af9aad42d68522f57ccc12ab84fa1e9b847598a7a2e3ad20f5c9c48c330deb6.png" src="../_images/2af9aad42d68522f57ccc12ab84fa1e9b847598a7a2e3ad20f5c9c48c330deb6.png" />
+</div>
+</div>
+</section>
+<section id="histograms">
+<h3>Histograms<a class="headerlink" href="#histograms" title="Permalink to this heading">#</a></h3>
+<p>We’ll often want to visualise the <em>distribution</em> of data. A very common tool for this is a <a class="reference external" href="https://en.wikipedia.org/wiki/Histogram">histogram</a>, which we can plot using the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.hist.html"><code class="docutils literal notranslate"><span class="pre">hist</span></code></a> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># generate some univariate Gaussian data</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">shared_rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># plot as a density histogram (ie, area sums to 1)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;cornflowerblue&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Sample Value&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Histogram of N(0,1) samples&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8f30a1b0ef226bb72ac2befd364912e7fe41277416ed89bb283a3b521cbc9a41.png" src="../_images/8f30a1b0ef226bb72ac2befd364912e7fe41277416ed89bb283a3b521cbc9a41.png" />
+</div>
+</div>
+</section>
+<section id="d-data">
+<h3>3D Data<a class="headerlink" href="#d-data" title="Permalink to this heading">#</a></h3>
+<p>We will often have to deal with data with more than two dimensions. Visualising higher dimensional data in general can be very difficult, but for 3D we have some decent options. Two common approaches are to use colour or intensity to represent the third dimension, or to use some form of 3D projection. We will illustrate both approaches below.</p>
+<p>For simplicity we’ll consider data with two <strong>independent variables</strong> <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, and a single <strong>dependent variable</strong> <span class="math notranslate nohighlight">\(z\)</span> that is a function of those variables:</p>
+<div class="math notranslate nohighlight">
+\[z = f(x, y) = \cos((x-1)^2 + (y+0.5)^2)\]</div>
+<p>We can sample many different values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> and calculate <span class="math notranslate nohighlight">\(z\)</span> for each one. One common sampling strategy uses the NumPy functions <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html"><code class="docutils literal notranslate"><span class="pre">linspace</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html"><code class="docutils literal notranslate"><span class="pre">meshgrid</span></code></a> to sample all points on a grid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">zz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">xx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">xx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">yy</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">yy</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using colour to display the value of <span class="math notranslate nohighlight">\(z\)</span> at every point on a regular <span class="math notranslate nohighlight">\((x,y)\)</span> grid is exactly equivalent to displaying an <strong>image</strong>, which can be done in Matplotlib using the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.imshow.html"><code class="docutils literal notranslate"><span class="pre">imshow</span></code></a> method.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">imshow</span></code> just uses the pixel dimensions of the image for the axis dimension, and it displays the image from the top downwards, which is how images are normally stored. However, in this case we want to specify the <strong>extents</strong> – the value ranges across and down – so that the match up with out <span class="math notranslate nohighlight">\((x,y)\)</span> values, and we also want to have the origin at the bottom, because it’s standard for graphs to have <span class="math notranslate nohighlight">\(y\)</span> increase upwards. So we add some extra options to our <code class="docutils literal notranslate"><span class="pre">imshow</span></code> call.</p>
+<p>In addition, we’re going to add some contour lines – partly because they help make the gradients a little bit clearer, but mostly for decorative effect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the coordinate range and aspect ratio</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">yy</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">yy</span><span class="p">))</span>
+<span class="n">aspect</span> <span class="o">=</span> <span class="p">(</span><span class="n">extent</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">extent</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">extent</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">extent</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">zz</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;cividis&quot;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="n">aspect</span><span class="p">)</span>
+
+<span class="c1"># add some contour lines</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">zz</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">zz</span><span class="p">),</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">,</span> <span class="n">levels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;rainbow&quot;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$z = \cos((x-1)^2 + (y+0.5)^2)$&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1df9eb19e41cb49527fb129499a5470780c62ff05c6040d2678003f317cfb0e6.png" src="../_images/1df9eb19e41cb49527fb129499a5470780c62ff05c6040d2678003f317cfb0e6.png" />
+</div>
+</div>
+<p>Alternatively, we can render the data as a <strong>surface</strong> within a projected 3D space, using the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/mpl_toolkits.mplot3d.axes3d.Axes3D.plot_surface.html"><code class="docutils literal notranslate"><span class="pre">plot_surface</span></code></a> method.</p>
+<p>(Note that this requires a different kind of Axes object – <a class="reference external" href="https://matplotlib.org/stable/api/toolkits/mplot3d/axes3d.html">Axes3D</a> – which in turn means that rather than the shorthand <a class="reference external" href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure.subplots"><code class="docutils literal notranslate"><span class="pre">Figure.subplots</span></code></a> method used previously, we’ll instead use the slightly different <a class="reference external" href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure.add_subplot"><code class="docutils literal notranslate"><span class="pre">Figure.add_subplot</span></code></a> interface. This is the sort of fiddly detail that can make Matplotlib daunting, but don’t worry about it too much. We’ll mostly stick to 2D plotting in this module.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span>
+    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">,</span> <span class="n">rcount</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">ccount</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;ocean&quot;</span><span class="p">,</span> <span class="n">antialiased</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">&quot;$z$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$z = \cos((x-1)^2 + (y+0.5)^2)$&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e5adff9d1499fd493c7a3ec6efb2b7f5c3ca2d7be90c252c5c9f3dbc4dc72a2e.png" src="../_images/e5adff9d1499fd493c7a3ec6efb2b7f5c3ca2d7be90c252c5c9f3dbc4dc72a2e.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="task-1-generating-linear-continuous-data">
+<h1>Task 1: Generating linear continuous data<a class="headerlink" href="#task-1-generating-linear-continuous-data" title="Permalink to this heading">#</a></h1>
+<p>A continuous <strong>linear model</strong> is one whose output is just a weighted sum of the input features:</p>
+<div class="math notranslate nohighlight">
+\[y = w_0 + w_1 x_1 + w_2 x_2 + ... + w_d x_d = \sum_{i=0}^d w_i x_i\]</div>
+<p>where we’ve defined a constant dummy feature <span class="math notranslate nohighlight">\(x_0 = 1\)</span> to capture the intercept term <span class="math notranslate nohighlight">\(w_0\)</span> in the sum. We can express this concisely in vector form:</p>
+<div class="math notranslate nohighlight">
+\[y = \mathbf{w \cdot x \quad\quad w},\mathbf{x} \in \mathbb{R}^{d+1}\]</div>
+<p>This is a <em>deterministic</em> model, fully parameterised by the weight vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>. In practice we might expect there to be some amount of measurement error or other uncertainty in the values we obtain for <span class="math notranslate nohighlight">\(y\)</span>. One way to represent this uncertainty is with an additive error term, <span class="math notranslate nohighlight">\(\varepsilon\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y = \mathbf{w \cdot x} + \varepsilon\]</div>
+<p>This is not the only way to model the uncertainty, or necessarily the best, but it is nice and simple and very commonly used. In the absence of other information about <span class="math notranslate nohighlight">\(\varepsilon\)</span>, we will often further assume that it follows a Gaussian distribution with mean zero (since the location is already modelled by <span class="math notranslate nohighlight">\(w_0\)</span>) and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\varepsilon \sim N(0, \sigma^2)\]</div>
+<p>Given <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, we can the generate any number of samples <span class="math notranslate nohighlight">\((\mathbf{x},y)\)</span> from this model by choosing values for <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+<section id="generate-samples-from-a-linear-model-with-additive-gaussian-noise">
+<h2>1.1 Generate samples from a linear model with additive Gaussian noise<a class="headerlink" href="#generate-samples-from-a-linear-model-with-additive-gaussian-noise" title="Permalink to this heading">#</a></h2>
+<p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">generate_noisy_linear</span></code> function in the cell below.</p>
+<p>Note the following:</p>
+<ul class="simple">
+<li><p>The function arguments <code class="docutils literal notranslate"><span class="pre">weights</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code> correspond to <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> in the equations given above.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weights[0]</span></code> is the intercept term <span class="math notranslate nohighlight">\(w_0\)</span>. Hence, the number of features, <span class="math notranslate nohighlight">\(d\)</span>, is <em>one less</em> than the length of <code class="docutils literal notranslate"><span class="pre">weights</span></code>.</p></li>
+<li><p>Use the supplied generator <code class="docutils literal notranslate"><span class="pre">rng</span></code> to obtain random numbers. The Generator class is documented <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html">here</a>, but probably the most immediately relevant methods are <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.random.html">random</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.normal.html">normal</a>.</p></li>
+</ul>
+<p><strong>IMPORTANT</strong>: Here and in all subsequent tasks, whenever you make changes to the code you must <strong>run the cell again</strong> to propagate your updates to the runtime environment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_noisy_linear</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Draw samples from a linear model with additive Gaussian noise.</span>
+
+<span class="sd">    # Arguments</span>
+<span class="sd">        num_samples: number of samples to generate</span>
+<span class="sd">            (ie, the number of rows in the returned X</span>
+<span class="sd">            and the length of the returned y)</span>
+<span class="sd">        weights: vector defining the model</span>
+<span class="sd">            (including a bias term at index 0)</span>
+<span class="sd">        sigma: standard deviation of the additive noise</span>
+<span class="sd">        limits: a tuple (low, high) specifying the value</span>
+<span class="sd">            range of all the input features x_i</span>
+<span class="sd">        rng: an instance of numpy.random.Generator</span>
+<span class="sd">            from which to draw random numbers</span>
+
+<span class="sd">    # Returns</span>
+<span class="sd">        X: a matrix of sample inputs, where</span>
+<span class="sd">            the samples are the rows and the</span>
+<span class="sd">            features are the columns</span>
+<span class="sd">            ie, its size should be:</span>
+<span class="sd">              num_samples x (len(weights) - 1)</span>
+<span class="sd">        y: a vector of num_samples output values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># TODO: implement this</span>
+    <span class="c1"># return None, None</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">random_sample</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">utils</span><span class="o">.</span><span class="n">affine</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">weights</span><span class="p">),</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">num_samples</span><span class="p">,</span>
+        <span class="n">limits</span><span class="p">,</span>
+        <span class="n">rng</span><span class="p">,</span>
+        <span class="n">sigma</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-a-1d-linear-model">
+<h2>1.2 Plot a 1D linear model<a class="headerlink" href="#plot-a-1d-linear-model" title="Permalink to this heading">#</a></h2>
+<p>Complete the implementation of the <code class="docutils literal notranslate"><span class="pre">plot_noisy_linear_1d</span></code> function below. Note that the function generates the data to plot by calling the function you implemented in part 1.1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_noisy_linear_1d</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate and plot points from a noisy single-feature linear model,</span>
+<span class="sd">    along with a line showing the true (noiseless) relationship.</span>
+
+<span class="sd">    # Arguments</span>
+<span class="sd">        axes: a Matplotlib Axes object into which to plot</span>
+<span class="sd">        num_samples: number of samples to generate</span>
+<span class="sd">            (ie, the number of rows in the returned X</span>
+<span class="sd">            and the length of the returned y)</span>
+<span class="sd">        weights: vector defining the model</span>
+<span class="sd">            (including a bias term at index 0)</span>
+<span class="sd">        sigma: standard deviation of the additive noise</span>
+<span class="sd">        limits: a tuple (low, high) specifying the value</span>
+<span class="sd">            range of all the input features x_i</span>
+<span class="sd">        rng: an instance of numpy.random.Generator</span>
+<span class="sd">            from which to draw random numbers</span>
+
+<span class="sd">    # Returns</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_noisy_linear</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
+
+    <span class="c1"># TODO: remove the following line and do the plotting</span>
+    <span class="c1"># utils.plot_unimplemented ( axes, &#39;Noisy 1D Linear Model&#39; )</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">limits</span><span class="p">,</span> <span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Noisy 1D Linear Model&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$y$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-a-2d-linear-model">
+<h2>1.3 Plot a 2D linear model<a class="headerlink" href="#plot-a-2d-linear-model" title="Permalink to this heading">#</a></h2>
+<p>Complete the implementation of the plot_noisy_linear_2d function below.</p>
+<p>While this problem is similar to the previous one, note that this model is significantly harder to visualise because there are three dimensions of data to consider: two inputs and one output. To make matters worse, the Axes object you are passed in the first argument is only a 2d cartesian one, not a 3d projection. So you’ll need to consider how to represent it, and that may affect what data you need to generate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_noisy_linear_2d</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Produce a plot illustrating a noisy two-feature linear model.</span>
+
+<span class="sd">    # Arguments</span>
+<span class="sd">        axes: a Matplotlib Axes object into which to plot</span>
+<span class="sd">        resolution: how densely should the model be sampled?</span>
+<span class="sd">        weights: vector defining the model</span>
+<span class="sd">            (including a bias term at index 0)</span>
+<span class="sd">        sigma: standard deviation of the additive noise</span>
+<span class="sd">        limits: a tuple (low, high) specifying the value</span>
+<span class="sd">            range of all the input features x_i</span>
+<span class="sd">        rng: an instance of numpy.random.Generator</span>
+<span class="sd">            from which to draw random numbers</span>
+
+<span class="sd">    # Returns</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+
+    <span class="c1"># TODO: generate the data</span>
+    <span class="c1"># TODO: remove the following line and do the plotting</span>
+    <span class="c1"># utils.plot_unimplemented ( axes, &#39;Noisy 2D Linear Model&#39; )</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">grid_sample</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">utils</span><span class="o">.</span><span class="n">affine</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">weights</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">sigma</span>
+    <span class="p">)</span>
+
+    <span class="n">axes</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+        <span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;GnBu&quot;</span><span class="p">,</span>
+        <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span>
+        <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="p">)</span>
+
+    <span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span>
+        <span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+        <span class="n">levels</span><span class="p">,</span>
+        <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span>
+        <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="p">)</span>
+
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x_1$&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$x_2$&quot;</span><span class="p">)</span>
+
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Noisy 2D Linear Model&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-task-1">
+<h2>→ Run Task 1<a class="headerlink" href="#run-task-1" title="Permalink to this heading">#</a></h2>
+<p>Execute the code cell below to run the previous tasks and generate a pair of plots.</p>
+<p>(BTW, if you found yourself wondering earlier why there are separate objects for figure and axes, this might help clarify that.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plot_noisy_linear_1d</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">50</span><span class="p">,</span> <span class="n">WEIGHTS</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">LIMITS</span><span class="p">,</span> <span class="n">shared_rng</span><span class="p">)</span>
+<span class="n">plot_noisy_linear_2d</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">,</span> <span class="n">WEIGHTS</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">LIMITS</span><span class="p">,</span> <span class="n">shared_rng</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/931b097f38eb15747a5c793febbadf85e0cfca1727f516d2c4cf017729ec1dcb.png" src="../_images/931b097f38eb15747a5c793febbadf85e0cfca1727f516d2c4cf017729ec1dcb.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="task-2-generating-linearly-separable-binary-data">
+<h1>Task 2: Generating linearly separable binary data<a class="headerlink" href="#task-2-generating-linearly-separable-binary-data" title="Permalink to this heading">#</a></h1>
+<p>We can use an equation akin to the model in Task 1 to define a linear boundary – or <strong>separating
+hyperplane</strong> – that divides a feature space into disjoint half-spaces:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w \cdot x} = 0\]</div>
+<p>In a <strong>binary classification</strong> problem, if there exists at least one such hyperplane for which all samples of class 0 are on one side and all those of class 1 are on the other, then the data are said to be <strong>linearly separable</strong>, and we can define a classifier using the hyperplane as a decision boundary:</p>
+<p>\begin{equation*}
+y = \begin{cases}
+1 &amp; \text{if <span class="math notranslate nohighlight">\(\mathbf{w \cdot x} \ge 0\)</span>}\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{equation*}</p>
+<p>Putting aside the question of how to <em>find</em> such a plane, or whether it makes a <em>good</em> classifier, we can see that (as with the continuous case in Task 1) it is easy to generate samples <span class="math notranslate nohighlight">\((\mathbf{x}, y)\)</span> given <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>.</p>
+<section id="generate-sample-data-with-binary-labels-that-are-linearly-separable-in-a-continuous-feature-space">
+<h2>2.1 Generate sample data with binary labels that are linearly separable in a continuous feature space<a class="headerlink" href="#generate-sample-data-with-binary-labels-that-are-linearly-separable-in-a-continuous-feature-space" title="Permalink to this heading">#</a></h2>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">generate_linearly_separable</span></code> function below.</p>
+<p>(The notes from Task 1.1 also apply here.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_linearly_separable</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Draw samples from a binary model with a given linear</span>
+<span class="sd">    decision boundary.</span>
+
+<span class="sd">    # Arguments</span>
+<span class="sd">        num_samples: number of samples to generate</span>
+<span class="sd">            (ie, the number of rows in the returned X</span>
+<span class="sd">            and the length of the returned y)</span>
+<span class="sd">        weights: vector defining the decision boundary</span>
+<span class="sd">            (including a bias term at index 0)</span>
+<span class="sd">        limits: a tuple (low, high) specifying the value</span>
+<span class="sd">            range of all the input features x_i</span>
+<span class="sd">        rng: an instance of numpy.random.Generator</span>
+<span class="sd">            from which to draw random numbers</span>
+
+<span class="sd">    # Returns</span>
+<span class="sd">        X: a matrix of sample vectors, where</span>
+<span class="sd">            the samples are the rows and the</span>
+<span class="sd">            features are the columns</span>
+<span class="sd">            ie, its size should be:</span>
+<span class="sd">              num_samples x (len(weights) - 1)</span>
+<span class="sd">        y: a vector of num_samples binary labels</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: implement this</span>
+    <span class="c1"># return None, None</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="k">def</span> <span class="nf">hyperplane_label</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">boundary</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">affine</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">boundary</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">random_sample</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">hyperplane_label</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">weights</span><span class="p">),</span>
+        <span class="n">count</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">num_samples</span><span class="o">=</span><span class="n">num_samples</span><span class="p">,</span>
+        <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">,</span>
+        <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-a-set-of-labelled-2d-samples-and-their-boundary-line">
+<h2>2.2 Plot a set of labelled 2D samples and their boundary line<a class="headerlink" href="#plot-a-set-of-labelled-2d-samples-and-their-boundary-line" title="Permalink to this heading">#</a></h2>
+<p>Complete the implementation of the function <code class="docutils literal notranslate"><span class="pre">plot_linearly_separable_2d</span></code> below. As in 1.2, the call to generate the data using the function above is provided, all you need to do is plot it.</p>
+<p>Aim to include most or all of the following features in your plot:</p>
+<ul class="simple">
+<li><p>All the generated samples, with their class clearly indicated (eg, by colour and shape).</p></li>
+<li><p>A line marking the decision boundary. You will need to calculate the end points (or other defining parameters such as gradient and intercept) from the weights vector. Consider how to do this – are there any edge cases you need to take into account.</p></li>
+<li><p>An <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.arrow.html">arrow</a> to show the weight vector itself.</p></li>
+</ul>
+<p>Verify that the weight vector is normal to the boundary and points towards the positive class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_linearly_separable_2d</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot a linearly separable binary data set in a 2d feature space.</span>
+
+<span class="sd">    # Arguments</span>
+<span class="sd">        axes: a Matplotlib Axes object into which to plot</span>
+<span class="sd">        num_samples: number of samples to generate</span>
+<span class="sd">            (ie, the number of rows in the returned X</span>
+<span class="sd">            and the length of the returned y)</span>
+<span class="sd">        weights: vector defining the decision boundary</span>
+<span class="sd">            (including a bias term at index 0)</span>
+<span class="sd">        limits: a tuple (low, high) specifying the value</span>
+<span class="sd">            range of all the input features x_i</span>
+<span class="sd">        rng: an instance of numpy.random.Generator</span>
+<span class="sd">            from which to draw random numbers</span>
+
+<span class="sd">    # Returns</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_linearly_separable</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
+
+    <span class="c1"># TODO: do the plotting</span>
+    <span class="c1"># utils.plot_unimplemented ( axes, &#39;Linearly Separable Binary Data&#39; )</span>
+
+    <span class="c1"># --------</span>
+
+    <span class="c1"># plot the two subsets with different markers &amp; colours</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Class 0&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;v&quot;</span><span class="p">,</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Class 1&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># to draw the boundary line we need to calculate the endpoints</span>
+    <span class="c1"># NB: this will fail if either of the coordinate weights is 0.</span>
+    <span class="c1"># special case it later</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">weights</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">weights</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">limits</span><span class="p">,</span> <span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">mid_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">limits</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">mid_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y0</span> <span class="o">+</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="n">axes</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span>
+        <span class="n">mid_x</span><span class="p">,</span>
+        <span class="n">mid_y</span><span class="p">,</span>
+        <span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">weights</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkorchid&quot;</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span>
+        <span class="n">head_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+        <span class="n">overhang</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">axes</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Linearly Separable Binary Data&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x_1$&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$x_2$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-task-2">
+<h2>→ Run Task 2<a class="headerlink" href="#run-task-2" title="Permalink to this heading">#</a></h2>
+<p>Execute the code cell below to run the function you wrote above and generate a plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">plot_linearly_separable_2d</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">WEIGHTS</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">LIMITS</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">shared_rng</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1c92261326f7d6567575e9ec90294adbe8043d2bfa01c1e582ada6f6e5cb2c14.png" src="../_images/1c92261326f7d6567575e9ec90294adbe8043d2bfa01c1e582ada6f6e5cb2c14.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exploring Machine Learning in Cybersecurity Workshop</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Module_1_Fundamentals_of_Machine_Learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Module 1:</strong> Fundamentals of Machine Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Module 0:</strong> Introduction to Jupyter Notebook and Colab</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-colab-environment-and-basic-data-generation">Introduction to Colab Environment and Basic Data Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-colab">Using Colab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up">Setting Up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-plotting">Basic Plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-scatter-plots">Line &amp; Scatter Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-data">3D Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-generating-linear-continuous-data">Task 1: Generating linear continuous data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-samples-from-a-linear-model-with-additive-gaussian-noise">1.1 Generate samples from a linear model with additive Gaussian noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-1d-linear-model">1.2 Plot a 1D linear model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-2d-linear-model">1.3 Plot a 2D linear model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-1">→ Run Task 1</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-generating-linearly-separable-binary-data">Task 2: Generating linearly separable binary data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-sample-data-with-binary-labels-that-are-linearly-separable-in-a-continuous-feature-space">2.1 Generate sample data with binary labels that are linearly separable in a continuous feature space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-set-of-labelled-2d-samples-and-their-boundary-line">2.2 Plot a set of labelled 2D samples and their boundary line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-2">→ Run Task 2</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By WSU Staffs
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

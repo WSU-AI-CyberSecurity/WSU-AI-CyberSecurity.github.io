@@ -19,6 +19,15 @@ latex:
   latex_documents:
     targetname: book.tex
 
+sphinx:
+  recursive_update: true
+  config:
+    html_theme_options:
+      navbar_end: ["navbar-icon-links"]
+
+    html_context:
+      default_mode: light
+
 # Information about where the book exists on the web
 repository:
   url: https://github.com/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io  # Online location of your book

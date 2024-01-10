@@ -4,6 +4,6 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
 - file: notebooks/Module_0_Introduction_to_Jupyter_Notebook_and_Colab
 - file: notebooks/Module_1_Fundamentals_of_Machine_Learning
+- file: notebooks/Module_2_Supervised_learning

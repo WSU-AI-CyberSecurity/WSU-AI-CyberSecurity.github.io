@@ -1,1 +1,3 @@
 _build
+.ipynb_checkpoints
+notebooks/wsu_workshop_utils/

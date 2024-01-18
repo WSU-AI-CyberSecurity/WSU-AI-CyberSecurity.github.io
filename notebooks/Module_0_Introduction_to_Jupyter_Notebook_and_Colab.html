@@ -182,6 +182,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Module 0:</strong> Introduction to Jupyter Notebook and Colab</a></li>
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="Module_1_Fundamentals_of_Machine_Learning.html"><strong>Module 1:</strong> Fundamentals of Machine Learning</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="Module_2_Supervised_learning.html"><strong>Module 2:</strong> Supervised Learning</a></li>
@@ -380,17 +381,22 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-generating-linear-continuous-data">Task 1: Generating linear continuous data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-plotting-machine-learning-model">Examples of plotting Machine Learning Model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimenting-with-plots">Experimenting with Plots:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-toolbox">Your Toolbox:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-generating-linear-continuous-data">Example 1: Generating linear continuous data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-samples-from-a-linear-model-with-additive-gaussian-noise">1.1 Generate samples from a linear model with additive Gaussian noise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-1d-linear-model">1.2 Plot a 1D linear model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-2d-linear-model">1.3 Plot a 2D linear model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-1">→ Run Task 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-example-1">→ Run Example 1</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-generating-linearly-separable-binary-data">Task 2: Generating linearly separable binary data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-generating-linearly-separable-binary-data">Example 2: Generating linearly separable binary data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-sample-data-with-binary-labels-that-are-linearly-separable-in-a-continuous-feature-space">2.1 Generate sample data with binary labels that are linearly separable in a continuous feature space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-set-of-labelled-2d-samples-and-their-boundary-line">2.2 Plot a set of labelled 2D samples and their boundary line</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-2">→ Run Task 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-example-2">→ Run Example 2</a></li>
 </ul>
 </li>
 </ul>
@@ -409,12 +415,12 @@ document.write(`
 <h1><strong>Module 0:</strong> Introduction to Jupyter Notebook and Colab<a class="headerlink" href="#module-0-introduction-to-jupyter-notebook-and-colab" title="Permalink to this heading">#</a></h1>
 <section id="introduction-to-colab-environment-and-basic-data-generation">
 <h2>Introduction to Colab Environment and Basic Data Generation<a class="headerlink" href="#introduction-to-colab-environment-and-basic-data-generation" title="Permalink to this heading">#</a></h2>
-<p>This guide aims to familiarize you with working in the Colab environment and acquaint you with fundamental data generation and plotting techniques. While these tasks do not involve actual <strong>machine learning</strong>, they introduce essential models and mechanisms crucial for subsequent learning.</p>
-<p>Each task requires you to code functions, respecting the defined function interface and provided instructions on their functionality. Following each task, there’s a code cell that executes the functions, typically producing results in the form of plots. While your outputs need not precisely resemble the examples provided, they will likely follow a similar structure. (In our upcoming workshop, plotting functions might be provided, but in this introductory exercise, you’re encouraged to create the plots yourself, allowing customization.)</p>
-<p><img alt="example of completed plots" src="../_images/m0-example-plot.jpg" /></p>
+<p>This guide aims to familiarize you with working in the Colab environment and acquaint you with fundamental data generation and plotting techniques. While these examples do not involve actual <strong>machine learning</strong>, they introduce essential models and mechanisms crucial for subsequent learning.</p>
+<p>Each example requires you to code functions, respecting the defined function interface and provided instructions on their functionality. Following each example, there’s a code cell that executes the functions, typically producing results in the form of plots. While your outputs need not precisely resemble the examples provided, they will likely follow a similar structure. (In our upcoming workshop, plotting functions might be provided, but in this introductory exercise, you’re encouraged to create the plots yourself, allowing customization.)</p>
+<p><img alt="example of completed plots" src="https://raw.githubusercontent.com/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/main/assets/m0-example-plot.png" /></p>
 <p>If you’re already adept at using NumPy and Matplotlib, especially within the context of ML, some exercises might appear straightforward. In such cases, the <strong>Further Exploration</strong> section offers additional challenges to explore.</p>
 <p>Alternatively, if you lack experience in these areas, the exercises might seem intimidating. Don’t be concerned if certain concepts feel unfamiliar at this stage. For now, focus on grasping the foundational concepts. If you encounter difficulties, feel free to seek assistance from our WSU staffs.</p>
-<p>Before delving into the tasks, the subsections below introduce Colab and the notebook format, demonstrating basic plotting. If you’re already comfortable with these aspects, you can skip the <strong>Using Colab</strong> and <strong>Basic Plotting</strong> sections. However, ensure to execute all code cells in the <strong>Setting Up</strong> section, as they import necessary components essential for the remainder of the assignment.</p>
+<p>Before delving into the examples, the subsections below introduce Colab and the notebook format, demonstrating basic plotting. If you’re already comfortable with these aspects, you can skip the <strong>Using Colab</strong> and <strong>Basic Plotting</strong> sections. However, ensure to execute all code cells in the <strong>Setting Up</strong> section, as they import necessary components essential for the remainder of the assignment.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">utils</span></code> module contains some utility functions that can aid in avoiding tedious manipulations, such as array axis ordering. While not mandatory, it’s beneficial to explore these functions as they can simplify certain exercises into concise one-liners through strategic utilization of <code class="docutils literal notranslate"><span class="pre">utils</span></code>.</p>
 </section>
 <section id="using-colab">
@@ -469,7 +475,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we will clone workshop resources if they dont exists yet</span>
 <span class="o">![</span><span class="w"> </span>-d<span class="w"> </span>wsu_workshop_utils<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/wsu-ai-cyberSecurity/wsu_workshop_utils
-    
+
 <span class="kn">import</span> <span class="nn">wsu_workshop_utils.utils</span> <span class="k">as</span> <span class="nn">utils</span>
 </pre></div>
 </div>
@@ -683,8 +689,26 @@ to ignore these examples.</p>
 </section>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="task-1-generating-linear-continuous-data">
-<h1>Task 1: Generating linear continuous data<a class="headerlink" href="#task-1-generating-linear-continuous-data" title="Permalink to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="examples-of-plotting-machine-learning-model">
+<h1>Examples of plotting Machine Learning Model<a class="headerlink" href="#examples-of-plotting-machine-learning-model" title="Permalink to this heading">#</a></h1>
+<p>Now, let us demystify the art of data plotting in the context of machine learning. <strong>Visualization</strong> is a powerful tool that helps us comprehend complex patterns, trends, and relationships hiding within our data. We’ll emphasize that you <strong>do not need to fear</strong> the technical details (as they are often hidden under the hood in ML libraries).
+Instead, let’s focus on the intuitive and impactful world of plotting.</p>
+<p>In your Colab notebook, we’ll skip the nitty-gritty details and head straight to the exciting part – plotting! You don’t need to worry about the intricate workings of the machine learning model or the underlying code; we’ve got that covered for you.</p>
+<section id="experimenting-with-plots">
+<h2>Experimenting with Plots:<a class="headerlink" href="#experimenting-with-plots" title="Permalink to this heading">#</a></h2>
+<p>Feel free to play around with the code, change variables, or input different data into the Colab notebook. Witness firsthand how tweaking the inputs influences the plotted output. This hands-on experimentation is a fantastic way to grasp the immediate impact of different parameters on your visualizations.</p>
+</section>
+<section id="your-toolbox">
+<h2>Your Toolbox:<a class="headerlink" href="#your-toolbox" title="Permalink to this heading">#</a></h2>
+<p>We’ll be leveraging powerful libraries like <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> and <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>, providing a range of plotting options at your fingertips. These libraries abstract away the complexities, enabling you to focus on the visual representation of your data.</p>
+<p>Let’s Dive In!
+Explore the provided code cells related to data plotting.
+Modify variables, change inputs, or experiment with different types of plots.
+Remember, the goal here is to instill confidence in exploring and interpreting data through visuals. You’re not alone in this journey, and the beauty of data plotting is that it’s as much an art as it is a science. So, let’s embark on this visual adventure together and bring your data to life!</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-1-generating-linear-continuous-data">
+<h1>Example 1: Generating linear continuous data<a class="headerlink" href="#example-1-generating-linear-continuous-data" title="Permalink to this heading">#</a></h1>
 <p>A continuous <strong>linear model</strong> is one whose output is just a weighted sum of the input features:</p>
 <div class="math notranslate nohighlight">
 \[y = w_0 + w_1 x_1 + w_2 x_2 + ... + w_d x_d = \sum_{i=0}^d w_i x_i\]</div>
@@ -700,14 +724,13 @@ to ignore these examples.</p>
 <p>Given <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, we can the generate any number of samples <span class="math notranslate nohighlight">\((\mathbf{x},y)\)</span> from this model by choosing values for <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
 <section id="generate-samples-from-a-linear-model-with-additive-gaussian-noise">
 <h2>1.1 Generate samples from a linear model with additive Gaussian noise<a class="headerlink" href="#generate-samples-from-a-linear-model-with-additive-gaussian-noise" title="Permalink to this heading">#</a></h2>
-<p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">generate_noisy_linear</span></code> function in the cell below.</p>
-<p>Note the following:</p>
+<p>Have a look the body of the <code class="docutils literal notranslate"><span class="pre">generate_noisy_linear</span></code> function in the cell below.</p>
 <ul class="simple">
 <li><p>The function arguments <code class="docutils literal notranslate"><span class="pre">weights</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code> correspond to <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> in the equations given above.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">weights[0]</span></code> is the intercept term <span class="math notranslate nohighlight">\(w_0\)</span>. Hence, the number of features, <span class="math notranslate nohighlight">\(d\)</span>, is <em>one less</em> than the length of <code class="docutils literal notranslate"><span class="pre">weights</span></code>.</p></li>
 <li><p>Use the supplied generator <code class="docutils literal notranslate"><span class="pre">rng</span></code> to obtain random numbers. The Generator class is documented <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generator.html">here</a>, but probably the most immediately relevant methods are <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.random.html">random</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.normal.html">normal</a>.</p></li>
 </ul>
-<p><strong>IMPORTANT</strong>: Here and in all subsequent tasks, whenever you make changes to the code you must <strong>run the cell again</strong> to propagate your updates to the runtime environment.</p>
+<p><strong>IMPORTANT</strong>: Here and in all subsequent examples, whenever you make changes to the code you must <strong>run the cell again</strong> to propagate your updates to the runtime environment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_noisy_linear</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
@@ -735,11 +758,6 @@ to ignore these examples.</p>
 <span class="sd">        y: a vector of num_samples output values</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1"># TODO: implement this</span>
-    <span class="c1"># return None, None</span>
-
-    <span class="c1"># --------</span>
-
     <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">random_sample</span><span class="p">(</span>
         <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">utils</span><span class="o">.</span><span class="n">affine</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">weights</span><span class="p">),</span>
         <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
@@ -755,7 +773,7 @@ to ignore these examples.</p>
 </section>
 <section id="plot-a-1d-linear-model">
 <h2>1.2 Plot a 1D linear model<a class="headerlink" href="#plot-a-1d-linear-model" title="Permalink to this heading">#</a></h2>
-<p>Complete the implementation of the <code class="docutils literal notranslate"><span class="pre">plot_noisy_linear_1d</span></code> function below. Note that the function generates the data to plot by calling the function you implemented in part 1.1.</p>
+<p>The following is an implementation of the <code class="docutils literal notranslate"><span class="pre">plot_noisy_linear_1d</span></code> function below. Note that the function generates the data to plot by calling the function in part 1.1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_noisy_linear_1d</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
@@ -782,11 +800,6 @@ to ignore these examples.</p>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
     <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_noisy_linear</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
 
-    <span class="c1"># TODO: remove the following line and do the plotting</span>
-    <span class="c1"># utils.plot_unimplemented ( axes, &#39;Noisy 1D Linear Model&#39; )</span>
-
-    <span class="c1"># --------</span>
-
     <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
     <span class="n">y0</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -805,8 +818,6 @@ to ignore these examples.</p>
 </section>
 <section id="plot-a-2d-linear-model">
 <h2>1.3 Plot a 2D linear model<a class="headerlink" href="#plot-a-2d-linear-model" title="Permalink to this heading">#</a></h2>
-<p>Complete the implementation of the plot_noisy_linear_2d function below.</p>
-<p>While this problem is similar to the previous one, note that this model is significantly harder to visualise because there are three dimensions of data to consider: two inputs and one output. To make matters worse, the Axes object you are passed in the first argument is only a 2d cartesian one, not a 3d projection. So you’ll need to consider how to represent it, and that may affect what data you need to generate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_noisy_linear_2d</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
@@ -828,12 +839,6 @@ to ignore these examples.</p>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
-
-    <span class="c1"># TODO: generate the data</span>
-    <span class="c1"># TODO: remove the following line and do the plotting</span>
-    <span class="c1"># utils.plot_unimplemented ( axes, &#39;Noisy 2D Linear Model&#39; )</span>
-
-    <span class="c1"># --------</span>
 
     <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">grid_sample</span><span class="p">(</span>
         <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">utils</span><span class="o">.</span><span class="n">affine</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">weights</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">sigma</span>
@@ -864,10 +869,9 @@ to ignore these examples.</p>
 </div>
 </div>
 </section>
-<section id="run-task-1">
-<h2>→ Run Task 1<a class="headerlink" href="#run-task-1" title="Permalink to this heading">#</a></h2>
-<p>Execute the code cell below to run the previous tasks and generate a pair of plots.</p>
-<p>(BTW, if you found yourself wondering earlier why there are separate objects for figure and axes, this might help clarify that.)</p>
+<section id="run-example-1">
+<h2>→ Run Example 1<a class="headerlink" href="#run-example-1" title="Permalink to this heading">#</a></h2>
+<p>Execute the code cell below to run the previous examples and generate a pair of plots.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -885,9 +889,9 @@ to ignore these examples.</p>
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="task-2-generating-linearly-separable-binary-data">
-<h1>Task 2: Generating linearly separable binary data<a class="headerlink" href="#task-2-generating-linearly-separable-binary-data" title="Permalink to this heading">#</a></h1>
-<p>We can use an equation akin to the model in Task 1 to define a linear boundary – or <strong>separating
+<section class="tex2jax_ignore mathjax_ignore" id="example-2-generating-linearly-separable-binary-data">
+<h1>Example 2: Generating linearly separable binary data<a class="headerlink" href="#example-2-generating-linearly-separable-binary-data" title="Permalink to this heading">#</a></h1>
+<p>We can use an equation akin to the model in Example 1 to define a linear boundary – or <strong>separating
 hyperplane</strong> – that divides a feature space into disjoint half-spaces:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{w \cdot x} = 0\]</div>
@@ -898,11 +902,11 @@ y = \begin{cases}
 0 &amp; \text{otherwise}
 \end{cases}
 \end{equation*}</p>
-<p>Putting aside the question of how to <em>find</em> such a plane, or whether it makes a <em>good</em> classifier, we can see that (as with the continuous case in Task 1) it is easy to generate samples <span class="math notranslate nohighlight">\((\mathbf{x}, y)\)</span> given <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>.</p>
+<p>Putting aside the question of how to <em>find</em> such a plane, or whether it makes a <em>good</em> classifier, we can see that (as with the continuous case in example 1) it is easy to generate samples <span class="math notranslate nohighlight">\((\mathbf{x}, y)\)</span> given <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>.</p>
 <section id="generate-sample-data-with-binary-labels-that-are-linearly-separable-in-a-continuous-feature-space">
 <h2>2.1 Generate sample data with binary labels that are linearly separable in a continuous feature space<a class="headerlink" href="#generate-sample-data-with-binary-labels-that-are-linearly-separable-in-a-continuous-feature-space" title="Permalink to this heading">#</a></h2>
-<p>Implement the <code class="docutils literal notranslate"><span class="pre">generate_linearly_separable</span></code> function below.</p>
-<p>(The notes from Task 1.1 also apply here.)</p>
+<p>Have a look at the <code class="docutils literal notranslate"><span class="pre">generate_linearly_separable</span></code> function below.</p>
+<p>(The notes from Example 1.1 also apply here.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_linearly_separable</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
@@ -929,10 +933,6 @@ y = \begin{cases}
 <span class="sd">              num_samples x (len(weights) - 1)</span>
 <span class="sd">        y: a vector of num_samples binary labels</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># TODO: implement this</span>
-    <span class="c1"># return None, None</span>
-
-    <span class="c1"># --------</span>
 
     <span class="k">def</span> <span class="nf">hyperplane_label</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">boundary</span><span class="p">):</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">affine</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">boundary</span><span class="p">)</span>
@@ -952,7 +952,7 @@ y = \begin{cases}
 </section>
 <section id="plot-a-set-of-labelled-2d-samples-and-their-boundary-line">
 <h2>2.2 Plot a set of labelled 2D samples and their boundary line<a class="headerlink" href="#plot-a-set-of-labelled-2d-samples-and-their-boundary-line" title="Permalink to this heading">#</a></h2>
-<p>Complete the implementation of the function <code class="docutils literal notranslate"><span class="pre">plot_linearly_separable_2d</span></code> below. As in 1.2, the call to generate the data using the function above is provided, all you need to do is plot it.</p>
+<p>The following is an implementation of the function <code class="docutils literal notranslate"><span class="pre">plot_linearly_separable_2d</span></code> below. As in 1.2, the call to generate the data using the function above is provided, all you need to do is plot it.</p>
 <p>Aim to include most or all of the following features in your plot:</p>
 <ul class="simple">
 <li><p>All the generated samples, with their class clearly indicated (eg, by colour and shape).</p></li>
@@ -983,11 +983,6 @@ y = \begin{cases}
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
     <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_linearly_separable</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
-
-    <span class="c1"># TODO: do the plotting</span>
-    <span class="c1"># utils.plot_unimplemented ( axes, &#39;Linearly Separable Binary Data&#39; )</span>
-
-    <span class="c1"># --------</span>
 
     <span class="c1"># plot the two subsets with different markers &amp; colours</span>
     <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
@@ -1041,8 +1036,8 @@ y = \begin{cases}
 </div>
 </div>
 </section>
-<section id="run-task-2">
-<h2>→ Run Task 2<a class="headerlink" href="#run-task-2" title="Permalink to this heading">#</a></h2>
+<section id="run-example-2">
+<h2>→ Run Example 2<a class="headerlink" href="#run-example-2" title="Permalink to this heading">#</a></h2>
 <p>Execute the code cell below to run the function you wrote above and generate a plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1138,17 +1133,22 @@ y = \begin{cases}
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-generating-linear-continuous-data">Task 1: Generating linear continuous data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-plotting-machine-learning-model">Examples of plotting Machine Learning Model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimenting-with-plots">Experimenting with Plots:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-toolbox">Your Toolbox:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-generating-linear-continuous-data">Example 1: Generating linear continuous data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-samples-from-a-linear-model-with-additive-gaussian-noise">1.1 Generate samples from a linear model with additive Gaussian noise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-1d-linear-model">1.2 Plot a 1D linear model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-2d-linear-model">1.3 Plot a 2D linear model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-1">→ Run Task 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-example-1">→ Run Example 1</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-generating-linearly-separable-binary-data">Task 2: Generating linearly separable binary data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-generating-linearly-separable-binary-data">Example 2: Generating linearly separable binary data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-sample-data-with-binary-labels-that-are-linearly-separable-in-a-continuous-feature-space">2.1 Generate sample data with binary labels that are linearly separable in a continuous feature space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-set-of-labelled-2d-samples-and-their-boundary-line">2.2 Plot a set of labelled 2D samples and their boundary line</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-task-2">→ Run Task 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-example-2">→ Run Example 2</a></li>
 </ul>
 </li>
 </ul>

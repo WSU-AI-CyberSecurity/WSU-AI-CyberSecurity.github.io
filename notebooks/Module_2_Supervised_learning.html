@@ -69,6 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Module_2_Supervised_learning';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 3: Data Preprocessing and Features Selection" href="Module_3_Data_preprocessing_and_features_selection.html" />
     <link rel="prev" title="Module 1: Fundamentals of Machine Learning" href="Module_1_Fundamentals_of_Machine_Learning.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -189,6 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="Module_3_Data_preprocessing_and_features_selection.html"><strong>Module 3:</strong> Data Preprocessing and Features Selection</a></li>
 </ul>
 
     </div>
@@ -559,7 +561,7 @@ Challenges</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we will clone workshop resources if they dont exists yet</span>
 <span class="o">![</span><span class="w"> </span>-d<span class="w"> </span>wsu_workshop_utils<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/wsu-ai-cyberSecurity/wsu_workshop_utils
-    
+
 <span class="kn">import</span> <span class="nn">wsu_workshop_utils.utils</span> <span class="k">as</span> <span class="nn">utils</span>
 </pre></div>
 </div>
@@ -571,7 +573,9 @@ Challenges</p>
 <span class="n">shared_rng</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
 
 <span class="c1"># load the synthetic data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/WSU-AI-CyberSecurity/data/master/syn-data.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://raw.githubusercontent.com/WSU-AI-CyberSecurity/data/master/syn-data.csv&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -589,7 +593,7 @@ Challenges</p>
 <p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">nearest_neighbours_predict</span></code> function in the cell below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nearest_neighbours_predict</span> <span class="p">(</span> <span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_X</span><span class="p">,</span> <span class="n">neighbours</span><span class="o">=</span><span class="mi">1</span> <span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nearest_neighbours_predict</span><span class="p">(</span><span class="n">train_X</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_X</span><span class="p">,</span> <span class="n">neighbours</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Predict labels for test data based on neighbourhood in</span>
 <span class="sd">    training set.</span>
@@ -606,21 +610,24 @@ Challenges</p>
 <span class="sd">    # Returns</span>
 <span class="sd">        test_y: predicted labels for the samples in test_X</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">assert</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">assert</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">test_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">assert</span> <span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">train_y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">test_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># TODO: implement the k-nearest neighbours algorithm</span>
-    <span class="c1">#return None</span>
+    <span class="c1"># return None</span>
 
     <span class="c1"># --------</span>
 
     <span class="n">test_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">test_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
     <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">test_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="n">dists</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">test_X</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">-</span> <span class="n">train_X</span><span class="p">[</span><span class="n">jj</span><span class="p">]),</span> <span class="n">train_y</span><span class="p">[</span><span class="n">jj</span><span class="p">])</span> <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">]</span>
+        <span class="n">dists</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">test_X</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">-</span> <span class="n">train_X</span><span class="p">[</span><span class="n">jj</span><span class="p">]),</span> <span class="n">train_y</span><span class="p">[</span><span class="n">jj</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">train_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="p">]</span>
         <span class="n">dists</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-        <span class="n">test_y</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">([</span> <span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">dists</span><span class="p">[:</span><span class="n">neighbours</span><span class="p">]</span> <span class="p">])</span>
+        <span class="n">test_y</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">([</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">dists</span><span class="p">[:</span><span class="n">neighbours</span><span class="p">]])</span>
 
     <span class="k">return</span> <span class="n">test_y</span>
 </pre></div>
@@ -638,20 +645,27 @@ Challenges</p>
 <span class="n">RESOLUTION</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">NEIGHBOURS</span> <span class="o">=</span> <span class="mi">3</span>
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="s1">&#39;X2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,:]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Multi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;X1&quot;</span><span class="p">,</span> <span class="s2">&quot;X2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Multi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
 <span class="c1"># this just tests to see whether there&#39;s a functioning implementation</span>
 <span class="c1"># before attempting to pass it to the plotting utility</span>
-<span class="n">dummy</span> <span class="o">=</span> <span class="n">nearest_neighbours_predict</span> <span class="p">(</span> <span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:],</span> <span class="n">neighbours</span><span class="o">=</span><span class="n">NEIGHBOURS</span> <span class="p">)</span>
+<span class="n">dummy</span> <span class="o">=</span> <span class="n">nearest_neighbours_predict</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:],</span> <span class="n">neighbours</span><span class="o">=</span><span class="n">NEIGHBOURS</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">dummy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">NEIGHBOURS</span><span class="si">}</span><span class="s1">-Nearest Neighbours&#39;</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">NEIGHBOURS</span><span class="si">}</span><span class="s2">-Nearest Neighbours&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">nn_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">nearest_neighbours_predict</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">neighbours</span><span class="o">=</span><span class="n">NEIGHBOURS</span> <span class="p">)</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">nn_cls</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">NEIGHBOURS</span><span class="si">}</span><span class="s1">-Nearest Neighbours&#39;</span><span class="p">)</span>
+    <span class="n">nn_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">nearest_neighbours_predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">neighbours</span><span class="o">=</span><span class="n">NEIGHBOURS</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span>
+        <span class="n">ax</span><span class="p">,</span>
+        <span class="n">nn_cls</span><span class="p">,</span>
+        <span class="n">X</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">,</span>
+        <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">NEIGHBOURS</span><span class="si">}</span><span class="s2">-Nearest Neighbours&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -675,7 +689,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">misclassification</span></code> function in the code cell below. Note that if <code class="docutils literal notranslate"><span class="pre">weights</span></code> is not provided you should default it to <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">misclassification</span> <span class="p">(</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">misclassification</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate (optionally-weighted) misclassification error for</span>
 <span class="sd">    a given set of labels if assigned the given class.</span>
@@ -691,11 +705,12 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># TODO: implement weighted misclassification metric</span>
-    <span class="c1">#return 1</span>
+    <span class="c1"># return 1</span>
 
     <span class="c1"># --------</span>
 
-    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">weights</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">!=</span> <span class="bp">cls</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -708,7 +723,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <p>Remember to account for the number of points in each child node — the weights should help with this. You should decide on some tie-break policy for when multiple splits produce the same loss improvement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decision_node_split</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">3</span> <span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decision_node_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find (by brute force) a split point that best improves the weighted</span>
 <span class="sd">    misclassification error rate compared to the original one (or not, if</span>
@@ -735,31 +750,33 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="sd">        c0: class assigned to the set with feature &lt; thresh (or None, if no split)</span>
 <span class="sd">        c1: class assigned to the set with feature &gt;= thresh (or None, if no split)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">assert</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
     <span class="c1"># TODO: implement this</span>
-    <span class="c1">#return None, None, None, None</span>
+    <span class="c1"># return None, None, None, None</span>
 
     <span class="c1"># --------</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
-    <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">cls</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
     <span class="n">g</span> <span class="o">=</span> <span class="n">misclassification</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">g</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">g</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
     <span class="n">best_feat</span><span class="p">,</span> <span class="n">best_thresh</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
     <span class="n">best_c0</span><span class="p">,</span> <span class="n">best_c1</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
     <span class="n">best_improvement</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
-        <span class="k">for</span> <span class="n">thresh</span> <span class="ow">in</span> <span class="n">X</span><span class="p">[:,</span><span class="n">feat</span><span class="p">]:</span>
-            <span class="n">set1</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="n">feat</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">thresh</span>
+        <span class="k">for</span> <span class="n">thresh</span> <span class="ow">in</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">]:</span>
+            <span class="n">set1</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">thresh</span>
             <span class="n">set0</span> <span class="o">=</span> <span class="o">~</span><span class="n">set1</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">set0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_size</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_size</span><span class="p">):</span>
@@ -807,7 +824,9 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <p>(You should find that most of the hard work is already done by your <code class="docutils literal notranslate"><span class="pre">decision_node_split</span></code> function, and this is just responsible for managing the recursion.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decision_tree_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span> <span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decision_tree_train</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recursively choose split points for a training dataset</span>
 <span class="sd">    until no further improvement occurs.</span>
@@ -836,28 +855,49 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="sd">            &#39;above&#39; : a nested tree applicable when feature &gt;= thresh</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># TODO: implement this</span>
-    <span class="c1">#return None</span>
+    <span class="c1"># return None</span>
 
     <span class="c1"># --------</span>
 
-    <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">cls</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">depth</span> <span class="o">==</span> <span class="n">max_depth</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;kind&#39;</span> <span class="p">:</span> <span class="s1">&#39;leaf&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span> <span class="p">:</span> <span class="bp">cls</span> <span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;leaf&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="bp">cls</span><span class="p">}</span>
 
-    <span class="n">feat</span><span class="p">,</span> <span class="n">thresh</span><span class="p">,</span> <span class="n">cls0</span><span class="p">,</span> <span class="n">cls1</span> <span class="o">=</span> <span class="n">decision_node_split</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span> <span class="p">)</span>
+    <span class="n">feat</span><span class="p">,</span> <span class="n">thresh</span><span class="p">,</span> <span class="n">cls0</span><span class="p">,</span> <span class="n">cls1</span> <span class="o">=</span> <span class="n">decision_node_split</span><span class="p">(</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span>
+    <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">feat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;kind&#39;</span> <span class="p">:</span> <span class="s1">&#39;leaf&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span> <span class="p">:</span> <span class="bp">cls</span> <span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;leaf&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="bp">cls</span><span class="p">}</span>
 
-    <span class="n">set1</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="n">feat</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">thresh</span>
+    <span class="n">set1</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">feat</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">thresh</span>
     <span class="n">set0</span> <span class="o">=</span> <span class="o">~</span><span class="n">set1</span>
 
-    <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;kind&#39;</span> <span class="p">:</span> <span class="s1">&#39;decision&#39;</span><span class="p">,</span>
-             <span class="s1">&#39;feature&#39;</span> <span class="p">:</span> <span class="n">feat</span><span class="p">,</span>
-             <span class="s1">&#39;thresh&#39;</span> <span class="p">:</span> <span class="n">thresh</span><span class="p">,</span>
-             <span class="s1">&#39;above&#39;</span> <span class="p">:</span> <span class="n">decision_tree_train</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">set1</span><span class="p">,:],</span> <span class="n">y</span><span class="p">[</span><span class="n">set1</span><span class="p">],</span> <span class="n">cls1</span><span class="p">,</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">weights</span><span class="p">[</span><span class="n">set1</span><span class="p">],</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">),</span>
-             <span class="s1">&#39;below&#39;</span> <span class="p">:</span> <span class="n">decision_tree_train</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">set0</span><span class="p">,:],</span> <span class="n">y</span><span class="p">[</span><span class="n">set0</span><span class="p">],</span> <span class="n">cls0</span><span class="p">,</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">weights</span><span class="p">[</span><span class="n">set0</span><span class="p">],</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;decision&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;feature&quot;</span><span class="p">:</span> <span class="n">feat</span><span class="p">,</span>
+        <span class="s2">&quot;thresh&quot;</span><span class="p">:</span> <span class="n">thresh</span><span class="p">,</span>
+        <span class="s2">&quot;above&quot;</span><span class="p">:</span> <span class="n">decision_tree_train</span><span class="p">(</span>
+            <span class="n">X</span><span class="p">[</span><span class="n">set1</span><span class="p">,</span> <span class="p">:],</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">set1</span><span class="p">],</span>
+            <span class="n">cls1</span><span class="p">,</span>
+            <span class="kc">None</span> <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">weights</span><span class="p">[</span><span class="n">set1</span><span class="p">],</span>
+            <span class="n">min_size</span><span class="p">,</span>
+            <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">max_depth</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;below&quot;</span><span class="p">:</span> <span class="n">decision_tree_train</span><span class="p">(</span>
+            <span class="n">X</span><span class="p">[</span><span class="n">set0</span><span class="p">,</span> <span class="p">:],</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">set0</span><span class="p">],</span>
+            <span class="n">cls0</span><span class="p">,</span>
+            <span class="kc">None</span> <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">weights</span><span class="p">[</span><span class="n">set0</span><span class="p">],</span>
+            <span class="n">min_size</span><span class="p">,</span>
+            <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">max_depth</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -869,7 +909,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <p>You may find it helpful to define an auxiliary function to process a single sample.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decision_tree_predict</span> <span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">X</span> <span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decision_tree_predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Predict labels for test data using a fitted decision tree.</span>
 
@@ -882,21 +922,25 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="sd">        y: the predicted labels</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># TODO: implement this</span>
-    <span class="c1">#return None</span>
+    <span class="c1"># return None</span>
 
     <span class="c1"># --------</span>
 
     <span class="c1"># auxiliary function to predict a single example</span>
-    <span class="k">def</span> <span class="nf">decision_tree_predict1</span> <span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">x</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decision_tree_predict1</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="c1"># descend the tree until we reach a leaf</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">tree</span><span class="p">[</span><span class="s1">&#39;kind&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;leaf&#39;</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">tree</span><span class="p">[</span><span class="s2">&quot;kind&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;leaf&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
 
-            <span class="n">tree</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="s1">&#39;above&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">]]</span> <span class="o">&gt;=</span> <span class="n">tree</span><span class="p">[</span><span class="s1">&#39;thresh&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="n">tree</span><span class="p">[</span><span class="s1">&#39;below&#39;</span><span class="p">]</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">tree</span><span class="p">[</span><span class="s2">&quot;above&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">]]</span> <span class="o">&gt;=</span> <span class="n">tree</span><span class="p">[</span><span class="s2">&quot;thresh&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="n">tree</span><span class="p">[</span><span class="s2">&quot;below&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
 
     <span class="c1"># iterate the single predictor over all the data</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">decision_tree_predict1</span><span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">ii</span><span class="p">,:]</span> <span class="p">)</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">decision_tree_predict1</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">ii</span><span class="p">,</span> <span class="p">:])</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -912,18 +956,20 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="n">RESOLUTION</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">MIN_SIZE</span> <span class="o">=</span> <span class="mi">3</span>
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="s1">&#39;X2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,:]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Multi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;X1&quot;</span><span class="p">,</span> <span class="s2">&quot;X2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Multi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
-<span class="n">tree</span> <span class="o">=</span> <span class="n">decision_tree_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">MIN_SIZE</span> <span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">decision_tree_train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">MIN_SIZE</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">tree</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Decision Tree&#39;</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Decision Tree&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">tree_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">decision_tree_predict</span> <span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">z</span> <span class="p">)</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">tree_cls</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Decision Tree&#39;</span><span class="p">)</span>
+    <span class="n">tree_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">decision_tree_predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span>
+        <span class="n">ax</span><span class="p">,</span> <span class="n">tree_cls</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Decision Tree&quot;</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -943,7 +989,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <p>Use the <code class="docutils literal notranslate"><span class="pre">decision_tree_train</span></code> function you wrote in Task 2.3 to train the individual trees. The <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.choice.html">choice</a> method of the supplied <code class="docutils literal notranslate"><span class="pre">rng</span></code> object should help with bootstrap sampling.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_forest_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span> <span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_forest_train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Train a (simplified) random forest of decision trees.</span>
 
@@ -963,7 +1009,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># TODO: implement this</span>
-    <span class="c1">#return None</span>
+    <span class="c1"># return None</span>
 
     <span class="c1"># --------</span>
 
@@ -971,9 +1017,11 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 
     <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
         <span class="n">boot_ix</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">X_i</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">boot_ix</span><span class="p">,:]</span>
+        <span class="n">X_i</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">boot_ix</span><span class="p">,</span> <span class="p">:]</span>
         <span class="n">y_i</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">boot_ix</span><span class="p">]</span>
-        <span class="n">forest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">decision_tree_train</span> <span class="p">(</span> <span class="n">X_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span> <span class="p">))</span>
+        <span class="n">forest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">decision_tree_train</span><span class="p">(</span><span class="n">X_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">)</span>
+        <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">forest</span>
 </pre></div>
@@ -988,7 +1036,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <p>Once again, the <code class="docutils literal notranslate"><span class="pre">utils.vote</span></code> function may be useful here.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_forest_predict</span> <span class="p">(</span> <span class="n">forest</span><span class="p">,</span> <span class="n">X</span> <span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_forest_predict</span><span class="p">(</span><span class="n">forest</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Predict labels for test data using a fitted random</span>
 <span class="sd">    forest of decision trees.</span>
@@ -1002,12 +1050,12 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="sd">        y: the predicted labels</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># TODO: implement this</span>
-    <span class="c1">#return None</span>
+    <span class="c1"># return None</span>
 
     <span class="c1"># --------</span>
 
-    <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">decision_tree_predict</span><span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">X</span> <span class="p">)</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">forest</span> <span class="p">])</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="n">preds</span><span class="p">[:,</span><span class="n">ii</span><span class="p">])</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">preds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">decision_tree_predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">forest</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">utils</span><span class="o">.</span><span class="n">vote</span><span class="p">(</span><span class="n">preds</span><span class="p">[:,</span> <span class="n">ii</span><span class="p">])</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">preds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
 </pre></div>
 </div>
 </div>
@@ -1022,18 +1070,25 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="n">RESOLUTION</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">NUM_TREES</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="s1">&#39;X2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,:]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Multi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;X1&quot;</span><span class="p">,</span> <span class="s2">&quot;X2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Multi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
-<span class="n">forest</span> <span class="o">=</span> <span class="n">random_forest_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">NUM_TREES</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">shared_rng</span> <span class="p">)</span>
+<span class="n">forest</span> <span class="o">=</span> <span class="n">random_forest_train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">NUM_TREES</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">shared_rng</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">forest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Random Forest&#39;</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Random Forest&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">forest_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">random_forest_predict</span> <span class="p">(</span> <span class="n">forest</span><span class="p">,</span> <span class="n">z</span> <span class="p">)</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">forest_cls</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Random Forest (</span><span class="si">{</span><span class="n">NUM_TREES</span><span class="si">}</span><span class="s1"> trees)&#39;</span><span class="p">)</span>
+    <span class="n">forest_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">random_forest_predict</span><span class="p">(</span><span class="n">forest</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span>
+        <span class="n">ax</span><span class="p">,</span>
+        <span class="n">forest_cls</span><span class="p">,</span>
+        <span class="n">X</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">,</span>
+        <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Random Forest (</span><span class="si">{</span><span class="n">NUM_TREES</span><span class="si">}</span><span class="s2"> trees)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1070,7 +1125,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <p>Provide an implementation body for the <code class="docutils literal notranslate"><span class="pre">adaboost_train</span></code> function defined in the cell below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adaboost_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-8</span> <span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adaboost_train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Iteratively train a set of decision tree classifiers</span>
 <span class="sd">    using AdaBoost.</span>
@@ -1092,14 +1147,18 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="sd">            given each of the decision tree predictions</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># TODO: implement this</span>
-<span class="c1">#    return None, None</span>
+    <span class="c1">#    return None, None</span>
 
-    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">alphas</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">trees</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-        <span class="n">trees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">decision_tree_train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">))</span>
+        <span class="n">trees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">decision_tree_train</span><span class="p">(</span>
+                <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
         <span class="n">pred_y</span> <span class="o">=</span> <span class="n">decision_tree_predict</span><span class="p">(</span><span class="n">trees</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="p">)</span>
         <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">pred_y</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span>
 
@@ -1108,7 +1167,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
             <span class="n">alphas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">break</span>
 
-        <span class="n">alphas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">err</span><span class="p">)</span><span class="o">/</span><span class="n">err</span><span class="p">))</span>
+        <span class="n">alphas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">err</span><span class="p">)</span> <span class="o">/</span> <span class="n">err</span><span class="p">))</span>
 
         <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">alphas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">pred_y</span> <span class="o">!=</span> <span class="n">y</span><span class="p">))</span>
         <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
@@ -1124,7 +1183,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">adaboost_predict</span></code> function in the code cell below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adaboost_predict</span> <span class="p">(</span> <span class="n">trees</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">X</span> <span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adaboost_predict</span><span class="p">(</span><span class="n">trees</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Predict labels for test data using a fitted AdaBoost</span>
 <span class="sd">    ensemble of decision trees.</span>
@@ -1139,11 +1198,11 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="sd">        y: the predicted labels</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># TODO: implement this</span>
-    <span class="c1">#return None</span>
+    <span class="c1"># return None</span>
 
     <span class="c1"># --------</span>
 
-    <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="n">decision_tree_predict</span><span class="p">(</span> <span class="n">tree</span><span class="p">,</span> <span class="n">X</span> <span class="p">)</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">trees</span> <span class="p">])</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">decision_tree_predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">trees</span><span class="p">])</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">weighted</span> <span class="o">=</span> <span class="n">preds</span> <span class="o">@</span> <span class="n">alphas</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">weighted</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -1161,18 +1220,20 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <span class="n">RESOLUTION</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">NUM_TREES</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span><span class="s1">&#39;X2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,:]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Binary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;X1&quot;</span><span class="p">,</span> <span class="s2">&quot;X2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Binary&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">NUM_SAMPLES</span><span class="p">]</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
-<span class="n">trees</span><span class="p">,</span> <span class="n">alphas</span> <span class="o">=</span> <span class="n">adaboost_train</span> <span class="p">(</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">NUM_TREES</span> <span class="p">)</span>
+<span class="n">trees</span><span class="p">,</span> <span class="n">alphas</span> <span class="o">=</span> <span class="n">adaboost_train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">NUM_TREES</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">forest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;AdaBoost&#39;</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_unimplemented</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;AdaBoost&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">ada_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">adaboost_predict</span> <span class="p">(</span> <span class="n">trees</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">z</span> <span class="p">)</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ada_cls</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;AdaBoost (</span><span class="si">{</span><span class="n">NUM_TREES</span><span class="si">}</span><span class="s1"> stumps)&#39;</span><span class="p">)</span>
+    <span class="n">ada_cls</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">adaboost_predict</span><span class="p">(</span><span class="n">trees</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">plot_classification_map</span><span class="p">(</span>
+        <span class="n">ax</span><span class="p">,</span> <span class="n">ada_cls</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;AdaBoost (</span><span class="si">{</span><span class="n">NUM_TREES</span><span class="si">}</span><span class="s2"> stumps)&quot;</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1253,7 +1314,9 @@ Threat severity prediction involves assessing and quantifying the potential impa
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/WSU-AI-CyberSecurity/data/master/intrusion99.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://raw.githubusercontent.com/WSU-AI-CyberSecurity/data/master/intrusion99.csv&quot;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1974,6 +2037,15 @@ Threat severity prediction involves assessing and quantifying the potential impa
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title"><strong>Module 1:</strong> Fundamentals of Machine Learning</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Module_3_Data_preprocessing_and_features_selection.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Module 3:</strong> Data Preprocessing and Features Selection</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

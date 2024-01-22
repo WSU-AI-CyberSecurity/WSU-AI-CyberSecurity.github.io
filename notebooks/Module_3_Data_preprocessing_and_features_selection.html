@@ -371,6 +371,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-objectives">Key Objectives:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-data-preprocessing-matters">Why Data Preprocessing Matters:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-scaling-methods">Visualising scaling methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-the-module">Navigating the Module:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-k-nearest-neighbours-on-the-spotify-dataset">Example: <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbours on the Spotify dataset</a></li>
@@ -389,7 +390,6 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-transformations-and-the-golden-rule">Feature transformations and the golden rule</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-carry-out-cross-validation">How to carry out cross-validation?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipelines">Pipelines</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-and-more-compact-syntax-make-pipeline">Alternative and more compact syntax: <code class="docutils literal notranslate"><span class="pre">make_pipeline</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-try-cross-validation-with-our-pipeline">Let’s try cross-validation with our pipeline</a></li>
@@ -419,8 +419,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p><img alt="" src="notebooks/img/330-banner.png" /></p>
-<section class="tex2jax_ignore mathjax_ignore" id="module-3-data-preprocessing-and-features-selection">
+  <section class="tex2jax_ignore mathjax_ignore" id="module-3-data-preprocessing-and-features-selection">
 <h1><strong>Module 3:</strong> Data Preprocessing and Features Selection<a class="headerlink" href="#module-3-data-preprocessing-and-features-selection" title="Permalink to this heading">#</a></h1>
 <p>Welcome to Module 3 of our learning journey! In this segment, we’ll delve into the critical aspects of Data Preprocessing and Feature Selection.</p>
 <p>As aspiring data enthusiasts, you’ve likely realized that the journey from raw data to meaningful insights involves careful preparation and strategic selection. This module is designed to equip you with the essential skills to transform raw, messy data into a refined and feature-rich dataset, setting the stage for robust machine learning models.</p>
@@ -461,6 +460,93 @@ document.write(`
 <h2>Why Data Preprocessing Matters:<a class="headerlink" href="#why-data-preprocessing-matters" title="Permalink to this heading">#</a></h2>
 <p>Raw data seldom fits neatly into the algorithms we love to employ. Data preprocessing is the unsung hero that transforms raw data into a well-behaved companion, ensuring your models can extract meaningful patterns and insights.</p>
 </section>
+<section id="visualising-scaling-methods">
+<h2>Visualising scaling methods<a class="headerlink" href="#visualising-scaling-methods" title="Permalink to this heading">#</a></h2>
+<p>Let us visulaise what does scaling methods do to the input data. The following are some of the popular preprocessing methods in the <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> library.</p>
+<p>The four preprocessing methods—<code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>, <code class="docutils literal notranslate"><span class="pre">MinMaxScaler</span></code>, <code class="docutils literal notranslate"><span class="pre">Normalizer</span></code>, and <code class="docutils literal notranslate"><span class="pre">RobustScaler</span></code>—from scikit-learn’s <code class="docutils literal notranslate"><span class="pre">preprocessing</span></code> module serve different purposes in preparing and scaling data for machine learning models. Here’s an overview of each:</p>
+<ol class="arabic simple">
+<li><p><strong>StandardScaler:</strong></p>
+<ul class="simple">
+<li><p><strong>Method:</strong> <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> standardizes features by removing the mean and scaling to unit variance.</p></li>
+<li><p><strong>Usage:</strong> It transforms features so that they have a mean of 0 and a standard deviation of 1.</p></li>
+<li><p><strong>When to Use:</strong> Suitable for algorithms that assume features follow a Gaussian distribution and for ensuring consistent scales for features.</p></li>
+</ul>
+</li>
+<li><p><strong>MinMaxScaler:</strong></p>
+<ul class="simple">
+<li><p><strong>Method:</strong> <code class="docutils literal notranslate"><span class="pre">MinMaxScaler</span></code> scales features to a specified range, typically between 0 and 1.</p></li>
+<li><p><strong>Usage:</strong> It transforms features, maintaining the original data’s shape while scaling it to a specified range.</p></li>
+<li><p><strong>When to Use:</strong> Useful when features need to be on a similar scale, but you want to preserve the original distribution.</p></li>
+</ul>
+</li>
+<li><p><strong>Normalizer:</strong></p>
+<ul class="simple">
+<li><p><strong>Method:</strong> <code class="docutils literal notranslate"><span class="pre">Normalizer</span></code> scales each sample (row) independently, such that the Euclidean norm (L2 norm) of each row is equal to 1.</p></li>
+<li><p><strong>Usage:</strong> It normalizes samples to a unit norm, useful when the direction of each data point is more important than its magnitude.</p></li>
+<li><p><strong>When to Use:</strong> Appropriate when working with datasets where the magnitude of the individual samples is crucial.</p></li>
+</ul>
+</li>
+<li><p><strong>RobustScaler:</strong></p>
+<ul class="simple">
+<li><p><strong>Method:</strong> <code class="docutils literal notranslate"><span class="pre">RobustScaler</span></code> scales features using statistics that are robust to outliers. It uses the median and the interquartile range (IQR).</p></li>
+<li><p><strong>Usage:</strong> It scales features while being less affected by outliers compared to <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>.</p></li>
+<li><p><strong>When to Use:</strong> Suitable when the dataset contains outliers and a more robust scaling method is needed.</p></li>
+</ul>
+</li>
+</ol>
+<p>In summary, these preprocessing methods provide flexibility in handling different types of data and scaling requirements. The choice of scaler depends on the characteristics of the data and the assumptions of the machine learning algorithm being used.</p>
+<p>In practice, <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> is the most typical approach as it requires less assumptions and works well in most scenarios.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">,</span> <span class="n">Normalizer</span><span class="p">,</span> <span class="n">RobustScaler</span>
+
+<span class="n">cm2</span> <span class="o">=</span> <span class="s2">&quot;bwr&quot;</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">+=</span> <span class="mi">3</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">main_ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">rowspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">colspan</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">main_ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm2</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">maxx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">maxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="n">main_ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">maxx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">main_ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="n">maxy</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxy</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">main_ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original Data&quot;</span><span class="p">)</span>
+<span class="n">other_axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">scaler</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+    <span class="n">other_axes</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">RobustScaler</span><span class="p">(),</span> <span class="n">MinMaxScaler</span><span class="p">(),</span> <span class="n">Normalizer</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="s2">&quot;l2&quot;</span><span class="p">)],</span>
+<span class="p">):</span>
+    <span class="n">X_</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm2</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">scaler</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">other_axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">main_ax</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">other_axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s2">&quot;left&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s2">&quot;right&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s2">&quot;bottom&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s2">&quot;top&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s2">&quot;bottom&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3bbb50d0c7a00a3d17035042ed5d99db6d8cec3f170999d4bed1aefba85bd095.png" src="../_images/3bbb50d0c7a00a3d17035042ed5d99db6d8cec3f170999d4bed1aefba85bd095.png" />
+</div>
+</div>
+</section>
 <section id="navigating-the-module">
 <h2>Navigating the Module:<a class="headerlink" href="#navigating-the-module" title="Permalink to this heading">#</a></h2>
 <p>We encourage you to actively participate in exercises, experiment with the provided code snippets, and explore real-world scenarios. Don’t hesitate to ask questions and engage with your peers – learning is a collaborative journey!</p>
@@ -480,9 +566,7 @@ document.write(`
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
 
-<span class="c1"># import mglearn</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
-<span class="c1"># from plotting_functions import *</span>
 
 <span class="c1"># Classifiers and regressors</span>
 <span class="kn">from</span> <span class="nn">sklearn.dummy</span> <span class="kn">import</span> <span class="n">DummyClassifier</span><span class="p">,</span> <span class="n">DummyRegressor</span>
@@ -514,8 +598,7 @@ document.write(`
 <section id="example-k-nearest-neighbours-on-the-spotify-dataset">
 <h3>Example: <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbours on the Spotify dataset<a class="headerlink" href="#example-k-nearest-neighbours-on-the-spotify-dataset" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Yesterday in our workshop, we’ve used <code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code> to predict whether the user would like a particular song or not.</p></li>
-<li><p>Can we use <span class="math notranslate nohighlight">\(k\)</span>-NN classifier for this task?</p></li>
+<li><p>Yesterday in our workshop, we’ve used <code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code>, and today we will use the same model to predict whether the user would like a particular song or not.</p></li>
 <li><p>Intuition: To predict whether the user likes a particular song or not (query point)</p>
 <ul>
 <li><p>find the songs that are closest to the query point</p></li>
@@ -527,7 +610,10 @@ document.write(`
 <p>We are going to use the <strong>Spotify Song Attributes</strong> dataset from <a class="reference external" href="https://www.kaggle.com/datasets/geomack/spotifyclassification">Kaggle</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spotify_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/WSU-AI-CyberSecurity/data/master/spotify.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spotify_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://raw.githubusercontent.com/WSU-AI-CyberSecurity/data/master/spotify.csv&quot;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="n">train_df</span><span class="p">,</span> <span class="n">test_df</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">spotify_df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;song_title&quot;</span><span class="p">,</span> <span class="s2">&quot;artist&quot;</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">]),</span>
@@ -586,36 +672,36 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.000731</td>
-      <td>0.000542</td>
+      <td>0.000531</td>
+      <td>0.000377</td>
       <td>0.507740</td>
       <td>0.507752</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.000637</td>
-      <td>0.000499</td>
+      <td>0.000417</td>
+      <td>0.000324</td>
       <td>0.507740</td>
       <td>0.507752</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.000635</td>
-      <td>0.000489</td>
+      <td>0.000537</td>
+      <td>0.000487</td>
       <td>0.507740</td>
       <td>0.507752</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.000628</td>
-      <td>0.000491</td>
+      <td>0.000625</td>
+      <td>0.000717</td>
       <td>0.506211</td>
       <td>0.508133</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.000623</td>
-      <td>0.000481</td>
+      <td>0.000628</td>
+      <td>0.000480</td>
       <td>0.509317</td>
       <td>0.507359</td>
     </tr>
@@ -663,36 +749,36 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.003959</td>
-      <td>0.009839</td>
+      <td>0.003458</td>
+      <td>0.013423</td>
       <td>0.563467</td>
       <td>0.717829</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.002046</td>
-      <td>0.010274</td>
+      <td>0.002030</td>
+      <td>0.010070</td>
       <td>0.535604</td>
       <td>0.721705</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.002196</td>
-      <td>0.010947</td>
+      <td>0.002076</td>
+      <td>0.010276</td>
       <td>0.529412</td>
       <td>0.708527</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.002230</td>
-      <td>0.010579</td>
+      <td>0.001925</td>
+      <td>0.009448</td>
       <td>0.537267</td>
       <td>0.721921</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.002099</td>
-      <td>0.009701</td>
+      <td>0.001921</td>
+      <td>0.009367</td>
       <td>0.562112</td>
       <td>0.711077</td>
     </tr>
@@ -703,7 +789,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_songs</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===== This is the distance of the two song by considering the following features =====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;===== This is the distance of the two song by considering the following features =====&quot;</span>
+<span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">two_songs</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===== Distance: =====&quot;</span><span class="p">)</span>
 <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">two_songs</span><span class="p">)</span>
@@ -795,7 +883,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_songs_subset</span> <span class="o">=</span> <span class="n">two_songs</span><span class="p">[[</span><span class="s2">&quot;duration_ms&quot;</span><span class="p">,</span> <span class="s2">&quot;tempo&quot;</span><span class="p">]]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===== This is the distance of the two song by considering the following features =====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;===== This is the distance of the two song by considering the following features =====&quot;</span>
+<span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">two_songs_subset</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===== Distance: =====&quot;</span><span class="p">)</span>
 <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">two_songs_subset</span><span class="p">)</span>
@@ -887,7 +977,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span> <span class="c1"># original X_train</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span>  <span class="c1"># original X_train</span>
 </pre></div>
 </div>
 </div>
@@ -1110,7 +1200,7 @@ document.write(`
 <p>Let’s examine transformed value of the energy feature in the first row.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1122,7 +1212,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]))</span><span class="o">/</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]))</span> <span class="o">/</span> <span class="n">X_train</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1134,7 +1224,9 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
+    <span class="mi">3</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1335,8 +1427,9 @@ Test score: 0.686
 <p>We’ll be working on <a class="reference external" href="https://www.kaggle.com/datasets/suraj520/cellular-network-analysis-dataset/code">Cellular Network Analysis Dataset</a> to demonstrate these feature transformation techniques. The task is to predict network latency, given a number of features from the collected metrics</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">housing_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;signal_metrics.csv&quot;</span><span class="p">)</span>
-<span class="n">train_df</span><span class="p">,</span> <span class="n">test_df</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">housing_df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_df</span><span class="p">,</span> <span class="n">test_df</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/WSU-AI-CyberSecurity/data/master/signal_metrics.csv&quot;</span><span class="p">),</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span>
+<span class="p">)</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">train_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
@@ -1488,8 +1581,8 @@ memory usage: 1.5+ MB
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">,</span> <span class="s1">&#39;Locality&#39;</span><span class="p">])</span>
-<span class="n">test_df</span> <span class="o">=</span>  <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">,</span> <span class="s1">&#39;Locality&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;Locality&quot;</span><span class="p">])</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;Locality&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1688,18 +1781,19 @@ memory usage: 1.3+ MB
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">scatter_mapbox</span><span class="p">(</span>
-    <span class="n">train_df</span><span class="p">[</span><span class="n">train_df</span><span class="p">[</span><span class="s1">&#39;Network Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;5G&#39;</span><span class="p">],</span>
-    <span class="n">lat</span><span class="o">=</span><span class="s1">&#39;Latitude&#39;</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="s1">&#39;Longitude&#39;</span><span class="p">,</span>
+    <span class="n">train_df</span><span class="p">[</span><span class="n">train_df</span><span class="p">[</span><span class="s2">&quot;Network Type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;5G&quot;</span><span class="p">],</span>
+    <span class="n">lat</span><span class="o">=</span><span class="s2">&quot;Latitude&quot;</span><span class="p">,</span>
+    <span class="n">lon</span><span class="o">=</span><span class="s2">&quot;Longitude&quot;</span><span class="p">,</span>
     <span class="n">mapbox_style</span><span class="o">=</span><span class="s2">&quot;open-street-map&quot;</span><span class="p">,</span>
-    <span class="n">opacity</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Signal Strength (dBm)&#39;</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Signal Strength (dBm)&quot;</span><span class="p">,</span>
     <span class="c1"># color=&#39;BladeRFxA9 Measurement (dBm)&#39;,</span>
 <span class="p">)</span>
 
 <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">margin</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;t&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;l&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">margin</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
 
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1710,12 +1804,12 @@ memory usage: 1.3+ MB
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
-    <span class="n">data_frame</span><span class="o">=</span><span class="n">train_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Network Type&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span>
+    <span class="n">data_frame</span><span class="o">=</span><span class="n">train_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;Network Type&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span>
     <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Network Type&quot;</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Signal Strength (dBm)&quot;</span><span class="p">,</span> <span class="s2">&quot;Data Throughput (Mbps)&quot;</span><span class="p">,</span> <span class="s2">&quot;Latency (ms)&quot;</span><span class="p">],</span>
-    <span class="n">barmode</span><span class="o">=</span><span class="s1">&#39;group&#39;</span><span class="p">,</span>
-    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Mean attributes grouped-by Netrowk Types (3G, 4G, 5G, LTE)&#39;</span>
-<span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
+    <span class="n">barmode</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mean attributes grouped-by Netrowk Types (3G, 4G, 5G, LTE)&quot;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1820,7 +1914,7 @@ Name: Latency (ms), Length: 15146, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_92314/4158382658.py:26: FutureWarning:
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_245424/4158382658.py:26: FutureWarning:
 
 Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
 </pre></div>
@@ -1881,7 +1975,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 <h3>Scaling<a class="headerlink" href="#scaling" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>This problem affects a large number of ML methods.</p></li>
-<li><p>A number of approaches to this problem. We are going to look into two most popular ones.</p></li>
+<li><p>A number of approaches to this problem. We are going to look into the most popular ones.</p></li>
 </ul>
 <table class="table">
 <thead>
@@ -1899,13 +1993,6 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </tr>
 </tbody>
 </table>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span><span class="p">,</span> <span class="n">StandardScaler</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
@@ -2093,12 +2180,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </section>
 <section id="feature-transformations-and-the-golden-rule">
 <h2>Feature transformations and the golden rule<a class="headerlink" href="#feature-transformations-and-the-golden-rule" title="Permalink to this heading">#</a></h2>
-<section id="how-to-carry-out-cross-validation">
-<h3>How to carry out cross-validation?<a class="headerlink" href="#how-to-carry-out-cross-validation" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Last week we saw that cross validation is a better way to get a realistic assessment of the model.</p></li>
-<li><p>Let’s try cross-validation with transformed data.</p></li>
-</ul>
+<p>Let’s try cross-validation with transformed data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">()</span>
@@ -2140,36 +2222,36 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.008516</td>
-      <td>0.029618</td>
+      <td>0.008447</td>
+      <td>0.028756</td>
       <td>0.669859</td>
       <td>0.773023</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.008807</td>
-      <td>0.029788</td>
+      <td>0.008505</td>
+      <td>0.029550</td>
       <td>0.657948</td>
       <td>0.774226</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.008561</td>
-      <td>0.029761</td>
+      <td>0.008446</td>
+      <td>0.028970</td>
       <td>0.657192</td>
       <td>0.772506</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.008408</td>
-      <td>0.028699</td>
+      <td>0.008358</td>
+      <td>0.028327</td>
       <td>0.646960</td>
       <td>0.775659</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.008355</td>
-      <td>0.029332</td>
+      <td>0.008291</td>
+      <td>0.029188</td>
       <td>0.647245</td>
       <td>0.774178</td>
     </tr>
@@ -2194,7 +2276,6 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 <li><p>In these examples our test accuracies look fine, but our methodology is flawed.</p></li>
 <li><p>Implications can be significant in practice!</p></li>
 </ul>
-</section>
 <section id="pipelines">
 <h3>Pipelines<a class="headerlink" href="#pipelines" title="Permalink to this heading">#</a></h3>
 <p>Can we do this in a more elegant and organized way?</p>
@@ -2250,22 +2331,19 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;simpleimputer&#x27;, SimpleImputer(strategy=&#x27;median&#x27;)),
+<div class="output text_html"><style>#sk-container-id-5 {color: black;}#sk-container-id-5 pre{padding: 0;}#sk-container-id-5 div.sk-toggleable {background-color: white;}#sk-container-id-5 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-5 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-5 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-5 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-5 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-5 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-5 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-5 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-5 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-5 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-5 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-5 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-5 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-5 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-5 div.sk-item {position: relative;z-index: 1;}#sk-container-id-5 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-5 div.sk-item::before, #sk-container-id-5 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-5 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-5 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-5 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-5 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-5 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-5 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-5 div.sk-label-container {text-align: center;}#sk-container-id-5 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-5 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-5" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;simpleimputer&#x27;, SimpleImputer(strategy=&#x27;median&#x27;)),
                 (&#x27;standardscaler&#x27;, StandardScaler()),
-                (&#x27;kneighborsregressor&#x27;, KNeighborsRegressor())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;simpleimputer&#x27;, SimpleImputer(strategy=&#x27;median&#x27;)),
+                (&#x27;kneighborsregressor&#x27;, KNeighborsRegressor())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-17" type="checkbox" ><label for="sk-estimator-id-17" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;simpleimputer&#x27;, SimpleImputer(strategy=&#x27;median&#x27;)),
                 (&#x27;standardscaler&#x27;, StandardScaler()),
-                (&#x27;kneighborsregressor&#x27;, KNeighborsRegressor())])</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div>
+                (&#x27;kneighborsregressor&#x27;, KNeighborsRegressor())])</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-18" type="checkbox" ><label for="sk-estimator-id-18" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-19" type="checkbox" ><label for="sk-estimator-id-19" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-20" type="checkbox" ><label for="sk-estimator-id-20" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div>
 </div>
-<ul class="simple">
-<li><p>Note that we are passing <code class="docutils literal notranslate"><span class="pre">X_train</span></code> and <strong>not</strong> the imputed or scaled data here.</p></li>
-</ul>
 <p>When you call <code class="docutils literal notranslate"><span class="pre">fit</span></code> on the pipeline, it carries out the following steps:</p>
 <ul class="simple">
 <li><p>Fit <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code> on <code class="docutils literal notranslate"><span class="pre">X_train</span></code></p></li>
-<li><p>Transform <code class="docutils literal notranslate"><span class="pre">X_train</span></code> using the fit <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code> to create <code class="docutils literal notranslate"><span class="pre">X_train_imp</span></code></p></li>
-<li><p>Fit <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> on <code class="docutils literal notranslate"><span class="pre">X_train_imp</span></code></p></li>
-<li><p>Transform <code class="docutils literal notranslate"><span class="pre">X_train_imp</span></code> using the fit <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> to create <code class="docutils literal notranslate"><span class="pre">X_train_imp_scaled</span></code></p></li>
-<li><p>Fit the model (<code class="docutils literal notranslate"><span class="pre">KNeighborsRegressor</span></code> in our case) on <code class="docutils literal notranslate"><span class="pre">X_train_imp_scaled</span></code></p></li>
+<li><p>Transform <code class="docutils literal notranslate"><span class="pre">X_train</span></code> using the fit <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code> to create <code class="docutils literal notranslate"><span class="pre">X_train</span></code></p></li>
+<li><p>Fit <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> on <code class="docutils literal notranslate"><span class="pre">X_train</span></code></p></li>
+<li><p>Transform <code class="docutils literal notranslate"><span class="pre">X_train</span></code> using the fit <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code></p></li>
+<li><p>Fit the model (<code class="docutils literal notranslate"><span class="pre">KNeighborsRegressor</span></code> in our case)</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2280,15 +2358,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </div>
 </div>
 </div>
-<p>Note that we are passing original data to <code class="docutils literal notranslate"><span class="pre">predict</span></code> as well. This time the pipeline is carrying out following steps:</p>
-<ul class="simple">
-<li><p>Transform <code class="docutils literal notranslate"><span class="pre">X_train</span></code> using the fit <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code> to create <code class="docutils literal notranslate"><span class="pre">X_train_imp</span></code></p></li>
-<li><p>Transform <code class="docutils literal notranslate"><span class="pre">X_train_imp</span></code> using the fit <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> to create <code class="docutils literal notranslate"><span class="pre">X_train_imp_scaled</span></code></p></li>
-<li><p>Predict using the fit model (<code class="docutils literal notranslate"><span class="pre">KNeighborsRegressor</span></code> in our case) on <code class="docutils literal notranslate"><span class="pre">X_train_imp_scaled</span></code>.</p></li>
-</ul>
-<p><img alt="" src="notebooks/img/pipeline.png" /></p>
-<!-- <img src='./img/pipeline.png' width="800"> -->
-<p><a class="reference external" href="https://amueller.github.io/COMS4995-s20/slides/aml-04-preprocessing/#18">Source</a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/main/assets/m3_pipeline.png" /></p>
 </section>
 <section id="let-s-try-cross-validation-with-our-pipeline">
 <h3>Let’s try cross-validation with our pipeline<a class="headerlink" href="#let-s-try-cross-validation-with-our-pipeline" title="Permalink to this heading">#</a></h3>
@@ -2302,7 +2372,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_92314/4158382658.py:26: FutureWarning:
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_245424/4158382658.py:26: FutureWarning:
 
 Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
 </pre></div>
@@ -2341,8 +2411,8 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
     </tr>
     <tr>
       <th>imp + scaling + knn</th>
-      <td>0.016 (+/- 0.001)</td>
-      <td>0.029 (+/- 0.000)</td>
+      <td>0.017 (+/- 0.002)</td>
+      <td>0.030 (+/- 0.000)</td>
       <td>0.656 (+/- 0.010)</td>
       <td>0.774 (+/- 0.001)</td>
     </tr>
@@ -2356,7 +2426,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 <section id="categorical-features">
 <h2>Categorical features<a class="headerlink" href="#categorical-features" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Recall that we had dropped the categorical feature <code class="docutils literal notranslate"><span class="pre">ocean_proximity</span></code> feature from the dataframe. But it could potentially be a useful feature in this task.</p></li>
+<li><p>Recall that we had dropped the categorical feature <code class="docutils literal notranslate"><span class="pre">Network</span> <span class="pre">Type</span></code> feature from the dataframe. But it could potentially be a useful feature in this task.</p></li>
 <li><p>Let’s create our <code class="docutils literal notranslate"><span class="pre">X_train</span></code> and and <code class="docutils literal notranslate"><span class="pre">X_test</span></code> again by keeping the feature in the data.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -2537,7 +2607,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pipe.fit(X_train, X_train)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pipe.fit(X_train, y_train)</span>
 </pre></div>
 </div>
 </div>
@@ -2734,6 +2804,329 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </div>
 <p>One-hot encoded variables are also referred to as <strong>dummy variables</strong>.
 You will often see people using <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html"><code class="docutils literal notranslate"><span class="pre">get_dummies</span></code> method of pandas</a> to convert categorical variables into dummy variables. That said, using <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>’s <code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code> has the advantage of making it easy to treat training and test set in a consistent way.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_onehot</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Latency (ms)&quot;</span><span class="p">,</span> <span class="s2">&quot;Network Type&quot;</span><span class="p">])</span>
+<span class="n">X_train_onehot</span><span class="p">[</span><span class="n">ohe</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">([</span><span class="s2">&quot;Network Type&quot;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">ohe</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+    <span class="n">train_df</span><span class="p">[[</span><span class="s2">&quot;Network Type&quot;</span><span class="p">]]</span>
+<span class="p">)</span>
+<span class="n">y_train_onehot</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s2">&quot;Latency (ms)&quot;</span><span class="p">]</span>
+
+<span class="n">X_test_onehot</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Latency (ms)&quot;</span><span class="p">,</span> <span class="s2">&quot;Network Type&quot;</span><span class="p">])</span>
+<span class="n">X_test_onehot</span><span class="p">[</span><span class="n">ohe</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">([</span><span class="s2">&quot;Network Type&quot;</span><span class="p">])]</span> <span class="o">=</span> <span class="n">ohe</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+    <span class="n">test_df</span><span class="p">[[</span><span class="s2">&quot;Network Type&quot;</span><span class="p">]]</span>
+<span class="p">)</span>
+<span class="n">y_test_onehot</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="s2">&quot;Latency (ms)&quot;</span><span class="p">]</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">X_train_onehot</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">X_test_onehot</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Signal Strength (dBm)</th>
+      <th>Signal Quality (%)</th>
+      <th>Data Throughput (Mbps)</th>
+      <th>BB60C Measurement (dBm)</th>
+      <th>srsRAN Measurement (dBm)</th>
+      <th>BladeRFxA9 Measurement (dBm)</th>
+      <th>Network Type_3G</th>
+      <th>Network Type_4G</th>
+      <th>Network Type_5G</th>
+      <th>Network Type_LTE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>11286</th>
+      <td>25.573834</td>
+      <td>85.174773</td>
+      <td>-88.823204</td>
+      <td>0.0</td>
+      <td>2.633925</td>
+      <td>-90.679320</td>
+      <td>-97.310913</td>
+      <td>-91.341579</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11445</th>
+      <td>25.459679</td>
+      <td>85.100593</td>
+      <td>-84.338977</td>
+      <td>0.0</td>
+      <td>8.230689</td>
+      <td>-85.669232</td>
+      <td>-90.443197</td>
+      <td>-83.662386</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8991</th>
+      <td>25.718163</td>
+      <td>85.164846</td>
+      <td>-95.165973</td>
+      <td>0.0</td>
+      <td>27.416884</td>
+      <td>-92.364076</td>
+      <td>-101.027782</td>
+      <td>-92.289394</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13062</th>
+      <td>25.646589</td>
+      <td>85.123178</td>
+      <td>-82.277196</td>
+      <td>0.0</td>
+      <td>2.681432</td>
+      <td>-78.858775</td>
+      <td>-89.006250</td>
+      <td>-84.283168</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4151</th>
+      <td>25.687754</td>
+      <td>85.008608</td>
+      <td>-89.665566</td>
+      <td>0.0</td>
+      <td>4.607886</td>
+      <td>-90.044765</td>
+      <td>-96.717788</td>
+      <td>-87.254787</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Signal Strength (dBm)</th>
+      <th>Signal Quality (%)</th>
+      <th>Data Throughput (Mbps)</th>
+      <th>BB60C Measurement (dBm)</th>
+      <th>srsRAN Measurement (dBm)</th>
+      <th>BladeRFxA9 Measurement (dBm)</th>
+      <th>Network Type_3G</th>
+      <th>Network Type_4G</th>
+      <th>Network Type_5G</th>
+      <th>Network Type_LTE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>9330</th>
+      <td>25.570543</td>
+      <td>85.083773</td>
+      <td>-93.993151</td>
+      <td>0.0</td>
+      <td>32.993816</td>
+      <td>-89.317574</td>
+      <td>-102.051970</td>
+      <td>-95.512645</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9444</th>
+      <td>25.482447</td>
+      <td>85.252053</td>
+      <td>-85.403792</td>
+      <td>0.0</td>
+      <td>1.324703</td>
+      <td>-80.892173</td>
+      <td>-90.616113</td>
+      <td>-84.190972</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10747</th>
+      <td>25.654413</td>
+      <td>84.995628</td>
+      <td>-85.801469</td>
+      <td>0.0</td>
+      <td>3.386222</td>
+      <td>-81.167757</td>
+      <td>-91.211866</td>
+      <td>-82.921993</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14890</th>
+      <td>25.652035</td>
+      <td>84.982229</td>
+      <td>-85.958410</td>
+      <td>0.0</td>
+      <td>2.626279</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6965</th>
+      <td>25.428545</td>
+      <td>85.090492</td>
+      <td>-96.360206</td>
+      <td>0.0</td>
+      <td>98.067846</td>
+      <td>-94.388360</td>
+      <td>-105.694470</td>
+      <td>-93.704065</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe_onehot</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
+    <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">),</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">KNeighborsRegressor</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">pipe_onehot</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_onehot</span><span class="p">,</span> <span class="n">y_train_onehot</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-6 {color: black;}#sk-container-id-6 pre{padding: 0;}#sk-container-id-6 div.sk-toggleable {background-color: white;}#sk-container-id-6 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-6 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-6 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-6 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-6 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-6 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-6 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-6 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-6 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-6 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-6 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-6 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-6 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-6 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-6 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-6 div.sk-item {position: relative;z-index: 1;}#sk-container-id-6 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-6 div.sk-item::before, #sk-container-id-6 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-6 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-6 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-6 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-6 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-6 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-6 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-6 div.sk-label-container {text-align: center;}#sk-container-id-6 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-6 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-6" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;simpleimputer&#x27;, SimpleImputer(strategy=&#x27;median&#x27;)),
+                (&#x27;standardscaler&#x27;, StandardScaler()),
+                (&#x27;kneighborsregressor&#x27;, KNeighborsRegressor())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-21" type="checkbox" ><label for="sk-estimator-id-21" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;simpleimputer&#x27;, SimpleImputer(strategy=&#x27;median&#x27;)),
+                (&#x27;standardscaler&#x27;, StandardScaler()),
+                (&#x27;kneighborsregressor&#x27;, KNeighborsRegressor())])</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-22" type="checkbox" ><label for="sk-estimator-id-22" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-23" type="checkbox" ><label for="sk-estimator-id-23" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-24" type="checkbox" ><label for="sk-estimator-id-24" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_dict</span><span class="p">[</span><span class="s2">&quot;imp + scaling + knn + onehot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_std_cross_val_scores</span><span class="p">(</span>
+    <span class="n">pipe_onehot</span><span class="p">,</span> <span class="n">X_train_onehot</span><span class="p">,</span> <span class="n">y_train_onehot</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results_dict</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_245424/4158382658.py:26: FutureWarning:
+
+Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fit_time</th>
+      <th>score_time</th>
+      <th>test_score</th>
+      <th>train_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>dummy</th>
+      <td>0.001 (+/- 0.000)</td>
+      <td>0.000 (+/- 0.000)</td>
+      <td>-0.001 (+/- 0.000)</td>
+      <td>-0.000 (+/- 0.000)</td>
+    </tr>
+    <tr>
+      <th>imp + scaling + knn</th>
+      <td>0.017 (+/- 0.002)</td>
+      <td>0.030 (+/- 0.000)</td>
+      <td>0.656 (+/- 0.010)</td>
+      <td>0.774 (+/- 0.001)</td>
+    </tr>
+    <tr>
+      <th>imp + scaling + knn + onehot</th>
+      <td>0.024 (+/- 0.002)</td>
+      <td>0.037 (+/- 0.001)</td>
+      <td>0.802 (+/- 0.004)</td>
+      <td>0.867 (+/- 0.001)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 </section>
 </section>
 <section id="what-did-we-learn-with-this-module">
@@ -2832,6 +3225,7 @@ You will often see people using <a class="reference external" href="https://pand
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-objectives">Key Objectives:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-data-preprocessing-matters">Why Data Preprocessing Matters:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-scaling-methods">Visualising scaling methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-the-module">Navigating the Module:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-k-nearest-neighbours-on-the-spotify-dataset">Example: <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbours on the Spotify dataset</a></li>
@@ -2850,7 +3244,6 @@ You will often see people using <a class="reference external" href="https://pand
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-transformations-and-the-golden-rule">Feature transformations and the golden rule</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-carry-out-cross-validation">How to carry out cross-validation?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipelines">Pipelines</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-and-more-compact-syntax-make-pipeline">Alternative and more compact syntax: <code class="docutils literal notranslate"><span class="pre">make_pipeline</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-try-cross-validation-with-our-pipeline">Let’s try cross-validation with our pipeline</a></li>

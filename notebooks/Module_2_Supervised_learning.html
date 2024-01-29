@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" data-theme="light">
+<html lang="en" data-content_root="../" data-theme="light">
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Module 2: Supervised Learning &#8212; WSU ML in Cybersecurity</title>
   
@@ -19,54 +18,58 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c72df8c4" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/custom.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Module_2_Supervised_learning';</script>
+    <script src="../_static/custom.js?v=a4c55d5e"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Module 3: Data Preprocessing and Features Selection" href="Module_3_Data_preprocessing_and_features_selection.html" />
@@ -83,7 +86,6 @@ const thebe_selector_output = ".output, .cell_output"
   <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -123,20 +125,15 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <header>
   
-    <div class="bd-header navbar navbar-expand-lg bd-navbar">
-    </div>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
-  </header>
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -168,7 +165,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -191,6 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="Module_3_Data_preprocessing_and_features_selection.html"><strong>Module 3:</strong> Data Preprocessing and Features Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Module_4_Unsupervised_Learning.html"><strong>Module 3</strong>: Unsupervised Learning</a></li>
 </ul>
 
     </div>
@@ -461,87 +470,87 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="module-2-supervised-learning">
-<h1><strong>Module 2:</strong> Supervised Learning<a class="headerlink" href="#module-2-supervised-learning" title="Permalink to this heading">#</a></h1>
+<h1><strong>Module 2:</strong> Supervised Learning<a class="headerlink" href="#module-2-supervised-learning" title="Link to this heading">#</a></h1>
 <p>In the realm of cybersecurity, the utilization of supervised learning techniques—specifically classification and regression—serves as a linchpin for fortifying defenses, detecting potential threats, and orchestrating robust risk assessment strategies. <strong>Supervised learning</strong>, a key branch of machine learning, operates by learning patterns from labeled datasets to make predictions or decisions about unseen data, proving invaluable in the realm of cybersecurity due to its ability to learn from historical data and adapt to evolving threats.</p>
 <section id="introduction-to-supervised-learning-in-cybersecurity">
-<h2>Introduction to Supervised Learning in Cybersecurity<a class="headerlink" href="#introduction-to-supervised-learning-in-cybersecurity" title="Permalink to this heading">#</a></h2>
+<h2>Introduction to Supervised Learning in Cybersecurity<a class="headerlink" href="#introduction-to-supervised-learning-in-cybersecurity" title="Link to this heading">#</a></h2>
 <p>Cyber threats continue to proliferate, evolving in sophistication and diversity, necessitating advanced mechanisms to combat them. This is where supervised learning techniques come into play, bolstering cybersecurity efforts by leveraging historical data to fortify defenses against existing threats and predict potential vulnerabilities.</p>
 <center>
     <img style="max-width: 600px" src="https://editor.analyticsvidhya.com/uploads/97744How.png" />
 </center>
 </section>
 <section id="classification-in-cybersecurity">
-<h2>Classification in Cybersecurity<a class="headerlink" href="#classification-in-cybersecurity" title="Permalink to this heading">#</a></h2>
+<h2>Classification in Cybersecurity<a class="headerlink" href="#classification-in-cybersecurity" title="Link to this heading">#</a></h2>
 <p>Supervised learning algorithms, with their ability to learn from labeled historical data, assist in identifying known threats and patterns of attacks. They enable security systems to make informed decisions in real-time by predicting and classifying potential threats or vulnerabilities. Continual training and improvement of these models with updated data help in adapting to evolving cyber threats and attack methods.</p>
 <section id="malware-detection">
-<h3>1. Malware Detection<a class="headerlink" href="#malware-detection" title="Permalink to this heading">#</a></h3>
+<h3>1. Malware Detection<a class="headerlink" href="#malware-detection" title="Link to this heading">#</a></h3>
 <center style="float: right; margin: 10px;">
     <img style="max-width: 400px" src="https://www.ayoub-benaissa.com/images/blog/malware-detection.png" />
 </center>
 <p>Malware detection stands as a critical component within cybersecurity, and supervised learning techniques play a pivotal role in identifying and mitigating the risks posed by malicious software.</p>
 <p>Techniques in Malware Detection Using Supervised Learning includes:</p>
 <section id="static-analysis">
-<h4>Static Analysis<a class="headerlink" href="#static-analysis" title="Permalink to this heading">#</a></h4>
+<h4>Static Analysis<a class="headerlink" href="#static-analysis" title="Link to this heading">#</a></h4>
 <p>Static analysis involves examining the code or file without executing it. Supervised learning models trained on static features, such as <strong>file attributes</strong>, <strong>file structure</strong>, or <strong>code snippets</strong>, help classify malware based on these extracted static features.</p>
 </section>
 <section id="dynamic-analysis">
-<h4>Dynamic Analysis<a class="headerlink" href="#dynamic-analysis" title="Permalink to this heading">#</a></h4>
+<h4>Dynamic Analysis<a class="headerlink" href="#dynamic-analysis" title="Link to this heading">#</a></h4>
 <p>Dynamic analysis involves observing the behavior of malware during execution in a controlled environment. Supervised learning models trained on <strong>behavioral patterns</strong> or <strong>API call sequences</strong> discern malicious behavior, aiding in real-time detection of malware.</p>
 </section>
 <section id="ensemble-methods">
-<h4>Ensemble Methods<a class="headerlink" href="#ensemble-methods" title="Permalink to this heading">#</a></h4>
+<h4>Ensemble Methods<a class="headerlink" href="#ensemble-methods" title="Link to this heading">#</a></h4>
 <p>Ensemble methods combine multiple models or classifiers to improve malware detection accuracy. Techniques like <strong>Random Forests</strong> or <strong>Gradient Boosting</strong> assemble multiple weaker models into a stronger, more accurate model for detecting malware.</p>
 </section>
 </section>
 <section id="intrusion-detection-systems-ids">
-<h3>2. Intrusion Detection Systems (IDS)<a class="headerlink" href="#intrusion-detection-systems-ids" title="Permalink to this heading">#</a></h3>
+<h3>2. Intrusion Detection Systems (IDS)<a class="headerlink" href="#intrusion-detection-systems-ids" title="Link to this heading">#</a></h3>
 <center style="float: right; margin: 10px;">
     <img style="max-width: 400px" src="https://www.mdpi.com/sensors/sensors-21-01113/article_deploy/html/images/sensors-21-01113-g001.png" />
 </center>
 <p>Intrusion Detection Systems (IDS) are vital components of cybersecurity, aiming to identify and respond to unauthorized access, malicious activities, or potential security breaches within computer networks or systems. Supervised learning techniques play a significant role in building effective IDS by aiding in the identification of anomalous network behavior and patterns associated with cyber attacks.</p>
 <p>Techniques in Intrusion Detection Using Supervised Learning includes:</p>
 <section id="signature-based-detection">
-<h4>Signature-based Detection<a class="headerlink" href="#signature-based-detection" title="Permalink to this heading">#</a></h4>
+<h4>Signature-based Detection<a class="headerlink" href="#signature-based-detection" title="Link to this heading">#</a></h4>
 <p>Supervised learning models recognize known attack patterns or signatures by learning from labeled datasets containing known attack behaviors. These models can quickly identify known threats based on learned signatures.</p>
 </section>
 <section id="anomaly-based-detection">
-<h4>Anomaly-based Detection<a class="headerlink" href="#anomaly-based-detection" title="Permalink to this heading">#</a></h4>
+<h4>Anomaly-based Detection<a class="headerlink" href="#anomaly-based-detection" title="Link to this heading">#</a></h4>
 <p>Anomaly detection involves identifying deviations from normal network behavior. Supervised learning models trained on normal behavior patterns detect anomalies by flagging behaviors that significantly differ from the learned norm.</p>
 </section>
 <section id="hybrid-approaches">
-<h4>Hybrid Approaches<a class="headerlink" href="#hybrid-approaches" title="Permalink to this heading">#</a></h4>
+<h4>Hybrid Approaches<a class="headerlink" href="#hybrid-approaches" title="Link to this heading">#</a></h4>
 <p>Hybrid approaches combine signature-based and anomaly-based detection methods. They leverage supervised learning to detect known attack patterns while also identifying deviations from normal behavior.
 Challenges</p>
 </section>
 </section>
 <section id="email-filtering">
-<h3>3. Email Filtering<a class="headerlink" href="#email-filtering" title="Permalink to this heading">#</a></h3>
+<h3>3. Email Filtering<a class="headerlink" href="#email-filtering" title="Link to this heading">#</a></h3>
 <center style="float: right; margin: 10px;">
     <img style="max-width: 400px" src="https://miro.medium.com/v2/resize:fit:1400/0*j1wMZQ2je5P5DHvN" />
 </center>
 <p>Email filtering is a critical aspect of cybersecurity, aimed at distinguishing legitimate emails from spam or malicious emails. Supervised learning techniques, particularly classification algorithms, are extensively utilized in email filtering to automatically categorize incoming emails and mitigate the risk of users being exposed to phishing attempts, malware, or other malicious content.</p>
 <p>Techniques in Email Filtering Using Supervised Learning inculdes</p>
 <section id="content-based-filtering">
-<h4>Content-Based Filtering<a class="headerlink" href="#content-based-filtering" title="Permalink to this heading">#</a></h4>
+<h4>Content-Based Filtering<a class="headerlink" href="#content-based-filtering" title="Link to this heading">#</a></h4>
 <p>Supervised learning models analyze the content of emails, including text analysis of email bodies, headers, embedded URLs, or attachments. They learn patterns indicative of spam or phishing attempts, enabling effective content-based filtering.</p>
 </section>
 <section id="header-and-metadata-analysis">
-<h4>Header and Metadata Analysis<a class="headerlink" href="#header-and-metadata-analysis" title="Permalink to this heading">#</a></h4>
+<h4>Header and Metadata Analysis<a class="headerlink" href="#header-and-metadata-analysis" title="Link to this heading">#</a></h4>
 <p>Metadata analysis, such as sender’s address, IP reputation, subject line analysis, or header information, aids in identifying suspicious or forged emails. Supervised learning models learn from metadata to detect email anomalies.</p>
 </section>
 <section id="behavioral-analysis">
-<h4>Behavioral Analysis<a class="headerlink" href="#behavioral-analysis" title="Permalink to this heading">#</a></h4>
+<h4>Behavioral Analysis<a class="headerlink" href="#behavioral-analysis" title="Link to this heading">#</a></h4>
 <p>Some models employ behavioral analysis, learning user-specific email behaviors to discern normal communication patterns. This helps in flagging anomalous emails that deviate from usual user interaction.</p>
 </section>
 </section>
 </section>
 <section id="an-exercise-on-visualising-decision-tree-model">
-<h2>An exercise on visualising Decision Tree Model<a class="headerlink" href="#an-exercise-on-visualising-decision-tree-model" title="Permalink to this heading">#</a></h2>
+<h2>An exercise on visualising Decision Tree Model<a class="headerlink" href="#an-exercise-on-visualising-decision-tree-model" title="Link to this heading">#</a></h2>
 <p>Let us now have a look at some <strong>non-parametric classification</strong> models and ensembles. These models have losses that are not smooth and aren’t suited to simple gradient-based optimisation. You are only asked to produce naïve, brute force implementations of these models, but do note that such implementations can scale really badly, so be cautious about running the algorithms with large sample sizes. You may find it interesting to think about what strategies could be used to speed things up.</p>
 <p>Examples of the kinds of plots that will be produced by your finished code are shown below. Plotting code is provided, so your plots should look pretty similar, but the default resolution is lower to avoid the code taking too long to run.</p>
 <p><img alt="example of completed plots" src="https://comp0088.github.io/assets/colab/week_3_small.jpg" /></p>
 <section id="setting-up">
-<h3>Setting Up<a class="headerlink" href="#setting-up" title="Permalink to this heading">#</a></h3>
+<h3>Setting Up<a class="headerlink" href="#setting-up" title="Link to this heading">#</a></h3>
 <p>As usual, we make use of the NumPy library for numerical computing and the Matplotlib library for plotting, so we need to import them. We will also use the <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html">Pandas</a> library for loading data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -584,12 +593,12 @@ Challenges</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="task-1-k-nearest-neighbours">
-<h1>Task 1: <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours<a class="headerlink" href="#task-1-k-nearest-neighbours" title="Permalink to this heading">#</a></h1>
+<h1>Task 1: <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours<a class="headerlink" href="#task-1-k-nearest-neighbours" title="Link to this heading">#</a></h1>
 <p>In a <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours classifier, test samples are compared directly against the samples in the training set and the <span class="math notranslate nohighlight">\(k\)</span> most similar (according to some chosen similarity or distance metric) vote on the class to predict. Training such a classifier consists simply of memorising the training set. For the implementation below, we will skip this step and just pass the training data directly to the prediction function.</p>
 <p>Although other distance metrics may be useful for real problem classes, for the purposes of this exercise you can stick to a simple Euclidean distance.</p>
 <p>You may find the function <code class="docutils literal notranslate"><span class="pre">vote</span></code> in the <code class="docutils literal notranslate"><span class="pre">utils</span></code> module useful.</p>
 <section id="implement-k-nearest-neighbours-prediction">
-<h2>1.1 Implement <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours prediction<a class="headerlink" href="#implement-k-nearest-neighbours-prediction" title="Permalink to this heading">#</a></h2>
+<h2>1.1 Implement <span class="math notranslate nohighlight">\(k\)</span>-Nearest Neighbours prediction<a class="headerlink" href="#implement-k-nearest-neighbours-prediction" title="Link to this heading">#</a></h2>
 <p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">nearest_neighbours_predict</span></code> function in the cell below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -636,7 +645,7 @@ Challenges</p>
 </div>
 </section>
 <section id="run-task-1">
-<h2>→ Run Task 1<a class="headerlink" href="#run-task-1" title="Permalink to this heading">#</a></h2>
+<h2>→ Run Task 1<a class="headerlink" href="#run-task-1" title="Link to this heading">#</a></h2>
 <p>Execute the code cell below to run your k-NN function on the test data and plot the results.</p>
 <p>Feel free to try out different values for the configuration variables <code class="docutils literal notranslate"><span class="pre">NUM_SAMPLES</span></code>, <code class="docutils literal notranslate"><span class="pre">RESOLUTION</span></code> and <code class="docutils literal notranslate"><span class="pre">NEIGHBOURS</span></code> – but note that larger values can slow things down significantly.</p>
 <div class="cell docutils container">
@@ -676,7 +685,7 @@ Challenges</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="task-2-decision-trees">
-<h1>Task 2: Decision Trees<a class="headerlink" href="#task-2-decision-trees" title="Permalink to this heading">#</a></h1>
+<h1>Task 2: Decision Trees<a class="headerlink" href="#task-2-decision-trees" title="Link to this heading">#</a></h1>
 <p>Decision trees are both a learning model in their own right and an important constituent model for the ensemble methods in subsequent tasks. The model consists of a recursive sequence of binary tests, typically of inequalities on single feature values. These effectively partition the feature space into separate regions, each of which is then assigned the class that occurs most often among training samples within it.(Equivalently, those training samples <em>vote</em> on the outcome. Once again, the <code class="docutils literal notranslate"><span class="pre">utils.vote</span></code> function may be useful here.)</p>
 <p>Trees can be trained by a greedy brute force search for the split that minimises some chosen loss. Various losses are possible, but for simplicity here (and compatibility with Task 4 later) we will use a <strong>weighted misclassification error</strong> throughout:</p>
 <div class="math notranslate nohighlight">
@@ -685,7 +694,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 \]</div>
 <p>Trees are a naturally recursive data structure that almost cry out for a class-based implementation, but here we limit ourselves to using dicts to avoid adding syntactical distractions for students who may not be very familiar with Python classes.</p>
 <section id="calculate-a-weighted-misclassification-error">
-<h2>2.1 Calculate a weighted misclassification error<a class="headerlink" href="#calculate-a-weighted-misclassification-error" title="Permalink to this heading">#</a></h2>
+<h2>2.1 Calculate a weighted misclassification error<a class="headerlink" href="#calculate-a-weighted-misclassification-error" title="Link to this heading">#</a></h2>
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">misclassification</span></code> function in the code cell below. Note that if <code class="docutils literal notranslate"><span class="pre">weights</span></code> is not provided you should default it to <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -718,7 +727,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </div>
 </section>
 <section id="split-a-dataset-to-reduce-misclassification">
-<h2>2.2 Split a dataset to reduce misclassification<a class="headerlink" href="#split-a-dataset-to-reduce-misclassification" title="Permalink to this heading">#</a></h2>
+<h2>2.2 Split a dataset to reduce misclassification<a class="headerlink" href="#split-a-dataset-to-reduce-misclassification" title="Link to this heading">#</a></h2>
 <p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">decision_node_split</span></code> function in the cell below.</p>
 <p>Remember to account for the number of points in each child node — the weights should help with this. You should decide on some tie-break policy for when multiple splits produce the same loss improvement.</p>
 <div class="cell docutils container">
@@ -819,7 +828,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </div>
 </section>
 <section id="train-a-decision-tree-classifier">
-<h2>2.3 Train a decision tree classifier<a class="headerlink" href="#train-a-decision-tree-classifier" title="Permalink to this heading">#</a></h2>
+<h2>2.3 Train a decision tree classifier<a class="headerlink" href="#train-a-decision-tree-classifier" title="Link to this heading">#</a></h2>
 <p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">decision_tree_train</span></code> function in the cell below.</p>
 <p>(You should find that most of the hard work is already done by your <code class="docutils literal notranslate"><span class="pre">decision_node_split</span></code> function, and this is just responsible for managing the recursion.)</p>
 <div class="cell docutils container">
@@ -904,7 +913,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </div>
 </section>
 <section id="make-predictions-from-a-decision-tree">
-<h2>2.4 Make predictions from a decision tree<a class="headerlink" href="#make-predictions-from-a-decision-tree" title="Permalink to this heading">#</a></h2>
+<h2>2.4 Make predictions from a decision tree<a class="headerlink" href="#make-predictions-from-a-decision-tree" title="Link to this heading">#</a></h2>
 <p>Implement the body of the <code class="docutils literal notranslate"><span class="pre">decision_tree_predict</span></code> function in the cell below. You will need to walk the tree for each sample, testing decision nodes until you reach a leaf.</p>
 <p>You may find it helpful to define an auxiliary function to process a single sample.</p>
 <div class="cell docutils container">
@@ -947,7 +956,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </div>
 </section>
 <section id="run-task-2">
-<h2>→ Run Task 2<a class="headerlink" href="#run-task-2" title="Permalink to this heading">#</a></h2>
+<h2>→ Run Task 2<a class="headerlink" href="#run-task-2" title="Link to this heading">#</a></h2>
 <p>Execute the code cell below to use your functions above to train and test a decision tree classifier and generate a plot.</p>
 <p>As in Task 1, try playing with different values for <code class="docutils literal notranslate"><span class="pre">NUM_SAMPLES</span></code> and <code class="docutils literal notranslate"><span class="pre">RESOLUTION</span></code> and see how this affects the results — and the running time.</p>
 <div class="cell docutils container">
@@ -980,11 +989,11 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="task-3-random-forests">
-<h1>Task 3: Random Forests<a class="headerlink" href="#task-3-random-forests" title="Permalink to this heading">#</a></h1>
+<h1>Task 3: Random Forests<a class="headerlink" href="#task-3-random-forests" title="Link to this heading">#</a></h1>
 <p>Random forests<sup><small>TM</small></sup> are an ensemble model aggregating the predictions from multiple decision trees. Diversity is introduced into the ensemble by training the trees on <strong>bootstrap samples</strong> from the training set, and also by restricting the subset of features used by each tree.</p>
 <p>For the exercises below, we will forgo feature subsetting (we will only be using two features anyway) and focus on the <strong>bagging</strong> aspect.</p>
 <section id="train-a-simplified-random-forest-classifier">
-<h2>3.1 Train a (simplified) random forest classifier<a class="headerlink" href="#train-a-simplified-random-forest-classifier" title="Permalink to this heading">#</a></h2>
+<h2>3.1 Train a (simplified) random forest classifier<a class="headerlink" href="#train-a-simplified-random-forest-classifier" title="Link to this heading">#</a></h2>
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">random_forest_train</span></code> function in the code cell below.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">decision_tree_train</span></code> function you wrote in Task 2.3 to train the individual trees. The <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.choice.html">choice</a> method of the supplied <code class="docutils literal notranslate"><span class="pre">rng</span></code> object should help with bootstrap sampling.</p>
 <div class="cell docutils container">
@@ -1030,7 +1039,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </div>
 </section>
 <section id="make-predictions-from-a-simplified-random-forest-classifier">
-<h2>3.2 Make predictions from a (simplified) random forest classifier<a class="headerlink" href="#make-predictions-from-a-simplified-random-forest-classifier" title="Permalink to this heading">#</a></h2>
+<h2>3.2 Make predictions from a (simplified) random forest classifier<a class="headerlink" href="#make-predictions-from-a-simplified-random-forest-classifier" title="Link to this heading">#</a></h2>
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">random_forest_predict</span></code> function in the cell below.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">decision_tree_predict</span></code> function you wrote in Task 2.4 to predict from the individual trees.</p>
 <p>Once again, the <code class="docutils literal notranslate"><span class="pre">utils.vote</span></code> function may be useful here.</p>
@@ -1062,7 +1071,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </div>
 </section>
 <section id="run-task-3">
-<h2>→ Run Task 3<a class="headerlink" href="#run-task-3" title="Permalink to this heading">#</a></h2>
+<h2>→ Run Task 3<a class="headerlink" href="#run-task-3" title="Link to this heading">#</a></h2>
 <p>Execute the cell below to train and test simplified random forest classifier and produce a plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1099,7 +1108,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="task-4-adaboost">
-<h1>Task 4: AdaBoost<a class="headerlink" href="#task-4-adaboost" title="Permalink to this heading">#</a></h1>
+<h1>Task 4: AdaBoost<a class="headerlink" href="#task-4-adaboost" title="Link to this heading">#</a></h1>
 <p>AdaBoost is a meta-algorithm that iteratively builds an ensemble of weak learners such that each new addition provides the best available marginal improvement in the ensemble performance. The new learner is chosen to minimise its weighted classification error on the training set, with the sample weights updated at each iteration to prioritise misclassified points. The training procedure is shown in pseudocode form below:</p>
 <ul class="simple">
 <li><p>Initialise sample weights <span class="math notranslate nohighlight">\(w_i = \frac{1}{n}, \quad i \in \{1, 2, \dots, n\}\)</span></p></li>
@@ -1121,7 +1130,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 <p>Note that the training algorithm has been expressed in terms that don’t require a particular binary labelling convention, but the prediction expression above assumes that the outputs of the classifiers <span class="math notranslate nohighlight">\(h_t\)</span> are <span class="math notranslate nohighlight">\(\{-1, 1\}\)</span>. This is <em>not</em> the case for the decision trees implemented in Task 2, nor for the synthetic data. So you will need to convert the <span class="math notranslate nohighlight">\(h_t\)</span> outputs appropriately within the prediction sum.</p>
 <p>AdaBoost is agnostic as to the class of weak learners used, but is commonly implemented using <strong>decision stumps</strong> — decision trees of depth 1 — and that is what you should do here, using the decision tree functions you implemented in Task 2.</p>
 <section id="train-an-adaboost-classifier">
-<h2>4.1 Train an AdaBoost classifier<a class="headerlink" href="#train-an-adaboost-classifier" title="Permalink to this heading">#</a></h2>
+<h2>4.1 Train an AdaBoost classifier<a class="headerlink" href="#train-an-adaboost-classifier" title="Link to this heading">#</a></h2>
 <p>Provide an implementation body for the <code class="docutils literal notranslate"><span class="pre">adaboost_train</span></code> function defined in the cell below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1179,7 +1188,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </div>
 </section>
 <section id="make-predictions-from-an-adaboost-classifier">
-<h2>4.2 Make predictions from an AdaBoost classifier<a class="headerlink" href="#make-predictions-from-an-adaboost-classifier" title="Permalink to this heading">#</a></h2>
+<h2>4.2 Make predictions from an AdaBoost classifier<a class="headerlink" href="#make-predictions-from-an-adaboost-classifier" title="Link to this heading">#</a></h2>
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">adaboost_predict</span></code> function in the code cell below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1212,7 +1221,7 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </div>
 </section>
 <section id="run-task-4">
-<h2>→ Run Task 4<a class="headerlink" href="#run-task-4" title="Permalink to this heading">#</a></h2>
+<h2>→ Run Task 4<a class="headerlink" href="#run-task-4" title="Link to this heading">#</a></h2>
 <p>Execute the code cell below to train and test an AdaBoost classifier and plot the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1243,65 +1252,65 @@ L(\mathbf{y}, \hat{\mathbf{y}}, \mathbf{w}) = \sum_i w_i \mathbb{1}(y_i \neq \ha
 </div>
 </section>
 <section id="regression-in-cybersecurity">
-<h2>Regression in Cybersecurity<a class="headerlink" href="#regression-in-cybersecurity" title="Permalink to this heading">#</a></h2>
+<h2>Regression in Cybersecurity<a class="headerlink" href="#regression-in-cybersecurity" title="Link to this heading">#</a></h2>
 <p>Regression techniques in cybersecurity play a pivotal role in predicting and assessing various quantitative measures related to security risks, vulnerabilities, and potential threats. Here are some key applications of regression in cybersecurity</p>
 <p>Regression techniques assist in <strong>predicting and quantifying</strong> security risks, aiding in proactive risk management and incident mitigation strategies. By prioritizing and allocating resources effectively, regression models contribute to <strong>optimizing cybersecurity efforts</strong>, focusing on critical areas and vulnerabilities.</p>
 <section id="risk-assessment">
-<h3>1. Risk Assessment<a class="headerlink" href="#risk-assessment" title="Permalink to this heading">#</a></h3>
+<h3>1. Risk Assessment<a class="headerlink" href="#risk-assessment" title="Link to this heading">#</a></h3>
 <center style="float: right; margin: 10px;">
     <img style="max-width: 400px" src="https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41598-023-35198-1/MediaObjects/41598_2023_35198_Fig3_HTML.png" />
 </center>
 <p>Risk assessment using regression models in cybersecurity involves predicting and quantifying potential security risks, vulnerabilities, and the likelihood of security incidents or breaches. Regression techniques aid in evaluating and estimating the impact and probability of various security threats, enabling organizations to prioritize and allocate resources effectively to mitigate these risks.</p>
 <section id="quantitative-risk-metrics">
-<h4>Quantitative Risk Metrics<a class="headerlink" href="#quantitative-risk-metrics" title="Permalink to this heading">#</a></h4>
+<h4>Quantitative Risk Metrics<a class="headerlink" href="#quantitative-risk-metrics" title="Link to this heading">#</a></h4>
 <p>Regression models create quantitative risk metrics by combining various factors such as vulnerability scores, threat intelligence, asset value, and historical incident data. These metrics assist in quantifying overall cybersecurity risk.</p>
 </section>
 <section id="time-series-analysis-for-risk-trends">
-<h4>Time Series Analysis for Risk Trends<a class="headerlink" href="#time-series-analysis-for-risk-trends" title="Permalink to this heading">#</a></h4>
+<h4>Time Series Analysis for Risk Trends<a class="headerlink" href="#time-series-analysis-for-risk-trends" title="Link to this heading">#</a></h4>
 <p>Regression analysis of historical data helps in identifying trends in security incidents or vulnerabilities over time. It forecasts potential future risks based on past patterns.</p>
 </section>
 </section>
 <section id="network-traffic-anomalies">
-<h3>2. Network Traffic Anomalies<a class="headerlink" href="#network-traffic-anomalies" title="Permalink to this heading">#</a></h3>
+<h3>2. Network Traffic Anomalies<a class="headerlink" href="#network-traffic-anomalies" title="Link to this heading">#</a></h3>
 <center style="float: right; margin: 10px;">
     <img style="max-width: 400px" src="https://d34smkdb128qfi.cloudfront.net/images/flowmonlibraries/blogs/10711c43-77a1-4066-bb93-4f7555055a42.png?sfvrsn=4a0f497f_4" />
 </center>
 <p>Network Traffic Anomalies refer to deviations or irregular patterns within network communication that differ significantly from the expected or “normal” behavior. Analyzing and identifying such anomalies is crucial in cybersecurity as they could indicate potential security breaches, intrusions, or suspicious activities within a network. Regression techniques are employed to predict, identify, and classify these anomalies, enabling proactive detection and response to potential security threats.</p>
 <section id="predicting-expected-behavior">
-<h4>Predicting Expected Behavior<a class="headerlink" href="#predicting-expected-behavior" title="Permalink to this heading">#</a></h4>
+<h4>Predicting Expected Behavior<a class="headerlink" href="#predicting-expected-behavior" title="Link to this heading">#</a></h4>
 <p>Regression models analyze historical network traffic data to learn and predict expected patterns or behaviors. They create baselines of normal traffic behavior based on various features such as packet sizes, protocols, or traffic flow.</p>
 </section>
 <section id="identifying-deviations-from-normal-behavior">
-<h4>Identifying Deviations from Normal Behavior<a class="headerlink" href="#identifying-deviations-from-normal-behavior" title="Permalink to this heading">#</a></h4>
+<h4>Identifying Deviations from Normal Behavior<a class="headerlink" href="#identifying-deviations-from-normal-behavior" title="Link to this heading">#</a></h4>
 <p>Regression-based anomaly detection identifies deviations or outliers from the established baseline. It detects unusual network behavior that may indicate security threats like DoS attacks, intrusions, or malware communication.</p>
 </section>
 <section id="quantifying-anomaly-severity">
-<h4>Quantifying Anomaly Severity<a class="headerlink" href="#quantifying-anomaly-severity" title="Permalink to this heading">#</a></h4>
+<h4>Quantifying Anomaly Severity<a class="headerlink" href="#quantifying-anomaly-severity" title="Link to this heading">#</a></h4>
 <p>Regression models help in quantifying the severity of anomalies by assessing the deviation from normal traffic patterns. They categorize anomalies based on the degree of deviation and potential impact on the network.</p>
 </section>
 </section>
 <section id="threat-severity-prediction">
-<h3>3.Threat Severity Prediction<a class="headerlink" href="#threat-severity-prediction" title="Permalink to this heading">#</a></h3>
+<h3>3.Threat Severity Prediction<a class="headerlink" href="#threat-severity-prediction" title="Link to this heading">#</a></h3>
 <center style="float: right; margin: 10px;">
     <img style="max-width: 400px" src="https://www.researchgate.net/publication/339121526/figure/fig1/AS:865822692110336@1583439624614/Cybersecurity-criticality-number-CSCN-in-terms-of-severity-vs-likelihood.png" />
 </center>
 Threat severity prediction involves assessing and quantifying the potential impact or seriousness of various security threats or vulnerabilities within an organization's IT infrastructure. Regression techniques are instrumental in predicting threat severity, enabling cybersecurity professionals to prioritize and allocate resources efficiently to mitigate the most critical security risks.
 <section id="data-analysis-and-feature-extraction">
-<h4>Data Analysis and Feature Extraction<a class="headerlink" href="#data-analysis-and-feature-extraction" title="Permalink to this heading">#</a></h4>
+<h4>Data Analysis and Feature Extraction<a class="headerlink" href="#data-analysis-and-feature-extraction" title="Link to this heading">#</a></h4>
 <p>Regression models analyze historical security incident data, vulnerability scores, exploitability, and potential consequences to identify relevant features that contribute to threat severity prediction.</p>
 </section>
 <section id="quantifying-threat-impact">
-<h4>Quantifying Threat Impact<a class="headerlink" href="#quantifying-threat-impact" title="Permalink to this heading">#</a></h4>
+<h4>Quantifying Threat Impact<a class="headerlink" href="#quantifying-threat-impact" title="Link to this heading">#</a></h4>
 <p>Regression techniques help in quantifying the potential impact of identified threats by assigning severity scores or probabilities based on learned patterns and correlations from historical data.</p>
 </section>
 <section id="prioritizing-threat-response">
-<h4>Prioritizing Threat Response<a class="headerlink" href="#prioritizing-threat-response" title="Permalink to this heading">#</a></h4>
+<h4>Prioritizing Threat Response<a class="headerlink" href="#prioritizing-threat-response" title="Link to this heading">#</a></h4>
 <p>Regression-based severity prediction aids in prioritizing response efforts by categorizing threats according to their predicted impact, allowing organizations to focus on addressing high-risk vulnerabilities.</p>
 </section>
 </section>
 </section>
 <section id="real-cyersecurity-intrusion-dataset">
-<h2>Real cyersecurity Intrusion Dataset<a class="headerlink" href="#real-cyersecurity-intrusion-dataset" title="Permalink to this heading">#</a></h2>
+<h2>Real cyersecurity Intrusion Dataset<a class="headerlink" href="#real-cyersecurity-intrusion-dataset" title="Link to this heading">#</a></h2>
 <p>We will now look at a real cybersecurity dataset available as a <a class="reference external" href="https://www.kaggle.com/datasets/galaxyh/kdd-cup-1999-data">Kaggle Dataset</a>, which was used for <strong>The Third International Knowledge Discovery and Data Mining Tools</strong> Competition.</p>
 <p><em>Some information about the dataset:</em></p>
 <p>The competition was held in conjunction with KDD-99 The Fifth International Conference on Knowledge Discovery and Data Mining. The competition task was to build a network intrusion detector, a predictive model capable of distinguishing between bad’’ connections, called intrusions or attacks, andgood’’ normal connections. This database contains a standard set of data to be audited, which includes a wide variety of intrusions simulated in a military network environment</p>
@@ -1322,7 +1331,7 @@ Threat severity prediction involves assessing and quantifying the potential impa
 </div>
 </div>
 <section id="visualisation-of-dataset">
-<h3>Visualisation of Dataset<a class="headerlink" href="#visualisation-of-dataset" title="Permalink to this heading">#</a></h3>
+<h3>Visualisation of Dataset<a class="headerlink" href="#visualisation-of-dataset" title="Link to this heading">#</a></h3>
 <p>Let’s have a look at the content of the dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2166,7 +2175,7 @@ By WSU Staffs
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -2190,8 +2199,8 @@ By WSU Staffs
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

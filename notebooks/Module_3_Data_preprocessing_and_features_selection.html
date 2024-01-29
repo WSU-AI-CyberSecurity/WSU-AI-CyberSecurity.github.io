@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" data-theme="light">
+<html lang="en" data-content_root="../" data-theme="light">
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Module 3: Data Preprocessing and Features Selection &#8212; WSU ML in Cybersecurity</title>
   
@@ -19,56 +18,61 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c72df8c4" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/custom.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Module_3_Data_preprocessing_and_features_selection';</script>
+    <script src="../_static/custom.js?v=a4c55d5e"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 3: Unsupervised Learning" href="Module_4_Unsupervised_Learning.html" />
     <link rel="prev" title="Module 2: Supervised Learning" href="Module_2_Supervised_learning.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -82,7 +86,6 @@ const thebe_selector_output = ".output, .cell_output"
   <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -122,20 +125,15 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <header>
   
-    <div class="bd-header navbar navbar-expand-lg bd-navbar">
-    </div>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
-  </header>
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -167,7 +165,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -190,6 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Module 3:</strong> Data Preprocessing and Features Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Module_4_Unsupervised_Learning.html"><strong>Module 3</strong>: Unsupervised Learning</a></li>
 </ul>
 
     </div>
@@ -420,11 +430,11 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="module-3-data-preprocessing-and-features-selection">
-<h1><strong>Module 3:</strong> Data Preprocessing and Features Selection<a class="headerlink" href="#module-3-data-preprocessing-and-features-selection" title="Permalink to this heading">#</a></h1>
+<h1><strong>Module 3:</strong> Data Preprocessing and Features Selection<a class="headerlink" href="#module-3-data-preprocessing-and-features-selection" title="Link to this heading">#</a></h1>
 <p>Welcome to Module 3 of our learning journey! In this segment, we’ll delve into the critical aspects of Data Preprocessing and Feature Selection.</p>
 <p>As aspiring data enthusiasts, you’ve likely realized that the journey from raw data to meaningful insights involves careful preparation and strategic selection. This module is designed to equip you with the essential skills to transform raw, messy data into a refined and feature-rich dataset, setting the stage for robust machine learning models.</p>
 <section id="key-objectives">
-<h2>Key Objectives:<a class="headerlink" href="#key-objectives" title="Permalink to this heading">#</a></h2>
+<h2>Key Objectives:<a class="headerlink" href="#key-objectives" title="Link to this heading">#</a></h2>
 <p>Data cleaning and imputation are essential steps in the data preprocessing pipeline for several reasons:</p>
 <ol class="arabic">
 <li><p>Handling Missing Data:</p>
@@ -457,11 +467,11 @@ document.write(`
 </center>
 </section>
 <section id="why-data-preprocessing-matters">
-<h2>Why Data Preprocessing Matters:<a class="headerlink" href="#why-data-preprocessing-matters" title="Permalink to this heading">#</a></h2>
+<h2>Why Data Preprocessing Matters:<a class="headerlink" href="#why-data-preprocessing-matters" title="Link to this heading">#</a></h2>
 <p>Raw data seldom fits neatly into the algorithms we love to employ. Data preprocessing is the unsung hero that transforms raw data into a well-behaved companion, ensuring your models can extract meaningful patterns and insights.</p>
 </section>
 <section id="visualising-scaling-methods">
-<h2>Visualising scaling methods<a class="headerlink" href="#visualising-scaling-methods" title="Permalink to this heading">#</a></h2>
+<h2>Visualising scaling methods<a class="headerlink" href="#visualising-scaling-methods" title="Link to this heading">#</a></h2>
 <p>Let us visulaise what does scaling methods do to the input data. The following are some of the popular preprocessing methods in the <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> library.</p>
 <p>The four preprocessing methods—<code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>, <code class="docutils literal notranslate"><span class="pre">MinMaxScaler</span></code>, <code class="docutils literal notranslate"><span class="pre">Normalizer</span></code>, and <code class="docutils literal notranslate"><span class="pre">RobustScaler</span></code>—from scikit-learn’s <code class="docutils literal notranslate"><span class="pre">preprocessing</span></code> module serve different purposes in preparing and scaling data for machine learning models. Here’s an overview of each:</p>
 <ol class="arabic simple">
@@ -548,11 +558,11 @@ document.write(`
 </div>
 </section>
 <section id="navigating-the-module">
-<h2>Navigating the Module:<a class="headerlink" href="#navigating-the-module" title="Permalink to this heading">#</a></h2>
+<h2>Navigating the Module:<a class="headerlink" href="#navigating-the-module" title="Link to this heading">#</a></h2>
 <p>We encourage you to actively participate in exercises, experiment with the provided code snippets, and explore real-world scenarios. Don’t hesitate to ask questions and engage with your peers – learning is a collaborative journey!</p>
 <p>So, gear up for an illuminating exploration of Data Preprocessing and Feature Selection. Let’s refine our data and set the stage for machine learning success!</p>
 <section id="imports">
-<h3>Imports<a class="headerlink" href="#imports" title="Permalink to this heading">#</a></h3>
+<h3>Imports<a class="headerlink" href="#imports" title="Link to this heading">#</a></h3>
 <p>Let’s begin by importing some of the common modules that we’ll be using today.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -596,7 +606,7 @@ document.write(`
 </div>
 </section>
 <section id="example-k-nearest-neighbours-on-the-spotify-dataset">
-<h3>Example: <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbours on the Spotify dataset<a class="headerlink" href="#example-k-nearest-neighbours-on-the-spotify-dataset" title="Permalink to this heading">#</a></h3>
+<h3>Example: <span class="math notranslate nohighlight">\(k\)</span>-nearest neighbours on the Spotify dataset<a class="headerlink" href="#example-k-nearest-neighbours-on-the-spotify-dataset" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Yesterday in our workshop, we’ve used <code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code>, and today we will use the same model to predict whether the user would like a particular song or not.</p></li>
 <li><p>Intuition: To predict whether the user likes a particular song or not (query point)</p>
@@ -942,7 +952,7 @@ document.write(`
 </div>
 </section>
 <section id="do-you-see-any-problem">
-<h3>Do you see any problem?<a class="headerlink" href="#do-you-see-any-problem" title="Permalink to this heading">#</a></h3>
+<h3>Do you see any problem?<a class="headerlink" href="#do-you-see-any-problem" title="Link to this heading">#</a></h3>
 <p>The distance of the two song, regardless of whether we are considering all features (13 total), or only a subset of features (only 2), have essentially the same value (79250.0054….)</p>
 <ul class="simple">
 <li><p>The distance is completely dominated by the the features with larger values</p></li>
@@ -958,7 +968,7 @@ document.write(`
 </ul>
 </section>
 <section id="scaling-using-scikit-learn-s-standardscaler">
-<h3>Scaling using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>’s <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"><code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code></a><a class="headerlink" href="#scaling-using-scikit-learn-s-standardscaler" title="Permalink to this heading">#</a></h3>
+<h3>Scaling using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>’s <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"><code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code></a><a class="headerlink" href="#scaling-using-scikit-learn-s-standardscaler" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>We’ll use <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>’s <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"><code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code></a>, which is a <code class="docutils literal notranslate"><span class="pre">transformer</span></code>.</p></li>
 <li><p>Only focus on the syntax for now. We’ll talk about scaling in a bit.</p></li>
@@ -1351,7 +1361,7 @@ document.write(`
 </div>
 </section>
 <section id="fit-and-transform-paradigm-for-transformers">
-<h3><code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">transform</span></code> paradigm for transformers<a class="headerlink" href="#fit-and-transform-paradigm-for-transformers" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">transform</span></code> paradigm for transformers<a class="headerlink" href="#fit-and-transform-paradigm-for-transformers" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sklearn</span></code> uses <code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">transform</span></code> paradigms for feature transformations.</p></li>
 <li><p>We <code class="docutils literal notranslate"><span class="pre">fit</span></code> the transformer on the train split and then transform the train split as well as the test split.</p></li>
@@ -1359,7 +1369,7 @@ document.write(`
 </ul>
 </section>
 <section id="sklearn-api-summary-estimators">
-<h3><code class="docutils literal notranslate"><span class="pre">sklearn</span></code> API summary: estimators<a class="headerlink" href="#sklearn-api-summary-estimators" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">sklearn</span></code> API summary: estimators<a class="headerlink" href="#sklearn-api-summary-estimators" title="Link to this heading">#</a></h3>
 <p>Suppose <code class="docutils literal notranslate"><span class="pre">model</span></code> is a classification or regression model.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">X_train_predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
@@ -1412,7 +1422,7 @@ Test score: 0.686
 <p>The scores with scaled data are better compared to the unscaled data in case of <span class="math notranslate nohighlight">\(k\)</span>-NNs.</p>
 </section>
 <section id="common-preprocessing-techniques">
-<h3>Common preprocessing techniques<a class="headerlink" href="#common-preprocessing-techniques" title="Permalink to this heading">#</a></h3>
+<h3>Common preprocessing techniques<a class="headerlink" href="#common-preprocessing-techniques" title="Link to this heading">#</a></h3>
 <p>Some commonly performed feature transformation include:</p>
 <ul class="simple">
 <li><p>Imputation: Tackling missing values</p></li>
@@ -1423,7 +1433,7 @@ Test score: 0.686
 </section>
 </section>
 <section id="dataset-splitting-and-baseline">
-<h2>Dataset, splitting, and baseline<a class="headerlink" href="#dataset-splitting-and-baseline" title="Permalink to this heading">#</a></h2>
+<h2>Dataset, splitting, and baseline<a class="headerlink" href="#dataset-splitting-and-baseline" title="Link to this heading">#</a></h2>
 <p>We’ll be working on <a class="reference external" href="https://www.kaggle.com/datasets/suraj520/cellular-network-analysis-dataset/code">Cellular Network Analysis Dataset</a> to demonstrate these feature transformation techniques. The task is to predict network latency, given a number of features from the collected metrics</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1588,7 +1598,7 @@ memory usage: 1.5+ MB
 </div>
 </div>
 <section id="eda">
-<h3>EDA<a class="headerlink" href="#eda" title="Permalink to this heading">#</a></h3>
+<h3>EDA<a class="headerlink" href="#eda" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -1819,7 +1829,7 @@ memory usage: 1.3+ MB
 </div>
 </section>
 <section id="what-all-transformations-we-need-to-apply-on-the-dataset">
-<h3>What all transformations we need to apply on the dataset?<a class="headerlink" href="#what-all-transformations-we-need-to-apply-on-the-dataset" title="Permalink to this heading">#</a></h3>
+<h3>What all transformations we need to apply on the dataset?<a class="headerlink" href="#what-all-transformations-we-need-to-apply-on-the-dataset" title="Link to this heading">#</a></h3>
 <p>Here is what we see from the EDA.</p>
 <ul class="simple">
 <li><p>Scales are quite different across columns.</p></li>
@@ -1839,7 +1849,7 @@ memory usage: 1.3+ MB
 </div>
 </section>
 <section id="let-s-first-run-our-baseline-model-dummyregressor">
-<h3>Let’s first run our baseline model <code class="docutils literal notranslate"><span class="pre">DummyRegressor</span></code><a class="headerlink" href="#let-s-first-run-our-baseline-model-dummyregressor" title="Permalink to this heading">#</a></h3>
+<h3>Let’s first run our baseline model <code class="docutils literal notranslate"><span class="pre">DummyRegressor</span></code><a class="headerlink" href="#let-s-first-run-our-baseline-model-dummyregressor" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_dict</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># dictionary to store our results for different models</span>
@@ -1972,7 +1982,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </div>
 </section>
 <section id="scaling">
-<h3>Scaling<a class="headerlink" href="#scaling" title="Permalink to this heading">#</a></h3>
+<h3>Scaling<a class="headerlink" href="#scaling" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>This problem affects a large number of ML methods.</p></li>
 <li><p>A number of approaches to this problem. We are going to look into the most popular ones.</p></li>
@@ -2179,7 +2189,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </section>
 </section>
 <section id="feature-transformations-and-the-golden-rule">
-<h2>Feature transformations and the golden rule<a class="headerlink" href="#feature-transformations-and-the-golden-rule" title="Permalink to this heading">#</a></h2>
+<h2>Feature transformations and the golden rule<a class="headerlink" href="#feature-transformations-and-the-golden-rule" title="Link to this heading">#</a></h2>
 <p>Let’s try cross-validation with transformed data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2277,7 +2287,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 <li><p>Implications can be significant in practice!</p></li>
 </ul>
 <section id="pipelines">
-<h3>Pipelines<a class="headerlink" href="#pipelines" title="Permalink to this heading">#</a></h3>
+<h3>Pipelines<a class="headerlink" href="#pipelines" title="Link to this heading">#</a></h3>
 <p>Can we do this in a more elegant and organized way?</p>
 <ul class="simple">
 <li><p>YES!! Using <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html"><code class="docutils literal notranslate"><span class="pre">scikit-learn</span> <span class="pre">Pipeline</span></code></a>.</p></li>
@@ -2307,7 +2317,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </ul>
 </section>
 <section id="alternative-and-more-compact-syntax-make-pipeline">
-<h3>Alternative and more compact syntax: <code class="docutils literal notranslate"><span class="pre">make_pipeline</span></code><a class="headerlink" href="#alternative-and-more-compact-syntax-make-pipeline" title="Permalink to this heading">#</a></h3>
+<h3>Alternative and more compact syntax: <code class="docutils literal notranslate"><span class="pre">make_pipeline</span></code><a class="headerlink" href="#alternative-and-more-compact-syntax-make-pipeline" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Shorthand for <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> constructor</p></li>
 <li><p>Does not permit naming steps</p></li>
@@ -2361,7 +2371,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 <p><img alt="" src="https://raw.githubusercontent.com/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/main/assets/m3_pipeline.png" /></p>
 </section>
 <section id="let-s-try-cross-validation-with-our-pipeline">
-<h3>Let’s try cross-validation with our pipeline<a class="headerlink" href="#let-s-try-cross-validation-with-our-pipeline" title="Permalink to this heading">#</a></h3>
+<h3>Let’s try cross-validation with our pipeline<a class="headerlink" href="#let-s-try-cross-validation-with-our-pipeline" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_dict</span><span class="p">[</span><span class="s2">&quot;imp + scaling + knn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_std_cross_val_scores</span><span class="p">(</span>
@@ -2424,7 +2434,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </section>
 </section>
 <section id="categorical-features">
-<h2>Categorical features<a class="headerlink" href="#categorical-features" title="Permalink to this heading">#</a></h2>
+<h2>Categorical features<a class="headerlink" href="#categorical-features" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Recall that we had dropped the categorical feature <code class="docutils literal notranslate"><span class="pre">Network</span> <span class="pre">Type</span></code> feature from the dataframe. But it could potentially be a useful feature in this task.</p></li>
 <li><p>Let’s create our <code class="docutils literal notranslate"><span class="pre">X_train</span></code> and and <code class="docutils literal notranslate"><span class="pre">X_test</span></code> again by keeping the feature in the data.</p></li>
@@ -2617,7 +2627,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 <li><p>Imagine how <span class="math notranslate nohighlight">\(k\)</span>-NN would calculate distances when you have non-numeric features.</p></li>
 </ul>
 <section id="can-we-use-this-feature-in-the-model">
-<h3>Can we use this feature in the model?<a class="headerlink" href="#can-we-use-this-feature-in-the-model" title="Permalink to this heading">#</a></h3>
+<h3>Can we use this feature in the model?<a class="headerlink" href="#can-we-use-this-feature-in-the-model" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>In <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, most algorithms require numeric inputs.</p></li>
 <li><p>Decision trees could theoretically work with categorical features.</p>
@@ -2628,7 +2638,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </ul>
 </section>
 <section id="what-are-the-options">
-<h3>What are the options?<a class="headerlink" href="#what-are-the-options" title="Permalink to this heading">#</a></h3>
+<h3>What are the options?<a class="headerlink" href="#what-are-the-options" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Drop the column (not recommended)</p>
 <ul>
@@ -2643,7 +2653,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </li>
 </ul>
 <section id="one-hot-encoding-ohe">
-<h4>One-hot encoding (OHE)<a class="headerlink" href="#one-hot-encoding-ohe" title="Permalink to this heading">#</a></h4>
+<h4>One-hot encoding (OHE)<a class="headerlink" href="#one-hot-encoding-ohe" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Create new binary columns to represent our categories.</p></li>
 <li><p>If we have <span class="math notranslate nohighlight">\(c\)</span> categories in our column.</p>
@@ -2658,7 +2668,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </section>
 </section>
 <section id="let-s-do-it-on-our-dataset">
-<h3>Let’s do it on our dataset<a class="headerlink" href="#let-s-do-it-on-our-dataset" title="Permalink to this heading">#</a></h3>
+<h3>Let’s do it on our dataset<a class="headerlink" href="#let-s-do-it-on-our-dataset" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ohe</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
@@ -3130,7 +3140,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 </section>
 </section>
 <section id="what-did-we-learn-with-this-module">
-<h2>What did we learn with this module?<a class="headerlink" href="#what-did-we-learn-with-this-module" title="Permalink to this heading">#</a></h2>
+<h2>What did we learn with this module?<a class="headerlink" href="#what-did-we-learn-with-this-module" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Motivation for preprocessing</p></li>
 <li><p>Common preprocessing steps</p>
@@ -3144,7 +3154,7 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
 <li><p>Building simple supervised machine learning pipelines using <code class="docutils literal notranslate"><span class="pre">sklearn.pipeline.make_pipeline</span></code>.</p></li>
 </ul>
 <section id="problem-different-transformations-on-different-columns">
-<h3>Problem: Different transformations on different columns<a class="headerlink" href="#problem-different-transformations-on-different-columns" title="Permalink to this heading">#</a></h3>
+<h3>Problem: Different transformations on different columns<a class="headerlink" href="#problem-different-transformations-on-different-columns" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>How do we put this together with other columns in the data before fitting the regressor?</p></li>
 <li><p>Before we fit our regressor, we want to apply different transformations on different columns</p>
@@ -3206,6 +3216,15 @@ Series.__getitem__ treating keys as positions is deprecated. In a future version
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title"><strong>Module 2:</strong> Supervised Learning</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Module_4_Unsupervised_Learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Module 3</strong>: Unsupervised Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -3286,7 +3305,7 @@ By WSU Staffs
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -3310,8 +3329,8 @@ By WSU Staffs
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

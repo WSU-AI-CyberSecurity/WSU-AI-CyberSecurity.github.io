@@ -410,9 +410,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-bad-initialization">Example: Bad initialization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-better-initialization">Example: Better initialization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-we-do-about-it">What can we do about it?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#select-all-of-the-following-statements-which-are-true-iclicker">14.1 Select all of the following statements which are <strong>True</strong> (iClicker)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">14.2 Select all of the following statements which are <strong>True</strong> (iClicker)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-k-video">Choosing K [video]</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning-for-the-number-of-clusters">Hyperparameter tuning for the number of clusters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-the-elbow-method">Method 1: The Elbow method</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-the-silhouette-method">Method 2: The Silhouette method</a></li>
@@ -421,7 +418,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#silhouette-distance-for-a-sample">Silhouette distance for a sample</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-silhouette-scores-to-select-the-number-of-clusters">Using Silhouette scores to select the number of clusters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-look-for-in-these-plots">What to look for in these plots?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">14.3 Select all of the following statements which are <strong>True</strong> (iClicker)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-comments-summary-and-reflection">Final comments, summary, and reflection</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#important-points-to-remember">Important points to remember</a></li>
 </ul>
@@ -1115,29 +1111,6 @@ document.write(`
 </li>
 </ul>
 </section>
-<section id="select-all-of-the-following-statements-which-are-true-iclicker">
-<h3>14.1 Select all of the following statements which are <strong>True</strong> (iClicker)<a class="headerlink" href="#select-all-of-the-following-statements-which-are-true-iclicker" title="Link to this heading">#</a></h3>
-<p><strong>iClicker cloud join link: <a class="reference external" href="https://join.iclicker.com/SNBF">https://join.iclicker.com/SNBF</a></strong></p>
-<ul class="simple">
-<li><p>(A) K-Means algorithm always converges to the same solution.</p></li>
-<li><p>(B) <span class="math notranslate nohighlight">\(K\)</span> in K-Means should always be <span class="math notranslate nohighlight">\(\leq\)</span> # of features.</p></li>
-<li><p>(C) In K-Means, it makes sense to have <span class="math notranslate nohighlight">\(K\)</span> <span class="math notranslate nohighlight">\(\leq\)</span> # of examples.</p></li>
-<li><p>(D) In K-Means, in some iterations some points may be left unassigned.</p></li>
-</ul>
-</section>
-<section id="id1">
-<h3>14.2 Select all of the following statements which are <strong>True</strong> (iClicker)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<p><strong>iClicker cloud join link: <a class="reference external" href="https://join.iclicker.com/SNBF">https://join.iclicker.com/SNBF</a></strong></p>
-<ul class="simple">
-<li><p>(A) K-Means is sensitive to initialization and the solution may change depending upon the initialization.</p></li>
-<li><p>(B) K-means terminates when the number of clusters does not increase between iterations.</p></li>
-<li><p>(C) K-means terminates when the centroid locations do not change between iterations.</p></li>
-<li><p>(D) K-Means is guaranteed to find the optimal solution.</p></li>
-</ul>
-</section>
-<section id="choosing-k-video">
-<h3>Choosing K [<a class="reference external" href="https://youtu.be/M5ilrhcL0oY">video</a>]<a class="headerlink" href="#choosing-k-video" title="Link to this heading">#</a></h3>
-</section>
 <section id="hyperparameter-tuning-for-the-number-of-clusters">
 <h3>Hyperparameter tuning for the number of clusters<a class="headerlink" href="#hyperparameter-tuning-for-the-number-of-clusters" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -1446,17 +1419,6 @@ document.write(`
 <li><p>The length (or area) of each silhouette indicates the goodness of each cluster.</p></li>
 <li><p>A slower dropoff (more rectangular) indicates more points are “happy” in their cluster.</p></li>
 <li><p>We can apply Silhouette method to clustering methods other than K-Means.</p></li>
-</ul>
-</section>
-<section id="id2">
-<h3>14.3 Select all of the following statements which are <strong>True</strong> (iClicker)<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<p><strong>iClicker cloud join link: <a class="reference external" href="https://join.iclicker.com/SNBF">https://join.iclicker.com/SNBF</a></strong></p>
-<ul class="simple">
-<li><p>(A) If you train K-Means with <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code>= the number of examples, the inertia value will be 0.</p></li>
-<li><p>(B) The elbow plot shows the tradeoff between within cluster distance and the number of clusters.</p></li>
-<li><p>(C) Unlike the Elbow method, the Silhouette method is not dependent on the notion of cluster centers.</p></li>
-<li><p>(D) The elbow plot is not a reliable method to obtain the optimal number of clusters in all cases.</p></li>
-<li><p>(E) The Silhouette scores ranges between -1 and 1 where higher scores indicates better cluster assignments.</p></li>
 </ul>
 </section>
 <section id="final-comments-summary-and-reflection">
@@ -1939,9 +1901,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-bad-initialization">Example: Bad initialization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-better-initialization">Example: Better initialization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-we-do-about-it">What can we do about it?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#select-all-of-the-following-statements-which-are-true-iclicker">14.1 Select all of the following statements which are <strong>True</strong> (iClicker)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">14.2 Select all of the following statements which are <strong>True</strong> (iClicker)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-k-video">Choosing K [video]</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning-for-the-number-of-clusters">Hyperparameter tuning for the number of clusters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-the-elbow-method">Method 1: The Elbow method</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-the-silhouette-method">Method 2: The Silhouette method</a></li>
@@ -1950,7 +1909,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#silhouette-distance-for-a-sample">Silhouette distance for a sample</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-silhouette-scores-to-select-the-number-of-clusters">Using Silhouette scores to select the number of clusters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-look-for-in-these-plots">What to look for in these plots?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">14.3 Select all of the following statements which are <strong>True</strong> (iClicker)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-comments-summary-and-reflection">Final comments, summary, and reflection</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#important-points-to-remember">Important points to remember</a></li>
 </ul>

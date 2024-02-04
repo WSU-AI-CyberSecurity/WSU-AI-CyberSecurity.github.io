@@ -1,0 +1,3164 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module 5: Anomaly and Intrusion Detection with Machine Learning &#8212; WSU ML in Cybersecurity</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c72df8c4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Module_5_Anomaly_and_Intrusion_Detection_with_Machine_Learning';</script>
+    <script src="../_static/custom.js?v=a4c55d5e"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Module 4: Unsupervised Learning" href="Module_4_Unsupervised_Learning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="WSU ML in Cybersecurity - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="WSU ML in Cybersecurity - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Exploring Machine Learning in Cybersecurity Workshop
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Module_0_Introduction_to_Jupyter_Notebook_and_Colab.html"><strong>Module 0:</strong> Introduction to Jupyter Notebook and Colab</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Module_1_Fundamentals_of_Machine_Learning.html"><strong>Module 1:</strong> Fundamentals of Machine Learning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Module_2_Supervised_learning.html"><strong>Module 2:</strong> Supervised Learning</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Module_3_Data_preprocessing_and_features_selection.html"><strong>Module 3:</strong> Data Preprocessing and Features Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Module_4_Unsupervised_Learning.html"><strong>Module 4</strong>: Unsupervised Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Module 5:</strong> Anomaly and Intrusion Detection with Machine Learning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/blob/main/notebooks/Module_5_Anomaly_and_Intrusion_Detection_with_Machine_Learning.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/Module_5_Anomaly_and_Intrusion_Detection_with_Machine_Learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module 5: Anomaly and Intrusion Detection with Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-anomaly-detection-in-cyber-security">Why do we need anomaly detection in Cyber Security?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-explanation">Technical Explanation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-time-anomaly-detection">Real-Time Anomaly Detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-detecting-intrusion-with-machine-learning">Case Study: Detecting Intrusion with Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#undersampling-against-unbalance">Undersampling against unbalance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-data-for-training">Preparing data for training</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance">Feature importance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-of-the-decision-tree-importance-evaluation-using-a-single-tree-decisiontreeclassifier">Visualization of the decision tree, importance evaluation using a single tree (DecisionTreeClassifier)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-evaluation-using-selectfrommodel">Importance evaluation using SelectFromModel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-importance-using-randomforestclassifier-feature-importances">Evaluation of importance using RandomForestClassifier.feature_importances_</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-selected-features">Analysis of selected features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-selection">Hyperparameter selection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-model">Final model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-approbation">Model approbation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-5-anomaly-and-intrusion-detection-with-machine-learning">
+<h1><strong>Module 5:</strong> Anomaly and Intrusion Detection with Machine Learning<a class="headerlink" href="#module-5-anomaly-and-intrusion-detection-with-machine-learning" title="Link to this heading">#</a></h1>
+<section id="why-do-we-need-anomaly-detection-in-cyber-security">
+<h2>Why do we need anomaly detection in Cyber Security?<a class="headerlink" href="#why-do-we-need-anomaly-detection-in-cyber-security" title="Link to this heading">#</a></h2>
+<p>Detecting and mitigating zero-day vulnerabilities is crucial for maintaining robust cybersecurity. A zero-day vulnerability represents a hidden weakness in a computer system, exploitable by attackers and undetected by affected parties. To comprehend the potential impact, consider the scenario where an organization falls victim to a zero-day exploit.</p>
+<center>
+    <img style="max-width: 670px" src="https://raw.githubusercontent.com/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/main/assets/m5_anomaly.png" />
+</center>
+<p>Identifying abnormal network behavior is instrumental in fortifying organizations against zero-day attacks. This document provides insights into various approaches to achieve effective anomaly detection.</p>
+</section>
+<section id="technical-explanation">
+<h2>Technical Explanation<a class="headerlink" href="#technical-explanation" title="Link to this heading">#</a></h2>
+<p>Anomaly detection, also known as outlier detection, involves recognizing unexpected events, observations, or items that significantly deviate from the norm. Anomalous data can often be easily identified by breaking established rules, such as exceeding predefined thresholds.</p>
+<p><strong>Properties of Anomaly</strong></p>
+<ul class="simple">
+<li><p>Anomalies in data occur infrequently.</p></li>
+<li><p>Features of data anomalies are markedly different from those of normal instances.</p></li>
+</ul>
+<center>
+    <img style="max-width: 800px" src="https://raw.githubusercontent.com/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/main/assets/m5_1.png" />
+</center>
+<p><strong>Examples of Anomalies:</strong></p>
+<ul class="simple">
+<li><p>Network anomalies (e.g., intrusion detection forecasting)</p></li>
+<li><p>Application performance anomalies</p></li>
+<li><p>Web application security anomalies (e.g., XSS attacks, DDoS attacks, unexpected login attempts)</p></li>
+</ul>
+<p><em>Refer below time series graph which shows unexpected drop in network usage (anomalous behaviour):</em></p>
+<center>
+    <img style="max-width: 800px" src="https://raw.githubusercontent.com/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/main/assets/m5_2.png" />
+</center>
+<p><strong>Challenges in Anomaly Detection:</strong></p>
+<ul class="simple">
+<li><p>Defining normal behavior</p></li>
+<li><p>Handling imbalanced distribution of normal and abnormal data</p></li>
+<li><p>Sparse occurrence of abnormal events</p></li>
+<li><p>Appropriate feature extraction</p></li>
+<li><p>Handling noise (distinct from anomalies)</p></li>
+<li><p>Future anomalies may differ significantly from training set examples.</p></li>
+</ul>
+<p><strong>Testing for Anomalous Points:</strong></p>
+<ul class="simple">
+<li><p>Supervised training requires labeled anomalous data points.</p></li>
+<li><p>Unsupervised learning relies on distances or cluster densities to estimate normalcy and outliers.</p></li>
+<li><p>Feature Selection Criteria:</p></li>
+<li><p>Choose features that exhibit unusually high or low values during anomaly events.</p></li>
+</ul>
+<section id="real-time-anomaly-detection">
+<h3>Real-Time Anomaly Detection<a class="headerlink" href="#real-time-anomaly-detection" title="Link to this heading">#</a></h3>
+<p>In communication networks, real-time processing is vital for detecting correlated traffic indicative of anomalous behavior, such as DDoS or zero-day attacks.</p>
+<center>
+    <img style="max-width: 800px" src="https://raw.githubusercontent.com/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/main/assets/m5_3.png" />
+</center>
+<p><strong>Performance Evaluation Criteria:</strong>
+Given class imbalance, accuracy may not be a reliable metric. Confusion matrix analysis is recommended for a more nuanced evaluation.</p>
+<p><strong>Applications:</strong>
+Anomaly-based network intrusion detection system, credit card fraud detection, and malware detection are among the diverse applications. Practical examples and demonstrations, including a zero-day attack demo, are available in the provided resources.</p>
+<p><em>In below picture, red points indicates anomaly based on previously seen data points.</em></p>
+<center>
+    <img style="max-width: 800px" src="https://raw.githubusercontent.com/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/main/assets/m5_4.png" />
+</center>
+<p><strong>Noise Filtering:</strong>
+Prior to applying anomaly detection techniques, noise filtering is essential to reduce false positives. A recommended approach is discussed in the referenced paper.</p>
+</section>
+</section>
+<section id="case-study-detecting-intrusion-with-machine-learning">
+<h2>Case Study: Detecting Intrusion with Machine Learning<a class="headerlink" href="#case-study-detecting-intrusion-with-machine-learning" title="Link to this heading">#</a></h2>
+<p>Training data: “Intrusion Detection Evaluation Dataset” (CICIDS2017). Description page: <a class="reference external" href="https://www.unb.ca/cic/datasets/ids-2017.html">https://www.unb.ca/cic/datasets/ids-2017.html</a></p>
+<p>The data set is public. Download link: <a class="reference external" href="http://205.174.165.80/CICDataset/CIC-IDS-2017/Dataset/">http://205.174.165.80/CICDataset/CIC-IDS-2017/Dataset/</a></p>
+<p>CICIDS2017 combines 8 files recorded on different days of observation (PCAP + CSV). Used archive: <a class="reference external" href="http://205.174.165.80/CICDataset/CIC-IDS-2017/Dataset/GeneratedLabelledFlows.zip">http://205.174.165.80/CICDataset/CIC-IDS-2017/Dataset/GeneratedLabelledFlows.zip</a></p>
+<p>In the downloaded archive GeneratedLabelledFlows.zip the file “Thursday” Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv is selected.</p>
+<p>Sources:</p>
+<ul class="simple">
+<li><p>[Sharafaldin2018] Iman Sharafaldin, Arash Habibi Lashkari and Ali A. Ghorbani. Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization. 2018</p></li>
+<li><p>[Kostas2018] Kahraman Kostas. Anomaly Detection in Networks Using Machine Learning. 2018 (error was found in assessing the importance of features)</p></li>
+<li><p><a class="github reference external" href="https://github.com/bozbil/Anomaly-Detection-in-Networks-Using-Machine-Learning">bozbil/Anomaly-Detection-in-Networks-Using-Machine-Learning</a> (error was found in assessing the importance of features)</p></li>
+</ul>
+</section>
+<section id="data-preprocessing">
+<h2>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>Download the dataset from Github to Google Colab and unzip it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>graphviz
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: graphviz in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (0.20.1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We use “engine=python” to avoid the “UnicodeDecodeError: ‘utf-8’ codec can’t decode byte 0x96 in position 11: invalid start byte” encoding error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/WSU-AI-CyberSecurity/data/master/CICIDS2017-thursday.pcap_ISCX.csv&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;cp1252&#39;</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Flow ID</th>
+      <th>Source IP</th>
+      <th>Source Port</th>
+      <th>Destination IP</th>
+      <th>Destination Port</th>
+      <th>Protocol</th>
+      <th>Timestamp</th>
+      <th>Flow Duration</th>
+      <th>Total Fwd Packets</th>
+      <th>Total Backward Packets</th>
+      <th>...</th>
+      <th>min_seg_size_forward</th>
+      <th>Active Mean</th>
+      <th>Active Std</th>
+      <th>Active Max</th>
+      <th>Active Min</th>
+      <th>Idle Mean</th>
+      <th>Idle Std</th>
+      <th>Idle Max</th>
+      <th>Idle Min</th>
+      <th>Label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>192.168.10.3-192.168.10.50-389-33898-6</td>
+      <td>192.168.10.50</td>
+      <td>33898</td>
+      <td>192.168.10.3</td>
+      <td>389</td>
+      <td>6</td>
+      <td>6/7/2017 8:59</td>
+      <td>113095465</td>
+      <td>48</td>
+      <td>24</td>
+      <td>...</td>
+      <td>32</td>
+      <td>203985.500</td>
+      <td>5.758373e+05</td>
+      <td>1629110.0</td>
+      <td>379.0</td>
+      <td>13800000.0</td>
+      <td>4.277541e+06</td>
+      <td>16500000.0</td>
+      <td>6737603.0</td>
+      <td>BENIGN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>192.168.10.3-192.168.10.50-389-33904-6</td>
+      <td>192.168.10.50</td>
+      <td>33904</td>
+      <td>192.168.10.3</td>
+      <td>389</td>
+      <td>6</td>
+      <td>6/7/2017 8:59</td>
+      <td>113473706</td>
+      <td>68</td>
+      <td>40</td>
+      <td>...</td>
+      <td>32</td>
+      <td>178326.875</td>
+      <td>5.034269e+05</td>
+      <td>1424245.0</td>
+      <td>325.0</td>
+      <td>13800000.0</td>
+      <td>4.229413e+06</td>
+      <td>16500000.0</td>
+      <td>6945512.0</td>
+      <td>BENIGN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8.0.6.4-8.6.0.1-0-0-0</td>
+      <td>8.6.0.1</td>
+      <td>0</td>
+      <td>8.0.6.4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6/7/2017 8:59</td>
+      <td>119945515</td>
+      <td>150</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>6909777.333</td>
+      <td>1.170000e+07</td>
+      <td>20400000.0</td>
+      <td>6.0</td>
+      <td>24400000.0</td>
+      <td>2.430000e+07</td>
+      <td>60100000.0</td>
+      <td>5702188.0</td>
+      <td>BENIGN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>192.168.10.14-65.55.44.109-59135-443-6</td>
+      <td>192.168.10.14</td>
+      <td>59135</td>
+      <td>65.55.44.109</td>
+      <td>443</td>
+      <td>6</td>
+      <td>6/7/2017 8:59</td>
+      <td>60261928</td>
+      <td>9</td>
+      <td>7</td>
+      <td>...</td>
+      <td>20</td>
+      <td>0.000</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>BENIGN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>192.168.10.3-192.168.10.14-53-59555-17</td>
+      <td>192.168.10.14</td>
+      <td>59555</td>
+      <td>192.168.10.3</td>
+      <td>53</td>
+      <td>17</td>
+      <td>6/7/2017 8:59</td>
+      <td>269</td>
+      <td>2</td>
+      <td>2</td>
+      <td>...</td>
+      <td>32</td>
+      <td>0.000</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>BENIGN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>170361</th>
+      <td>157.240.18.35-192.168.10.51-443-55641-6</td>
+      <td>157.240.18.35</td>
+      <td>443</td>
+      <td>192.168.10.51</td>
+      <td>55641</td>
+      <td>6</td>
+      <td>6/7/2017 12:59</td>
+      <td>49</td>
+      <td>1</td>
+      <td>3</td>
+      <td>...</td>
+      <td>20</td>
+      <td>0.000</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>BENIGN</td>
+    </tr>
+    <tr>
+      <th>170362</th>
+      <td>192.168.10.51-199.16.156.120-45337-443-6</td>
+      <td>199.16.156.120</td>
+      <td>443</td>
+      <td>192.168.10.51</td>
+      <td>45337</td>
+      <td>6</td>
+      <td>6/7/2017 12:59</td>
+      <td>217</td>
+      <td>2</td>
+      <td>1</td>
+      <td>...</td>
+      <td>32</td>
+      <td>0.000</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>BENIGN</td>
+    </tr>
+    <tr>
+      <th>170363</th>
+      <td>192.168.10.12-192.168.10.50-60148-22-6</td>
+      <td>192.168.10.12</td>
+      <td>60148</td>
+      <td>192.168.10.50</td>
+      <td>22</td>
+      <td>6</td>
+      <td>6/7/2017 12:59</td>
+      <td>1387547</td>
+      <td>41</td>
+      <td>46</td>
+      <td>...</td>
+      <td>32</td>
+      <td>0.000</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>BENIGN</td>
+    </tr>
+    <tr>
+      <th>170364</th>
+      <td>192.168.10.12-192.168.10.50-60146-22-6</td>
+      <td>192.168.10.12</td>
+      <td>60146</td>
+      <td>192.168.10.50</td>
+      <td>22</td>
+      <td>6</td>
+      <td>6/7/2017 12:59</td>
+      <td>207</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>32</td>
+      <td>0.000</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>BENIGN</td>
+    </tr>
+    <tr>
+      <th>170365</th>
+      <td>192.168.10.12-192.168.10.50-60146-22-6</td>
+      <td>192.168.10.50</td>
+      <td>22</td>
+      <td>192.168.10.12</td>
+      <td>60146</td>
+      <td>6</td>
+      <td>6/7/2017 12:59</td>
+      <td>50</td>
+      <td>1</td>
+      <td>2</td>
+      <td>...</td>
+      <td>32</td>
+      <td>0.000</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000e+00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>BENIGN</td>
+    </tr>
+  </tbody>
+</table>
+<p>170366 rows × 85 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(170366, 85)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The columns “Fwd Header Length” and “Fwd Header Length.1” are identical, the second one is removed, 84 columns remain.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fwd Header Length.1&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(170366, 84)
+</pre></div>
+</div>
+</div>
+</div>
+<p>When assessing the distribution of labels, it turns out that out of 458968 records there are many blank records (“BENIGN” - benign background traffic).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;BENIGN&#39;, &#39;Web Attack – Brute Force&#39;, &#39;Web Attack – XSS&#39;,
+       &#39;Web Attack – Sql Injection&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Label
+BENIGN                        168186
+Web Attack – Brute Force        1507
+Web Attack – XSS                 652
+Web Attack – Sql Injection        21
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Delete blank records.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Flow ID&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(170366, 84)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The “Flow Bytes/s” and “Flow Packets/s” columns have non-numerical values, replace them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Infinity&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Flow Bytes/s&quot;</span><span class="p">,</span> <span class="s2">&quot;Flow Packets/s&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Flow Bytes/s&quot;</span><span class="p">,</span> <span class="s2">&quot;Flow Packets/s&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Replace the NaN values and infinity values with -1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Convert string characters to numbers, use LabelEncoder, not OneHotEncoder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">string_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">string_features</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;Label&#39;</span><span class="p">)</span>
+<span class="n">string_features</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Flow ID&#39;, &#39;Source IP&#39;, &#39;Destination IP&#39;, &#39;Timestamp&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">le</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="n">string_features</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">string_features</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="undersampling-against-unbalance">
+<h3>Undersampling against unbalance<a class="headerlink" href="#undersampling-against-unbalance" title="Link to this heading">#</a></h3>
+<p>Dataset is unbalanced: total records = 170366, “BENIGN” records = 168186, records with attacks much less: 1507 + 652 + 21 = 2180.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">benign_total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;BENIGN&quot;</span><span class="p">])</span>
+<span class="n">benign_total</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>168186
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attack_total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;BENIGN&quot;</span><span class="p">])</span>
+<span class="n">attack_total</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2180
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;web_attacks_unbalanced.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Label
+BENIGN                        168186
+Web Attack – Brute Force        1507
+Web Attack – XSS                 652
+Web Attack – Sql Injection        21
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We use <strong>undersampling</strong> to correct class imbalances: we remove most of the “BENIGN” records.</p>
+<p>Form a balanced dataset web_attacks_balanced.csv in proportion: 30% attack (2180 records), 70% benign data (2180 / 30 * 70 ~ = 5087 records).</p>
+<p>Algorithm to form a balanced df_balanced dataset:</p>
+<ul class="simple">
+<li><p>All the records with the attacks are copied to the new dataset.</p></li>
+<li><p>There are two conditions for copying “BENIGN” records to the new dataset:</p>
+<ol class="arabic simple">
+<li><p>The next record is copyied with the benign_inc_probability.</p></li>
+<li><p>The total number of “BENIGN” records must not exceed the limit of 5087 records.</p></li>
+</ol>
+</li>
+</ul>
+<p>Сalculate the probability of copying a “BENIGN” record. The enlargement multiplier is used to get exactly 70% benign data (5087 records).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">enlargement</span> <span class="o">=</span> <span class="mf">1.1</span>
+<span class="n">benign_included_max</span> <span class="o">=</span> <span class="n">attack_total</span> <span class="o">/</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">70</span>
+<span class="n">benign_inc_probability</span> <span class="o">=</span> <span class="p">(</span><span class="n">benign_included_max</span> <span class="o">/</span> <span class="n">benign_total</span><span class="p">)</span> <span class="o">*</span> <span class="n">enlargement</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">benign_included_max</span><span class="p">,</span> <span class="n">benign_inc_probability</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5086.666666666667 0.03326872232726466
+</pre></div>
+</div>
+</div>
+</div>
+<p>Copy records from df to df_balanced, save dataset <strong>web_attacks_balanced.csv</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">indexes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">benign_included_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;BENIGN&quot;</span><span class="p">):</span>
+        <span class="n">indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Copying with benign_inc_probability</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">benign_inc_probability</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="c1"># Have we achieved 70% (5087 records)?</span>
+        <span class="k">if</span> <span class="n">benign_included_count</span> <span class="o">&gt;</span> <span class="n">benign_included_max</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="n">benign_included_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df_balanced</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indexes</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_balanced</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Label
+BENIGN                        5087
+Web Attack – Brute Force      1507
+Web Attack – XSS               652
+Web Attack – Sql Injection      21
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_balanced</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;web_attacks_balanced.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preparing-data-for-training">
+<h3>Preparing data for training<a class="headerlink" href="#preparing-data-for-training" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;web_attacks_balanced.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Label column is encoded as follows: “BENIGN” = 0, attack = 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;BENIGN&#39;</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>7 features (Flow ID, Source IP, Source Port, Destination IP, Destination Port, Protocol, Timestamp) are excluded from the dataset. The hypothesis is that the “shape” of the data being transmitted is more important than these attributes. In addition, ports and addresses can be substituted by an attacker, so it is better that the ML algorithm does not take these features into account in training [Kostas2018].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excluded</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Flow ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Source IP&#39;</span><span class="p">,</span> <span class="s1">&#39;Source Port&#39;</span><span class="p">,</span> <span class="s1">&#39;Destination IP&#39;</span><span class="p">,</span> <span class="s1">&#39;Destination Port&#39;</span><span class="p">,</span> <span class="s1">&#39;Protocol&#39;</span><span class="p">,</span> <span class="s1">&#39;Timestamp&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">excluded</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below at the stage of importance estimation the “Init_Win_bytes_backward” feature has the maximum value. After viewing the source dataset, it seems that an inaccuracy was made in forming the dataset.</p>
+<p>It turns out that it is possible to make a fairly accurate classification by one feature.</p>
+<p>Description of features: <a class="reference external" href="http://www.netflowmeter.ca/netflowmeter.html">http://www.netflowmeter.ca/netflowmeter.html</a></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> Init_Win_bytes_backward - The total number of bytes sent in initial window in the backward direction
+ Init_Win_bytes_forward - The total number of bytes sent in initial window in the forward direction
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;Init_Win_bytes_backward&#39;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Init_Win_bytes_backward&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Init_Win_bytes_backward&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Value bins&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;Init_Win_bytes_backward.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/841eb5ed38784c57301cf40776d17d796862ce90660de57dae726cc8f9ef67f9.png" src="../_images/841eb5ed38784c57301cf40776d17d796862ce90660de57dae726cc8f9ef67f9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;Init_Win_bytes_forward&#39;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Init_Win_bytes_forward&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Init_Win_bytes_forward&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Value bins&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;Init_Win_bytes_forward.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c099884728ec1eb96ad3d5e5b9e92fb2145647236a145926626f1304243b6bb7.png" src="../_images/c099884728ec1eb96ad3d5e5b9e92fb2145647236a145926626f1304243b6bb7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">excluded2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Init_Win_bytes_backward&#39;</span><span class="p">,</span> <span class="s1">&#39;Init_Win_bytes_forward&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">excluded2</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7267, 74) (7267,)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="feature-importance">
+<h2>Feature importance<a class="headerlink" href="#feature-importance" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: 3543, 1: 1543}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="visualization-of-the-decision-tree-importance-evaluation-using-a-single-tree-decisiontreeclassifier">
+<h3>Visualization of the decision tree, importance evaluation using a single tree (DecisionTreeClassifier)<a class="headerlink" href="#visualization-of-the-decision-tree-importance-evaluation-using-a-single-tree-decisiontreeclassifier" title="Link to this heading">#</a></h3>
+<p>In the beginning we use one tree - for the convenience of visualization of the classifier. High cross-validation scores even with 5 leaves look suspiciously good, we should look at the data carefully. Parameters for change - test_size in the cell above (train_test_split), max_leaf_nodes in the cell below.</p>
+<p>By changing the <strong>random_state</strong> parameter, we will get different trees and different features with the highest importance. But the forest will already average individual trees below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="n">decision_tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_leaf_nodes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">decision_tree</span> <span class="o">=</span> <span class="n">decision_tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">cross_val_score</span><span class="p">(</span><span class="n">decision_tree</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.95874263, 0.97249509, 0.96267191, 0.96070727, 0.94302554,
+       0.94695481, 0.96653543, 0.95275591, 0.95866142, 0.95669291])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">export_text</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">export_text</span><span class="p">(</span><span class="n">decision_tree</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>|--- Packet Length Mean &lt;= 0.75
+|   |--- Fwd IAT Std &lt;= 3524936.88
+|   |   |--- class: 0
+|   |--- Fwd IAT Std &gt;  3524936.88
+|   |   |--- Fwd IAT Min &lt;= 11241.00
+|   |   |   |--- class: 1
+|   |   |--- Fwd IAT Min &gt;  11241.00
+|   |   |   |--- class: 0
+|--- Packet Length Mean &gt;  0.75
+|   |--- Subflow Fwd Bytes &lt;= 37130.00
+|   |   |--- class: 0
+|   |--- Subflow Fwd Bytes &gt;  37130.00
+|   |   |--- class: 1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">Source</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="n">Source</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">decision_tree</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5239c6d0c0e2c5057d641e718cd92f1e346dee585c3521a30eb75d09bf751831.svg" src="../_images/5239c6d0c0e2c5057d641e718cd92f1e346dee585c3521a30eb75d09bf751831.svg" /></div>
+</div>
+<p>Analyze the confusion matrix. Which classes are confidently classified by the model?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: 1544, 1: 637}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">decision_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1544,    0],
+       [  92,  545]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="importance-evaluation-using-selectfrommodel">
+<h3>Importance evaluation using SelectFromModel<a class="headerlink" href="#importance-evaluation-using-selectfrommodel" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectFromModel</span>
+<span class="n">sfm</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">decision_tree</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">sfm</span><span class="o">.</span><span class="n">estimator_</span><span class="o">.</span><span class="n">feature_importances_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.17782863, 0.        , 0.01621238, 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.7481656 ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.05779339, 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sfm</span><span class="o">.</span><span class="n">threshold_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.013513513513513514
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_new</span> <span class="o">=</span> <span class="n">sfm</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original num features: </span><span class="si">{}</span><span class="s2">, selected num features: </span><span class="si">{}</span><span class="s2">&quot;</span>
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">X_train_new</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original num features: 74, selected num features: 4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">decision_tree</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indices</span><span class="p">[:</span><span class="mi">10</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="se">\t</span><span class="si">{}</span><span class="s2"> - </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">decision_tree</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.	Packet Length Mean - 0.7481656013741973
+1.	Fwd IAT Std - 0.17782862880204273
+2.	Subflow Fwd Bytes - 0.05779338565191023
+3.	Fwd IAT Min - 0.016212384171849784
+4.	Idle Min - 0.0
+5.	Bwd IAT Std - 0.0
+6.	Fwd IAT Mean - 0.0
+7.	Fwd IAT Max - 0.0
+8.	Bwd IAT Total - 0.0
+9.	Bwd IAT Mean - 0.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluation-of-importance-using-randomforestclassifier-feature-importances">
+<h3>Evaluation of importance using RandomForestClassifier.feature_importances_<a class="headerlink" href="#evaluation-of-importance-using-randomforestclassifier-feature-importances" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+<span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">oob_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1"># Score = mean accuracy on the given test data and labels</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R^2 Training Score: </span><span class="si">{:.2f}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">R^2 Validation Score: </span><span class="si">{:.2f}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">Out-of-bag Score: </span><span class="si">{:.2f}</span><span class="s1">&#39;</span>
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="n">rf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span> <span class="n">rf</span><span class="o">.</span><span class="n">oob_score_</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R^2 Training Score: 0.99 
+R^2 Validation Score: 0.97 
+Out-of-bag Score: 0.97
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">importances</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">feature_importances_</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">importances</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">webattack_features</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indices</span><span class="p">[:</span><span class="mi">20</span><span class="p">]):</span>
+    <span class="n">webattack_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="se">\t</span><span class="s1">#</span><span class="si">{}</span><span class="se">\t</span><span class="si">{:.3f}</span><span class="se">\t</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">importances</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.	#51	0.081	Average Packet Size
+2.	#13	0.077	Flow Bytes/s
+3.	#39	0.065	Packet Length Mean
+4.	#38	0.062	Max Packet Length
+5.	#61	0.056	Subflow Fwd Bytes
+6.	#23	0.056	Fwd IAT Min
+7.	#7	0.053	Fwd Packet Length Mean
+8.	#52	0.051	Avg Fwd Segment Size
+9.	#3	0.046	Total Length of Fwd Packets
+10.	#15	0.033	Flow IAT Mean
+11.	#5	0.032	Fwd Packet Length Max
+12.	#21	0.031	Fwd IAT Std
+13.	#33	0.030	Fwd Header Length
+14.	#14	0.023	Flow Packets/s
+15.	#0	0.021	Flow Duration
+16.	#35	0.021	Fwd Packets/s
+17.	#16	0.019	Flow IAT Std
+18.	#17	0.018	Flow IAT Max
+19.	#20	0.018	Fwd IAT Mean
+20.	#22	0.016	Fwd IAT Max
+</pre></div>
+</div>
+</div>
+</div>
+<p>For comparison, the results of the study [Sharafaldin2018] (compare relatively, without taking into account the multiplier):</p>
+<ul class="simple">
+<li><p>Init Win F.Bytes 0.0200</p></li>
+<li><p>Subflow F.Bytes 0.0145</p></li>
+<li><p>Init Win B.Bytes 0.0129</p></li>
+<li><p>Total Len F.Packets 0.0096</p></li>
+</ul>
+<p>And incorrect results [Kostas2018] (error was found in assessing the importance of features, line: <em>impor_bars = pd.DataFrame({‘Features’:refclasscol[0:20],’importance’:importances[0:20]})</em>, the importances[0:20] sample does not take into account that the values are not sorted in descending order):</p>
+<ul class="simple">
+<li><p>Flow Bytes/s 0.313402</p></li>
+<li><p>Total Length of Fwd Packets 0.304917</p></li>
+<li><p>Flow Duration 0.000485</p></li>
+<li><p>Fwd Packet Length Max 0.00013</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">importances</span><span class="p">)[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Feature Importances&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)),</span> <span class="n">importances</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#cccccc&#39;</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)),</span> <span class="p">[</span><span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Relative Importance&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;feature_importances.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/26856d7e1aa41ef3eab7a29ed1779f0647d8e782c0ece395cfdd43ed24ba13f7.png" src="../_images/26856d7e1aa41ef3eab7a29ed1779f0647d8e782c0ece395cfdd43ed24ba13f7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1520,   24],
+       [  32,  605]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, for experiments, we keep the first max_features of features with maximum importance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_features</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">webattack_features</span> <span class="o">=</span> <span class="n">webattack_features</span><span class="p">[:</span><span class="n">max_features</span><span class="p">]</span>
+<span class="n">webattack_features</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Average Packet Size&#39;,
+ &#39;Flow Bytes/s&#39;,
+ &#39;Packet Length Mean&#39;,
+ &#39;Max Packet Length&#39;,
+ &#39;Subflow Fwd Bytes&#39;,
+ &#39;Fwd IAT Min&#39;,
+ &#39;Fwd Packet Length Mean&#39;,
+ &#39;Avg Fwd Segment Size&#39;,
+ &#39;Total Length of Fwd Packets&#39;,
+ &#39;Flow IAT Mean&#39;,
+ &#39;Fwd Packet Length Max&#39;,
+ &#39;Fwd IAT Std&#39;,
+ &#39;Fwd Header Length&#39;,
+ &#39;Flow Packets/s&#39;,
+ &#39;Flow Duration&#39;,
+ &#39;Fwd Packets/s&#39;,
+ &#39;Flow IAT Std&#39;,
+ &#39;Flow IAT Max&#39;,
+ &#39;Fwd IAT Mean&#39;,
+ &#39;Fwd IAT Max&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analysis-of-selected-features">
+<h2>Analysis of selected features<a class="headerlink" href="#analysis-of-selected-features" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">webattack_features</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;features_hist.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4e1c9056f207fd26a0bf5994f750f306812ce49448d27fe5edc6de787aa03976.png" src="../_images/4e1c9056f207fd26a0bf5994f750f306812ce49448d27fe5edc6de787aa03976.png" />
+</div>
+</div>
+<p>Install Facets Overview</p>
+<p><a class="reference external" href="https://pair-code.github.io/facets/">https://pair-code.github.io/facets/</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>facets-overview
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting facets-overview
+  Downloading facets_overview-1.1.1-py2.py3-none-any.whl.metadata (10 kB)
+Requirement already satisfied: numpy&gt;=1.16.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from facets-overview) (1.26.3)
+Requirement already satisfied: pandas&gt;=0.22.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from facets-overview) (2.2.0)
+Requirement already satisfied: protobuf&gt;=3.20.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from facets-overview) (4.23.4)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from pandas&gt;=0.22.0-&gt;facets-overview) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from pandas&gt;=0.22.0-&gt;facets-overview) (2024.1)
+Requirement already satisfied: tzdata&gt;=2022.7 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from pandas&gt;=0.22.0-&gt;facets-overview) (2023.4)
+Requirement already satisfied: six&gt;=1.5 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=0.22.0-&gt;facets-overview) (1.16.0)
+Downloading facets_overview-1.1.1-py2.py3-none-any.whl (22 kB)
+Installing collected packages: facets-overview
+Successfully installed facets-overview-1.1.1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create the feature stats for the datasets and stringify it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">from</span> <span class="nn">facets_overview.generic_feature_statistics_generator</span> <span class="kn">import</span> <span class="n">GenericFeatureStatisticsGenerator</span>
+
+<span class="n">gfsg</span> <span class="o">=</span> <span class="n">GenericFeatureStatisticsGenerator</span><span class="p">()</span>
+<span class="n">proto</span> <span class="o">=</span> <span class="n">gfsg</span><span class="o">.</span><span class="n">ProtoFromDataFrames</span><span class="p">([{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;train + test&#39;</span><span class="p">,</span> <span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">webattack_features</span><span class="p">]}])</span>
+<span class="n">protostr</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">proto</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages/facets_overview/base_generic_feature_statistics_generator.py:121: FutureWarning: Series.ravel is deprecated. The underlying array is already 1D, so ravel is not necessary.  Use `to_numpy()` for conversion to a numpy array instead.
+  flattened = x.ravel()
+</pre></div>
+</div>
+</div>
+</div>
+<p>Display the facets overview visualization for this data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+
+<span class="n">HTML_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.3.3/webcomponents-lite.js&quot;&gt;&lt;/script&gt;</span>
+<span class="s2">        &lt;link rel=&quot;import&quot; href=&quot;https://raw.githubusercontent.com/PAIR-code/facets/1.0.0/facets-dist/facets-jupyter.html&quot; &gt;</span>
+<span class="s2">        &lt;facets-overview id=&quot;elem&quot;&gt;&lt;/facets-overview&gt;</span>
+<span class="s2">        &lt;script&gt;</span>
+<span class="s2">          document.querySelector(&quot;#elem&quot;).protoInput = &quot;</span><span class="si">{protostr}</span><span class="s2">&quot;;</span>
+<span class="s2">        &lt;/script&gt;&quot;&quot;&quot;</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">HTML_TEMPLATE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">protostr</span><span class="o">=</span><span class="n">protostr</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.3.3/webcomponents-lite.js"></script>
+        <link rel="import" href="https://raw.githubusercontent.com/PAIR-code/facets/1.0.0/facets-dist/facets-jupyter.html" >
+        <facets-overview id="elem"></facets-overview>
+        <script>
+          document.querySelector("#elem").protoInput = "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";
+        </script></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">webattack_features</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.1g&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;corr_heatmap.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/32006aec64e41a526a30ca2be2672f301d83d3b52c4567f6a2049304e518946b.png" src="../_images/32006aec64e41a526a30ca2be2672f301d83d3b52c4567f6a2049304e518946b.png" />
+</div>
+</div>
+<p>Remove correlated features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">to_be_removed</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Packet Length Mean&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg Fwd Segment Size&#39;</span><span class="p">,</span> <span class="s1">&#39;Subflow Fwd Bytes&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Fwd Packets/s&#39;</span><span class="p">,</span> <span class="s1">&#39;Fwd IAT Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Fwd IAT Max&#39;</span><span class="p">}</span>
+<span class="n">webattack_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">webattack_features</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">to_be_removed</span><span class="p">]</span>
+<span class="n">webattack_features</span> <span class="o">=</span> <span class="n">webattack_features</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">webattack_features</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Average Packet Size&#39;,
+ &#39;Flow Bytes/s&#39;,
+ &#39;Max Packet Length&#39;,
+ &#39;Fwd IAT Min&#39;,
+ &#39;Fwd Packet Length Mean&#39;,
+ &#39;Total Length of Fwd Packets&#39;,
+ &#39;Flow IAT Mean&#39;,
+ &#39;Fwd Packet Length Max&#39;,
+ &#39;Fwd IAT Std&#39;,
+ &#39;Fwd Header Length&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">webattack_features</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.1g&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/edf8ecb56acedeb9a6111c9b88f6c3c89e1180cf2cec2e12c2e14f49c240bbea.png" src="../_images/edf8ecb56acedeb9a6111c9b88f6c3c89e1180cf2cec2e12c2e14f49c240bbea.png" />
+</div>
+</div>
+</section>
+<section id="hyperparameter-selection">
+<h2>Hyperparameter selection<a class="headerlink" href="#hyperparameter-selection" title="Link to this heading">#</a></h2>
+<p>Reopen the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;web_attacks_balanced.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;BENIGN&#39;</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">webattack_features</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7267, 10) (7267,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If necessary, we will work with our own dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#df = pd.read_csv(&#39;mix_labelled.csv&#39;)</span>
+<span class="c1">#y = df[&#39;Label&#39;].values</span>
+<span class="c1">#X = df[webattack_features]</span>
+<span class="c1">#print(X.shape, y.shape)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We get the list of RandomForestClassifier parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rfc</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">rfc</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;bootstrap&#39;, &#39;ccp_alpha&#39;, &#39;class_weight&#39;, &#39;criterion&#39;, &#39;max_depth&#39;, &#39;max_features&#39;, &#39;max_leaf_nodes&#39;, &#39;max_samples&#39;, &#39;min_impurity_decrease&#39;, &#39;min_samples_leaf&#39;, &#39;min_samples_split&#39;, &#39;min_weight_fraction_leaf&#39;, &#39;monotonic_cst&#39;, &#39;n_estimators&#39;, &#39;n_jobs&#39;, &#39;oob_score&#39;, &#39;random_state&#39;, &#39;verbose&#39;, &#39;warm_start&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>For search of quasi-optimal value of one parameter we fix the others.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+              <span class="s1">&#39;min_samples_leaf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+              <span class="s1">&#39;max_features&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+              <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">]}</span>
+<span class="n">scoring</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span> <span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">gcv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">rfc</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">gcv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">gcv</span><span class="o">.</span><span class="n">cv_results_</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gcv</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">cv_results</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_max_depth</th>
+      <th>param_max_features</th>
+      <th>param_min_samples_leaf</th>
+      <th>param_n_estimators</th>
+      <th>params</th>
+      <th>split0_test_f1</th>
+      <th>...</th>
+      <th>split2_train_accuracy</th>
+      <th>split3_train_accuracy</th>
+      <th>split4_train_accuracy</th>
+      <th>split5_train_accuracy</th>
+      <th>split6_train_accuracy</th>
+      <th>split7_train_accuracy</th>
+      <th>split8_train_accuracy</th>
+      <th>split9_train_accuracy</th>
+      <th>mean_train_accuracy</th>
+      <th>std_train_accuracy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.012530</td>
+      <td>0.001730</td>
+      <td>0.001747</td>
+      <td>0.000314</td>
+      <td>1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>10</td>
+      <td>{'max_depth': 1, 'max_features': 3, 'min_sampl...</td>
+      <td>0.891509</td>
+      <td>...</td>
+      <td>0.914985</td>
+      <td>0.909480</td>
+      <td>0.912691</td>
+      <td>0.912844</td>
+      <td>0.909633</td>
+      <td>0.910105</td>
+      <td>0.906895</td>
+      <td>0.912552</td>
+      <td>0.910830</td>
+      <td>0.002354</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.016174</td>
+      <td>0.000129</td>
+      <td>0.001513</td>
+      <td>0.000062</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+      <td>10</td>
+      <td>{'max_depth': 2, 'max_features': 3, 'min_sampl...</td>
+      <td>0.893939</td>
+      <td>...</td>
+      <td>0.957034</td>
+      <td>0.957187</td>
+      <td>0.957034</td>
+      <td>0.957187</td>
+      <td>0.958104</td>
+      <td>0.953830</td>
+      <td>0.953371</td>
+      <td>0.959486</td>
+      <td>0.956913</td>
+      <td>0.001833</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.019908</td>
+      <td>0.000145</td>
+      <td>0.001543</td>
+      <td>0.000079</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>10</td>
+      <td>{'max_depth': 3, 'max_features': 3, 'min_sampl...</td>
+      <td>0.893939</td>
+      <td>...</td>
+      <td>0.960092</td>
+      <td>0.959633</td>
+      <td>0.959786</td>
+      <td>0.959480</td>
+      <td>0.959786</td>
+      <td>0.955664</td>
+      <td>0.955511</td>
+      <td>0.960098</td>
+      <td>0.959023</td>
+      <td>0.001742</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.022983</td>
+      <td>0.000326</td>
+      <td>0.001557</td>
+      <td>0.000040</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>10</td>
+      <td>{'max_depth': 4, 'max_features': 3, 'min_sampl...</td>
+      <td>0.910000</td>
+      <td>...</td>
+      <td>0.971713</td>
+      <td>0.971713</td>
+      <td>0.971407</td>
+      <td>0.962691</td>
+      <td>0.967890</td>
+      <td>0.968965</td>
+      <td>0.966366</td>
+      <td>0.967436</td>
+      <td>0.968870</td>
+      <td>0.002796</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.024346</td>
+      <td>0.000631</td>
+      <td>0.001577</td>
+      <td>0.000077</td>
+      <td>5</td>
+      <td>3</td>
+      <td>3</td>
+      <td>10</td>
+      <td>{'max_depth': 5, 'max_features': 3, 'min_sampl...</td>
+      <td>0.923457</td>
+      <td>...</td>
+      <td>0.976911</td>
+      <td>0.972324</td>
+      <td>0.969878</td>
+      <td>0.972018</td>
+      <td>0.972630</td>
+      <td>0.969577</td>
+      <td>0.969729</td>
+      <td>0.973399</td>
+      <td>0.972157</td>
+      <td>0.002108</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 59 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://scikit-learn.org/dev/auto_examples/model_selection/plot_multi_metric_evaluation.html</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;GridSearchCV results&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;max_depth&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f1&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;param_max_depth&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">scorer</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">scoring</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">sample</span><span class="p">,</span> <span class="n">style</span> <span class="ow">in</span> <span class="p">((</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)):</span>
+        <span class="n">sample_score_mean</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;mean_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">scorer</span><span class="p">)]</span>
+        <span class="n">sample_score_std</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;std_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">scorer</span><span class="p">)]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">X_axis</span><span class="p">,</span> <span class="n">sample_score_mean</span> <span class="o">-</span> <span class="n">sample_score_std</span><span class="p">,</span>
+                        <span class="n">sample_score_mean</span> <span class="o">+</span> <span class="n">sample_score_std</span><span class="p">,</span>
+                        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span> <span class="k">if</span> <span class="n">sample</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_axis</span><span class="p">,</span> <span class="n">sample_score_mean</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span> <span class="k">if</span> <span class="n">sample</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span> <span class="k">else</span> <span class="mf">0.7</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">scorer</span><span class="p">,</span> <span class="n">sample</span><span class="p">))</span>
+
+    <span class="n">best_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;rank_test_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">scorer</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">best_score</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;mean_test_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">scorer</span><span class="p">][</span><span class="n">best_index</span><span class="p">]</span>
+
+    <span class="c1"># Plot a dotted vertical line at the best score for that scorer marked by x</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">X_axis</span><span class="p">[</span><span class="n">best_index</span><span class="p">],</span> <span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">best_score</span><span class="p">],</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+    <span class="c1"># Annotate the best score for that scorer</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%0.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">best_score</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">X_axis</span><span class="p">[</span><span class="n">best_index</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">best_score</span> <span class="o">+</span> <span class="mf">0.005</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;GridSearchCV_results.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e6bc68e5d51af75f34b15c74c6673f265b2d9e69bf56f6be9f6b7a47a8d708c9.png" src="../_images/e6bc68e5d51af75f34b15c74c6673f265b2d9e69bf56f6be9f6b7a47a8d708c9.png" />
+</div>
+</div>
+</section>
+<section id="final-model">
+<h2>Final model<a class="headerlink" href="#final-model" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5086, 10) (5086,)
+(2181, 10) (2181,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rfc</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">oob_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># rfc = RandomForestClassifier(n_estimators=250, random_state=1)</span>
+<span class="n">rfc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-3 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: black;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-3 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-3 pre {
+  padding: 0;
+}
+
+#sk-container-id-3 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-3 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-3 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-3 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-3 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-3 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-3 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-3 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-3 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-3 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-3 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-3 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-3 label.sk-toggleable__label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#sk-container-id-3 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-3 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-3 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-3 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-3 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-3 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-3 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-3 div.sk-label label.sk-toggleable__label,
+#sk-container-id-3 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-3 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-3 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-3 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-3 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-3 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-3 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-3 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 1ex;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-3 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-3 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-3 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-3 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(max_depth=17, max_features=10, min_samples_leaf=3,
+                       n_estimators=50, oob_score=True, random_state=42)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" checked><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;RandomForestClassifier<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.ensemble.RandomForestClassifier.html">?<span>Documentation for RandomForestClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>RandomForestClassifier(max_depth=17, max_features=10, min_samples_leaf=3,
+                       n_estimators=50, oob_score=True, random_state=42)</pre></div> </div></div></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">importances</span> <span class="o">=</span> <span class="n">rfc</span><span class="o">.</span><span class="n">feature_importances_</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">importances</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indices</span><span class="p">[:</span><span class="mi">10</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="se">\t</span><span class="s1">#</span><span class="si">{}</span><span class="se">\t</span><span class="si">{:.3f}</span><span class="se">\t</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">importances</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.	#2	0.402	Max Packet Length
+2.	#0	0.245	Average Packet Size
+3.	#8	0.129	Fwd IAT Std
+4.	#9	0.054	Fwd Header Length
+5.	#5	0.049	Total Length of Fwd Packets
+6.	#3	0.043	Fwd IAT Min
+7.	#6	0.043	Flow IAT Mean
+8.	#4	0.016	Fwd Packet Length Mean
+9.	#1	0.015	Flow Bytes/s
+10.	#7	0.006	Fwd Packet Length Max
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">rfc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1526,   18],
+       [  40,  597]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn.metrics</span> <span class="k">as</span> <span class="nn">metrics</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy =&#39;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision =&#39;</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall =&#39;</span><span class="p">,</span> <span class="n">recall</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1 =&#39;</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy = 0.973406694176983
+Precision = 0.9707317073170731
+Recall = 0.9372056514913658
+F1 = 0.9536741214057508
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-approbation">
+<h2>Model approbation<a class="headerlink" href="#model-approbation" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;web_attacks_balanced.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;BENIGN&#39;</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">webattack_features</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7267, 10) (7267,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_test</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Average Packet Size</th>
+      <th>Flow Bytes/s</th>
+      <th>Max Packet Length</th>
+      <th>Fwd IAT Min</th>
+      <th>Fwd Packet Length Mean</th>
+      <th>Total Length of Fwd Packets</th>
+      <th>Flow IAT Mean</th>
+      <th>Fwd Packet Length Max</th>
+      <th>Fwd IAT Std</th>
+      <th>Fwd Header Length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>66.250000</td>
+      <td>1.009258e+04</td>
+      <td>98</td>
+      <td>4.0</td>
+      <td>23.0</td>
+      <td>46</td>
+      <td>7.992667e+03</td>
+      <td>23</td>
+      <td>0.0</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>49.714286</td>
+      <td>1.255896e+01</td>
+      <td>48</td>
+      <td>3.0</td>
+      <td>48.0</td>
+      <td>672</td>
+      <td>3.963526e+06</td>
+      <td>48</td>
+      <td>20100000.0</td>
+      <td>304</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>75.000000</td>
+      <td>1.065574e+06</td>
+      <td>90</td>
+      <td>3.0</td>
+      <td>40.0</td>
+      <td>80</td>
+      <td>8.133333e+01</td>
+      <td>40</td>
+      <td>0.0</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>80.000000</td>
+      <td>1.326923e+06</td>
+      <td>94</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>88</td>
+      <td>6.933333e+01</td>
+      <td>44</td>
+      <td>0.0</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>88.500000</td>
+      <td>5.745894e+03</td>
+      <td>91</td>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>43</td>
+      <td>2.332100e+04</td>
+      <td>43</td>
+      <td>0.0</td>
+      <td>32</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">seconds</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">rfc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total operation time:&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">seconds</span><span class="p">,</span> <span class="s2">&quot;seconds&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Benign records detected (0), attacks detected (1):&quot;</span><span class="p">)</span>
+<span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total operation time: 0.013282537460327148 seconds
+Benign records detected (0), attacks detected (1):
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: 5139, 1: 2128}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Confusion matrix:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  0  1 - predicted value (Wikipedia uses different convention for axes)
+0 TN FP
+1 FN TP
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[5044,   43],
+       [  95, 2085]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy =&#39;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision =&#39;</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall =&#39;</span><span class="p">,</span> <span class="n">recall</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1 =&#39;</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy = 0.981010045410761
+Precision = 0.9797932330827067
+Recall = 0.9564220183486238
+F1 = 0.967966573816156
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predict</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Predict&#39;</span><span class="p">:</span> <span class="n">rfc</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)})</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Label&#39;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">})</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">predict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="s2">&quot;The following is point that are predicted to be intrusion (anomaly)&quot;</span><span class="p">)</span>
+<span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;Predict&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;The following is point that are predicted to be intrusion (anomaly)&#39;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Average Packet Size</th>
+      <th>Flow Bytes/s</th>
+      <th>Max Packet Length</th>
+      <th>Fwd IAT Min</th>
+      <th>Fwd Packet Length Mean</th>
+      <th>Total Length of Fwd Packets</th>
+      <th>Flow IAT Mean</th>
+      <th>Fwd Packet Length Max</th>
+      <th>Fwd IAT Std</th>
+      <th>Fwd Header Length</th>
+      <th>Label</th>
+      <th>Predict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>122</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>4.400000e+01</td>
+      <td>0</td>
+      <td>0.000000e+00</td>
+      <td>32</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>444</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>8.100000e+01</td>
+      <td>0</td>
+      <td>0.000000e+00</td>
+      <td>32</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>448</th>
+      <td>218.454545</td>
+      <td>478.624430</td>
+      <td>1066</td>
+      <td>18.0</td>
+      <td>139.000000</td>
+      <td>973</td>
+      <td>5.020638e+05</td>
+      <td>565</td>
+      <td>2.021330e+06</td>
+      <td>232</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>512</th>
+      <td>618.150000</td>
+      <td>7589.090322</td>
+      <td>5330</td>
+      <td>195.0</td>
+      <td>178.750000</td>
+      <td>2145</td>
+      <td>8.573942e+04</td>
+      <td>566</td>
+      <td>4.370286e+05</td>
+      <td>392</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>514</th>
+      <td>549.319149</td>
+      <td>1206.155288</td>
+      <td>2896</td>
+      <td>705.0</td>
+      <td>211.678571</td>
+      <td>5927</td>
+      <td>4.653305e+05</td>
+      <td>561</td>
+      <td>1.474704e+06</td>
+      <td>904</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>6790</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>4.100000e+01</td>
+      <td>0</td>
+      <td>0.000000e+00</td>
+      <td>32</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6814</th>
+      <td>105.666667</td>
+      <td>62.519533</td>
+      <td>507</td>
+      <td>16146.0</td>
+      <td>101.400000</td>
+      <td>507</td>
+      <td>1.901406e+06</td>
+      <td>507</td>
+      <td>4.964304e+06</td>
+      <td>168</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6826</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>5.000000e+01</td>
+      <td>0</td>
+      <td>0.000000e+00</td>
+      <td>32</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6827</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>8.100000e+01</td>
+      <td>0</td>
+      <td>0.000000e+00</td>
+      <td>32</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7007</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>7.900000e+01</td>
+      <td>0</td>
+      <td>0.000000e+00</td>
+      <td>32</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>2128 rows × 12 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="s2">&quot;The following is point that are predicted to be genuine&quot;</span><span class="p">)</span>
+<span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;Predict&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;The following is point that are predicted to be genuine&#39;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Average Packet Size</th>
+      <th>Flow Bytes/s</th>
+      <th>Max Packet Length</th>
+      <th>Fwd IAT Min</th>
+      <th>Fwd Packet Length Mean</th>
+      <th>Total Length of Fwd Packets</th>
+      <th>Flow IAT Mean</th>
+      <th>Fwd Packet Length Max</th>
+      <th>Fwd IAT Std</th>
+      <th>Fwd Header Length</th>
+      <th>Label</th>
+      <th>Predict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>66.250000</td>
+      <td>1.009258e+04</td>
+      <td>98</td>
+      <td>4.0</td>
+      <td>23.0</td>
+      <td>46</td>
+      <td>7.992667e+03</td>
+      <td>23</td>
+      <td>0.0</td>
+      <td>64</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>49.714286</td>
+      <td>1.255896e+01</td>
+      <td>48</td>
+      <td>3.0</td>
+      <td>48.0</td>
+      <td>672</td>
+      <td>3.963526e+06</td>
+      <td>48</td>
+      <td>20100000.0</td>
+      <td>304</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>75.000000</td>
+      <td>1.065574e+06</td>
+      <td>90</td>
+      <td>3.0</td>
+      <td>40.0</td>
+      <td>80</td>
+      <td>8.133333e+01</td>
+      <td>40</td>
+      <td>0.0</td>
+      <td>28</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>80.000000</td>
+      <td>1.326923e+06</td>
+      <td>94</td>
+      <td>49.0</td>
+      <td>44.0</td>
+      <td>88</td>
+      <td>6.933333e+01</td>
+      <td>44</td>
+      <td>0.0</td>
+      <td>64</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>88.500000</td>
+      <td>5.745894e+03</td>
+      <td>91</td>
+      <td>0.0</td>
+      <td>43.0</td>
+      <td>43</td>
+      <td>2.332100e+04</td>
+      <td>43</td>
+      <td>0.0</td>
+      <td>32</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>7262</th>
+      <td>9.000000</td>
+      <td>1.237113e+05</td>
+      <td>6</td>
+      <td>97.0</td>
+      <td>6.0</td>
+      <td>12</td>
+      <td>9.700000e+01</td>
+      <td>6</td>
+      <td>0.0</td>
+      <td>40</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7263</th>
+      <td>28.750000</td>
+      <td>6.013072e+05</td>
+      <td>23</td>
+      <td>0.0</td>
+      <td>23.0</td>
+      <td>46</td>
+      <td>5.100000e+01</td>
+      <td>23</td>
+      <td>0.0</td>
+      <td>64</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7264</th>
+      <td>28.750000</td>
+      <td>4.693878e+05</td>
+      <td>23</td>
+      <td>49.0</td>
+      <td>23.0</td>
+      <td>46</td>
+      <td>6.533333e+01</td>
+      <td>23</td>
+      <td>0.0</td>
+      <td>64</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7265</th>
+      <td>9.000000</td>
+      <td>1.304348e+05</td>
+      <td>6</td>
+      <td>92.0</td>
+      <td>6.0</td>
+      <td>12</td>
+      <td>9.200000e+01</td>
+      <td>6</td>
+      <td>0.0</td>
+      <td>40</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7266</th>
+      <td>93.000000</td>
+      <td>2.530612e+06</td>
+      <td>62</td>
+      <td>49.0</td>
+      <td>62.0</td>
+      <td>124</td>
+      <td>4.900000e+01</td>
+      <td>62</td>
+      <td>0.0</td>
+      <td>64</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5139 rows × 12 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Module_4_Unsupervised_Learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Module 4</strong>: Unsupervised Learning</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-anomaly-detection-in-cyber-security">Why do we need anomaly detection in Cyber Security?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technical-explanation">Technical Explanation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-time-anomaly-detection">Real-Time Anomaly Detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-detecting-intrusion-with-machine-learning">Case Study: Detecting Intrusion with Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#undersampling-against-unbalance">Undersampling against unbalance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-data-for-training">Preparing data for training</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance">Feature importance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-of-the-decision-tree-importance-evaluation-using-a-single-tree-decisiontreeclassifier">Visualization of the decision tree, importance evaluation using a single tree (DecisionTreeClassifier)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-evaluation-using-selectfrommodel">Importance evaluation using SelectFromModel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-importance-using-randomforestclassifier-feature-importances">Evaluation of importance using RandomForestClassifier.feature_importances_</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-selected-features">Analysis of selected features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-selection">Hyperparameter selection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-model">Final model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-approbation">Model approbation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By WSU Staffs
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

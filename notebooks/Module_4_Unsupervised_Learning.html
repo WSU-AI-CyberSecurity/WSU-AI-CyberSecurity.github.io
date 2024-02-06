@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c72df8c4" />
@@ -382,7 +382,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-and-segmentation">Clustering and Segmentation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anomaly-detection-in-cybersecurity">Anomaly Detection in Cybersecurity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-unsupervised-learning">Introduction to unsupervised learning</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-machine-learning">Types of machine learning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-we-learn-without-targets">Can we learn without targets?</a></li>
@@ -425,8 +424,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#important-points-to-remember">Important points to remember</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-after-this-is-optional">Everything after this is optional!</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-introduction-to-gaussian-mixture-models-high-level">(Optional) Introduction to Gaussian mixture models (high-level)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-look-at-a-different-clustering-method">Let’s look at a different Clustering method!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-gaussian-mixture-models-high-level">Introduction to Gaussian mixture models (high-level)</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-it-work-high-level">How does it work? (high-level)</a></li>
 </ul>
 </li>
@@ -456,17 +455,26 @@ document.write(`
     <img style="max-width: 670px" src="https://www.researchgate.net/publication/351953193/figure/fig3/AS:11431281117150742@1675395484096/Supervised-and-unsupervised-machine-learning-a-Schematic-representation-of-an.png" />
 </center>
 <p>Segmentation, an outcome of effective clustering, provides a methodical breakdown of the overall system into distinct components or segments. In the cybersecurity realm, this segmentation is akin to carving out meaningful partitions within network behavior. Each segment encapsulates entities or activities that share specific attributes, allowing for a more granular understanding of the cybersecurity landscape.</p>
-</section>
-<section id="anomaly-detection-in-cybersecurity">
-<h2>Anomaly Detection in Cybersecurity<a class="headerlink" href="#anomaly-detection-in-cybersecurity" title="Link to this heading">#</a></h2>
-<p>Anomaly detection helps to uncover deviations from established patterns and fortify digital defenses. Anomaly detection involves identifying patterns or instances that deviate significantly from the norm. Unsupervised learning excels in this domain by autonomously recognizing anomalies without the need for pre-labeled training data. In cybersecurity, anomalies could range from unusual user behavior to atypical network activities, providing early indicators of potential security breaches.</p>
-<center>
-    <img style="max-width: 470px" src="https://media.licdn.com/dms/image/C5612AQFPczSrydHgXw/article-cover_image-shrink_600_2000/0/1613603083048?e=2147483647&v=beta&t=R1tKe4HBlrjXPlVy4TdsvT6b0Zsj1XN3TwnzB9lv7fQ" />
-</center>
-<p>Anomaly detection provides users the ability to identify activities that stand out from established baselines. These anomalies may signify malicious intent, unauthorized access, or the presence of security threats. Leveraging unsupervised learning techniques, cybersecurity professionals can proactively detect irregularities that might otherwise go unnoticed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">![</span><span class="w"> </span>-d<span class="w"> </span>wsu_workshop_utils<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/wsu-ai-cyberSecurity/wsu_workshop_utils
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>mglearn<span class="w"> </span>plotly<span class="w"> </span>yellowbrick
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -474,12 +482,10 @@ document.write(`
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">),</span> <span class="s2">&quot;code&quot;</span><span class="p">))</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-<span class="kn">from</span> <span class="nn">plotting_functions</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">plotting_functions_unsup</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">wsu_workshop_utils.plotting</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cluster</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">metrics</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
 
@@ -491,6 +497,9 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/015c430b4f664d244d75a42888eeaa03e1a94fb01de761e7d7f0a79a232587de.png" src="../_images/015c430b4f664d244d75a42888eeaa03e1a94fb01de761e7d7f0a79a232587de.png" />
 </div>
 </div>
 </section>
@@ -579,8 +588,8 @@ document.write(`
                 <td></td>
             </tr>
             <tr>
-                <td>$x_1$</td>
-                <td>$y$</td>
+                <td>x<sub>1</sub></td>
+                <td>y</td>
             </tr>
             <tr>
                 <td> 101.0
@@ -611,9 +620,9 @@ document.write(`
                 <td></td>
             </tr>
             <tr>
-                <td>$x_1$</td>
-                <td>$x_2$</td>
-                <td>$y$</td>
+                <td>x<sub>1</sub></td>
+                <td>x<sub>2</sub></td>
+                <td>y</td>
             </tr>
             <tr>
                 <td> -2.68
@@ -655,7 +664,7 @@ document.write(`
                 <td></td>
             </tr>
             <tr>
-                <td>$x_1$</td>
+                <td>x<sub>1</sub></td>
             </tr>
             <tr>
                 <td> 101.0
@@ -681,8 +690,8 @@ document.write(`
                 <td></td>
             </tr>
             <tr>
-                <td>$x_1$</td>
-                <td>$x_2$</td>
+                <td>x<sub>1</sub></td>
+                <td>x<sub>2</sub></td>
             </tr>
             <tr>
                 <td> -2.68
@@ -735,7 +744,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a8234f47f5f7fa41758e61b07c3d96686ae04773476cccfff668e67d40bedc70.png" src="../_images/a8234f47f5f7fa41758e61b07c3d96686ae04773476cccfff668e67d40bedc70.png" />
+<img alt="../_images/491e4af2d038489cf80d857913d9bea9f55a3b3f58ceb7f5705e0ae96a541223.png" src="../_images/491e4af2d038489cf80d857913d9bea9f55a3b3f58ceb7f5705e0ae96a541223.png" />
 </div>
 </div>
 <ul class="simple">
@@ -801,7 +810,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/00bf715d0b658e6c60f2bf382cbd65ca438f24e12f3b65c03fc1d982207d1c71.png" src="../_images/00bf715d0b658e6c60f2bf382cbd65ca438f24e12f3b65c03fc1d982207d1c71.png" />
+<img alt="../_images/b9ec6091c204d800eb86575318f39a996c1855e9bab80c3cc50704d16381afc9.png" src="../_images/b9ec6091c204d800eb86575318f39a996c1855e9bab80c3cc50704d16381afc9.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -866,7 +875,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c065fe3a49cf2d04430b3314189fd9ac9d5ae13d21eb86b95b513b7f58f3a1d3.png" src="../_images/c065fe3a49cf2d04430b3314189fd9ac9d5ae13d21eb86b95b513b7f58f3a1d3.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f922d503760&gt;,
+ &lt;matplotlib.lines.Line2D at 0x7f922d503190&gt;,
+ &lt;matplotlib.lines.Line2D at 0x7f922d503f10&gt;]
+</pre></div>
+</div>
+<img alt="../_images/269256e84ed9365c5d41cf090eba4f0eff4ff8de845f26dddadcd5aea3d1f602.png" src="../_images/269256e84ed9365c5d41cf090eba4f0eff4ff8de845f26dddadcd5aea3d1f602.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -903,7 +917,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c38a0579c671ffa65d64ec0549d5a01b9d41837ef8fe6f2be6964394f340dd6a.png" src="../_images/c38a0579c671ffa65d64ec0549d5a01b9d41837ef8fe6f2be6964394f340dd6a.png" />
+<img alt="../_images/e73bc9c6552867783d63be9d76ef7889cf64a1e82411ad18bf91e1beabce5da3.png" src="../_images/e73bc9c6552867783d63be9d76ef7889cf64a1e82411ad18bf91e1beabce5da3.png" />
 </div>
 </div>
 </section>
@@ -950,7 +964,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d6269b2d460cd8e42780456d76e3f063e7292ca0c34c0032ba545284f3fd2b59.png" src="../_images/d6269b2d460cd8e42780456d76e3f063e7292ca0c34c0032ba545284f3fd2b59.png" />
+<img alt="../_images/8e37e434ee9360aed6095d990a09143427a1dda1f1743d4f46590bf2bf9e8cd2.png" src="../_images/8e37e434ee9360aed6095d990a09143427a1dda1f1743d4f46590bf2bf9e8cd2.png" />
 </div>
 </div>
 </section>
@@ -970,7 +984,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c9495439dc25c5a04ef4ab6992d23b02570be4a5edc61349e817c03186de6a7b.png" src="../_images/c9495439dc25c5a04ef4ab6992d23b02570be4a5edc61349e817c03186de6a7b.png" />
+<img alt="../_images/052a4a8256e307ff35fc66cd57454ffba2c432907a366fdd040522863e3a11b4.png" src="../_images/052a4a8256e307ff35fc66cd57454ffba2c432907a366fdd040522863e3a11b4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -984,7 +998,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/09bec8ab7f20748d894fe4cdce1ad473469ec2a8470cf996c7b308d2ebf371ad.png" src="../_images/09bec8ab7f20748d894fe4cdce1ad473469ec2a8470cf996c7b308d2ebf371ad.png" />
+<img alt="../_images/4cc55735b57d0ae1765370b6cc7e625477f409cd9336605b5667fb5179c7a663.png" src="../_images/4cc55735b57d0ae1765370b6cc7e625477f409cd9336605b5667fb5179c7a663.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -998,7 +1012,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/01e11e8be900d969a6e02431588b055fa52489278106b62767dd7d00c4bc4b0b.png" src="../_images/01e11e8be900d969a6e02431588b055fa52489278106b62767dd7d00c4bc4b0b.png" />
+<img alt="../_images/aa6440ed25591b29937cdbce0615326bcd4bf001d6bf2b250fe2ebda8adeef99.png" src="../_images/aa6440ed25591b29937cdbce0615326bcd4bf001d6bf2b250fe2ebda8adeef99.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1012,7 +1026,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8e4dd13498113ba98dea0fdca0896b96a345185df3c5197df6c3fea7af8e48aa.png" src="../_images/8e4dd13498113ba98dea0fdca0896b96a345185df3c5197df6c3fea7af8e48aa.png" />
+<img alt="../_images/f389d729f24fd6ba58a0175504ecd59eedd05a56aa5ba7b7f194c5a270b9cf18.png" src="../_images/f389d729f24fd6ba58a0175504ecd59eedd05a56aa5ba7b7f194c5a270b9cf18.png" />
 </div>
 </div>
 </section>
@@ -1031,7 +1045,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/69edbe48e394aa12fb4657e5cec1f60046e443555bade84c65696236366225aa.png" src="../_images/69edbe48e394aa12fb4657e5cec1f60046e443555bade84c65696236366225aa.png" />
+<img alt="../_images/e9258028eb31151265b18671c7837c807b0c073f1a73291ce4d9d152e5ff9ac5.png" src="../_images/e9258028eb31151265b18671c7837c807b0c073f1a73291ce4d9d152e5ff9ac5.png" />
 </div>
 </div>
 </section>
@@ -1053,7 +1067,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ea06cfa75be6b110de19c184dfca41fd08f68bf414175e62b233a610a725998e.png" src="../_images/ea06cfa75be6b110de19c184dfca41fd08f68bf414175e62b233a610a725998e.png" />
+<img alt="../_images/cae59f4b948fe22dc566c3565e3166b3a6a4283b2c3b59c8d49923c74a33dacf.png" src="../_images/cae59f4b948fe22dc566c3565e3166b3a6a4283b2c3b59c8d49923c74a33dacf.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1076,7 +1090,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/73252c542d5e1c09b4089c4eba4365f46209b305f35e72dc507fb8db6badf9d9.png" src="../_images/73252c542d5e1c09b4089c4eba4365f46209b305f35e72dc507fb8db6badf9d9.png" />
+<img alt="../_images/383078b9b2a98d337fd68cc3757af7c26dd1d936b42049a0cfae71c8a100fa25.png" src="../_images/383078b9b2a98d337fd68cc3757af7c26dd1d936b42049a0cfae71c8a100fa25.png" />
 </div>
 </div>
 </section>
@@ -1092,7 +1106,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d1a1e521c64a868344d94c856fd24daa70fcd622429c1c5159880fb73ebd075a.png" src="../_images/d1a1e521c64a868344d94c856fd24daa70fcd622429c1c5159880fb73ebd075a.png" />
+<img alt="../_images/5dd0a48e3145ad0ecb689f804a5f39b4737f8a79bf655d2d468ed9ad1159d9de.png" src="../_images/5dd0a48e3145ad0ecb689f804a5f39b4737f8a79bf655d2d468ed9ad1159d9de.png" />
 </div>
 </div>
 </section>
@@ -1146,7 +1160,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/26951f8df1516669e8847ce366f37f2ed1fe5de0b217a84a2bdf4a1b786c3603.png" src="../_images/26951f8df1516669e8847ce366f37f2ed1fe5de0b217a84a2bdf4a1b786c3603.png" />
+<img alt="../_images/a904fe086c8cd02c8e303f3a4d9256112ec759e35a5e178a5d97405b131ef8ce.png" src="../_images/a904fe086c8cd02c8e303f3a4d9256112ec759e35a5e178a5d97405b131ef8ce.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1272,7 +1286,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3e0cecdbc0ea8f4181b3f8a46d36b51bdf09a31bdae4a0db6b66eacbb1bcf58b.png" src="../_images/3e0cecdbc0ea8f4181b3f8a46d36b51bdf09a31bdae4a0db6b66eacbb1bcf58b.png" />
+<img alt="../_images/00fa2c8b75c7332d379aaf284069086937ceb74166d3d57b856af2ff5a2dfe8b.png" src="../_images/00fa2c8b75c7332d379aaf284069086937ceb74166d3d57b856af2ff5a2dfe8b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1280,9 +1294,6 @@ document.write(`
 <li><p>The inertia decreases when clusters are greater than 3. However it’s not a big improvement and so we prefer K=3.</p></li>
 <li><p>In this toy example, it’s the plot is kind of clear and easy to interpret but it can be hard to interpret in real life examples.</p></li>
 </ul>
-<p>There is a package called <a class="reference external" href="https://www.scikit-yb.org/en/latest/api/cluster/elbow.html"><code class="docutils literal notranslate"><span class="pre">yellowbrick</span></code></a> which can be used to create these plots conveniently.</p>
-<p>You can install it as follows:</p>
-<p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">districtdatalabs</span> <span class="pre">yellowbrick</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">yellowbrick.cluster</span> <span class="kn">import</span> <span class="n">KElbowVisualizer</span>
@@ -1296,7 +1307,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9396c7d3a177ae331f077f955ed8c405c0f497c8d591946844e1072c778f05ca.png" src="../_images/9396c7d3a177ae331f077f955ed8c405c0f497c8d591946844e1072c778f05ca.png" />
+<img alt="../_images/cea5279bb21e4fe7f1d84762ec59c9f3ddb110d66144130a04a4d3a359ca698c.png" src="../_images/cea5279bb21e4fe7f1d84762ec59c9f3ddb110d66144130a04a4d3a359ca698c.png" />
 </div>
 </div>
 </section>
@@ -1324,7 +1335,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2efc6f401c13a509dc0f2b08a5777096521278719e192970084f17f24073569c.png" src="../_images/2efc6f401c13a509dc0f2b08a5777096521278719e192970084f17f24073569c.png" />
+<img alt="../_images/672dbcf9f2c135c00341c9a1fbdf902a22921b78b2fa7d0397be3930fc2baac0.png" src="../_images/672dbcf9f2c135c00341c9a1fbdf902a22921b78b2fa7d0397be3930fc2baac0.png" />
 </div>
 </div>
 </section>
@@ -1341,7 +1352,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2efc6f401c13a509dc0f2b08a5777096521278719e192970084f17f24073569c.png" src="../_images/2efc6f401c13a509dc0f2b08a5777096521278719e192970084f17f24073569c.png" />
+<img alt="../_images/672dbcf9f2c135c00341c9a1fbdf902a22921b78b2fa7d0397be3930fc2baac0.png" src="../_images/672dbcf9f2c135c00341c9a1fbdf902a22921b78b2fa7d0397be3930fc2baac0.png" />
 </div>
 </div>
 </section>
@@ -1383,7 +1394,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1f1f9508e41b31539355ba88f76d0a9129ac89693a4f6cfa0b3c5a75c556dc28.png" src="../_images/1f1f9508e41b31539355ba88f76d0a9129ac89693a4f6cfa0b3c5a75c556dc28.png" />
+<img alt="../_images/9679eab39cd9235b53e9abcd6507e1716e5051e2164429d899f3388019dd88c4.png" src="../_images/9679eab39cd9235b53e9abcd6507e1716e5051e2164429d899f3388019dd88c4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1396,7 +1407,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5eb2ae796764111a78cdea15ac2c0a5d48c0ee18b2db105c8c9c6b78e96a9aa9.png" src="../_images/5eb2ae796764111a78cdea15ac2c0a5d48c0ee18b2db105c8c9c6b78e96a9aa9.png" />
+<img alt="../_images/f723001dcfc521e2983b60a350f178f757125c98e4b955ab94fa7dc12bc812c5.png" src="../_images/f723001dcfc521e2983b60a350f178f757125c98e4b955ab94fa7dc12bc812c5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1409,7 +1420,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7eda68de852c98ec305187dc51909f6ac63988c3b03f3dec6d66d831ec5401e1.png" src="../_images/7eda68de852c98ec305187dc51909f6ac63988c3b03f3dec6d66d831ec5401e1.png" />
+<img alt="../_images/21fff8e7d07b564e32d9995f0c4906d89b8a7f28b1c3fcfd9767db7a611fa39e.png" src="../_images/21fff8e7d07b564e32d9995f0c4906d89b8a7f28b1c3fcfd9767db7a611fa39e.png" />
 </div>
 </div>
 </section>
@@ -1446,14 +1457,14 @@ document.write(`
 </ul>
 </section>
 </section>
-<section id="everything-after-this-is-optional">
-<h2>Everything after this is optional!<a class="headerlink" href="#everything-after-this-is-optional" title="Link to this heading">#</a></h2>
-<section id="optional-introduction-to-gaussian-mixture-models-high-level">
-<h3>(Optional) Introduction to Gaussian mixture models (high-level)<a class="headerlink" href="#optional-introduction-to-gaussian-mixture-models-high-level" title="Link to this heading">#</a></h3>
+<section id="let-s-look-at-a-different-clustering-method">
+<h2>Let’s look at a different Clustering method!<a class="headerlink" href="#let-s-look-at-a-different-clustering-method" title="Link to this heading">#</a></h2>
+<section id="introduction-to-gaussian-mixture-models-high-level">
+<h3>Introduction to Gaussian mixture models (high-level)<a class="headerlink" href="#introduction-to-gaussian-mixture-models-high-level" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>K-Means is great but it cannot handle oddly shaped clusters.</p></li>
 <li><p>In K-Means our clusters are solely defined by cluster centers.</p></li>
-<li><p>Let’s look at a toy example.</p></li>
+<li><p>Let’s look at a toy example. We will generate a sample cluster with multivariate normal distribution</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1483,7 +1494,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8d5d157c16f876f9357cb477be02a88cfdf6d23aaeb2c3cd1223ca6f2daab270.png" src="../_images/8d5d157c16f876f9357cb477be02a88cfdf6d23aaeb2c3cd1223ca6f2daab270.png" />
+<img alt="../_images/d9d731e4de6e2c94b134648eda4dfa885872f27d2401b9e17f1136f49603b3bb.png" src="../_images/d9d731e4de6e2c94b134648eda4dfa885872f27d2401b9e17f1136f49603b3bb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1496,7 +1507,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12d7a5034034535dda2e0c23da9ab71dfac28c873e829437b93514d8d5dcf199.png" src="../_images/12d7a5034034535dda2e0c23da9ab71dfac28c873e829437b93514d8d5dcf199.png" />
+<img alt="../_images/e8e90a69bfa52fe85c786978a1ddbd82e15c6555cb4bdbb6c81f954ed658fc31.png" src="../_images/e8e90a69bfa52fe85c786978a1ddbd82e15c6555cb4bdbb6c81f954ed658fc31.png" />
 </div>
 </div>
 <ul class="simple">
@@ -1536,7 +1547,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/de4db50ea26d97a5766e380d8d2b75169f037edab8c5f5d70886e2683a24f707.png" src="../_images/de4db50ea26d97a5766e380d8d2b75169f037edab8c5f5d70886e2683a24f707.png" />
+<img alt="../_images/333b46b898e4709af2817f7e3de486ca2a94db1427954e411e596098fd4752e4.png" src="../_images/333b46b898e4709af2817f7e3de486ca2a94db1427954e411e596098fd4752e4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1625,7 +1636,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f9047171e05c065eee30cb6acf81e00182fb5164c73a00e081e5050e2201df09.png" src="../_images/f9047171e05c065eee30cb6acf81e00182fb5164c73a00e081e5050e2201df09.png" />
+<img alt="../_images/d3c406ca7de017d27b4b3bf0bb76f00c1366d25c0c1b79c22ad61c416bf41ac9.png" src="../_images/d3c406ca7de017d27b4b3bf0bb76f00c1366d25c0c1b79c22ad61c416bf41ac9.png" />
 </div>
 </div>
 <p>The goal is to estimate <span class="math notranslate nohighlight">\(\pi_k\)</span>, <span class="math notranslate nohighlight">\(\mu_k\)</span>, <span class="math notranslate nohighlight">\(\Sigma_k\)</span> for all clusters or components <span class="math notranslate nohighlight">\(k\)</span>.</p>
@@ -1670,7 +1681,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6d1b2d601f8f96651e90a35da19c751b9a04e3ba645a64416198b7536e71b70c.png" src="../_images/6d1b2d601f8f96651e90a35da19c751b9a04e3ba645a64416198b7536e71b70c.png" />
+<img alt="../_images/cf3b4675ddce7e31bf5be2f7fc700602962b648db0d6a42d48e7df8af8caa739.png" src="../_images/cf3b4675ddce7e31bf5be2f7fc700602962b648db0d6a42d48e7df8af8caa739.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1801,7 +1812,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c60471f3403eeee2e519cb2d022eb285ec7f27182314d8a5e811e3a9be6bd309.png" src="../_images/c60471f3403eeee2e519cb2d022eb285ec7f27182314d8a5e811e3a9be6bd309.png" />
+<img alt="../_images/e6c80049dbbd258b0b958a120956de4ea837a3ddd2ad248cd07f668b354c6bbe.png" src="../_images/e6c80049dbbd258b0b958a120956de4ea837a3ddd2ad248cd07f668b354c6bbe.png" />
 </div>
 </div>
 <p><strong>Clustering with Gaussian mixture models</strong></p>
@@ -1826,16 +1837,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "conda-env-cpsc330-py"
+            mode: "python"
         },
         kernelOptions: {
-            name: "conda-env-cpsc330-py",
+            name: "python3",
             path: "./notebooks"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'conda-env-cpsc330-py'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -1882,7 +1893,6 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-and-segmentation">Clustering and Segmentation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anomaly-detection-in-cybersecurity">Anomaly Detection in Cybersecurity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-unsupervised-learning">Introduction to unsupervised learning</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-machine-learning">Types of machine learning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-we-learn-without-targets">Can we learn without targets?</a></li>
@@ -1925,8 +1935,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#important-points-to-remember">Important points to remember</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-after-this-is-optional">Everything after this is optional!</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-introduction-to-gaussian-mixture-models-high-level">(Optional) Introduction to Gaussian mixture models (high-level)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-look-at-a-different-clustering-method">Let’s look at a different Clustering method!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-gaussian-mixture-models-high-level">Introduction to Gaussian mixture models (high-level)</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-it-work-high-level">How does it work? (high-level)</a></li>
 </ul>
 </li>

@@ -380,7 +380,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tunning-a-model-for-cyber-security">Fine-tunning a model for Cyber Security</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-securebret">Case Study: SecureBret</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-llms-as-conversational-model">Using LLMs as Conversational Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-llms-as-offensive-generative-ai">Using LLMs as Offensive Generative AI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offensive-generative-ai-model">Offensive Generative AI Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-model-for-cracking-password">Generative model for cracking password</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passgpt">PassGPT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-behaviour-of-human-s-password-creation">Learning the behaviour of human’s password creation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-password-generation">Conditional Password Generation</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -496,7 +503,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of the model checkpoint at ehsanaghaei/SecureBERT were not used when initializing RobertaModel: [&#39;lm_head.layer_norm.weight&#39;, &#39;lm_head.dense.bias&#39;, &#39;lm_head.bias&#39;, &#39;lm_head.layer_norm.bias&#39;, &#39;lm_head.dense.weight&#39;]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of the model checkpoint at ehsanaghaei/SecureBERT were not used when initializing RobertaModel: [&#39;lm_head.layer_norm.bias&#39;, &#39;lm_head.bias&#39;, &#39;lm_head.layer_norm.weight&#39;, &#39;lm_head.dense.bias&#39;, &#39;lm_head.dense.weight&#39;]
 - This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
 - This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
 Some weights of RobertaModel were not initialized from the model checkpoint at ehsanaghaei/SecureBERT and are newly initialized: [&#39;roberta.pooler.dense.weight&#39;, &#39;roberta.pooler.dense.bias&#39;]
@@ -582,68 +589,235 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 <div class="output text_html"><b>Input:</b> A <&zwj;mask> injection occurs when an attacker inserts malicious code into a server</div><div class="output text_html"><b>SecureBert:</b> code | SQL | command | malicious | script | web | vulnerability | server | ql | SQL</div></div>
 </div>
 </section>
-<section id="using-llms-as-conversational-model">
-<h2>Using LLMs as Conversational Model<a class="headerlink" href="#using-llms-as-conversational-model" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">Conversation</span>
-
-<span class="n">converse</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;conversational&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;facebook/blenderbot-400M-distill&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>A Conversational Language Model (also known as Casual Language Model) is a type of language model designed to generate human-like responses in a conversational context. These models aim to understand and generate text in a way that simulates natural conversation. The main differences between conversational language model and our previous masked model are:</p>
-<ul>
-<li><p><strong>Context-Awareness</strong></p>
-<p>Conversational language models are designed to be context-aware, meaning they consider the preceding dialogue to generate relevant and coherent responses. They often utilize context from the conversation history to understand the user’s intent and provide more accurate replies.</p>
-</li>
-<li><p><strong>Sequential Processing</strong></p>
-<p>Conversational models process input sequentially, considering the conversation history turn by turn. This sequential nature enables them to generate responses based on the evolving context.</p>
-</li>
-<li><p><strong>Long-Term Dependency</strong></p>
-<p>Effective conversational models need to capture long-term dependencies in the conversation. They should remember important information and references from earlier turns to provide meaningful and contextually appropriate responses.</p>
-</li>
-<li><p><strong>User Intent Recognition</strong></p>
-<p>Understanding user intent is crucial in conversational language models. These models often incorporate intent recognition mechanisms to identify the user’s goals, queries, or commands from the input text.</p>
-</li>
-<li><p><strong>Dynamic Context Handling</strong></p>
-<p>Conversational models dynamically update their understanding of the conversation as new information is provided. This dynamic context handling allows them to adapt to changes in user queries or context shifts during the conversation.</p>
-</li>
-<li><p><strong>Ethical Considerations</strong></p>
-<p>Conversational language models should be designed with ethical considerations in mind. This includes addressing biases, preventing the generation of inappropriate or harmful content, and ensuring responsible use of the technology.</p>
-</li>
+<section id="using-llms-as-offensive-generative-ai">
+<h2>Using LLMs as Offensive Generative AI<a class="headerlink" href="#using-llms-as-offensive-generative-ai" title="Link to this heading">#</a></h2>
+</section>
+<section id="offensive-generative-ai-model">
+<h2>Offensive Generative AI Model<a class="headerlink" href="#offensive-generative-ai-model" title="Link to this heading">#</a></h2>
+<p>Offensive security is the practice of actively seeking out vulnerabilities in an organization’s cybersecurity. It often involves using similar tactics as attackers and might include red teaming, penetration testing and vulnerability assessments. Offensive security can be shortened to “OffSec.”</p>
+<p>Offensive generative AI refers natural language processing (NLP) and machine learning techniques, that are designed or trained to produce content that is offensive, harmful, or inappropriate in some way. This content could include hate speech, derogatory language, violent or threatening messages, misinformation, or other forms of harmful content. Malicious AI can weaponising generative AI to improve the monetisation of their attacks, which will stem from a surge in ransomware attacks and phishing campaigns.</p>
+<p><img alt="image.png" src="https://canalys-prod-public.s3.eu-west-1.amazonaws.com/client/static/uimages/7Xb9lz2jbGfvTH1TJcfoGuID7VNqyocPICtqhesEJqerayYVsmLORCMJb1BQNSKC.png" /></p>
+<p>Such AI systems can pose significant ethical and societal challenges. They have the potential to spread harmful messages at scale, amplify existing biases and prejudices present in the training data, and contribute to the proliferation of toxic online environments. Offensive generative AI can be used maliciously by individuals or groups to harass others, manipulate public opinion, or undermine trust in information sources.</p>
+<section id="generative-model-for-cracking-password">
+<h3>Generative model for cracking password<a class="headerlink" href="#generative-model-for-cracking-password" title="Link to this heading">#</a></h3>
+<p>Generative AI poses several dangers for password cracking:</p>
+<ul class="simple">
+<li><p>Speed and Efficiency: Generative AI can significantly speed up the process of password cracking by generating and testing a vast number of possible passwords in a short amount of time. This can make it much more efficient for attackers to breach password-protected systems or accounts.</p></li>
+<li><p>Sophisticated Attack Techniques: Generative AI can employ sophisticated techniques, such as neural networks or reinforcement learning, to generate passwords that are more likely to be successful in cracking password hashes or bypassing authentication mechanisms.</p></li>
+<li><p>Adaptability: Generative AI models can adapt to different patterns and structures commonly found in passwords, such as common words, phrases, or character combinations. This adaptability makes them more effective at cracking passwords that may not be easily guessable or vulnerable to traditional brute-force methods.</p></li>
+<li><p>Privacy Risks: If generative AI is used for password cracking, it could compromise the privacy and security of individuals or organizations by gaining unauthorized access to sensitive information stored behind password-protected systems or accounts.</p></li>
+<li><p>Scale and Automation: Generative AI can be deployed at scale and automated, allowing attackers to launch large-scale password cracking attacks against multiple targets simultaneously, increasing the potential impact and severity of security breaches.imators.</p></li>
 </ul>
-<p><img alt="" src="https://assets-global.website-files.com/6305e5d52c28356b4fe71bac/63f8cfaeb05eed305bbc24f4_Holistic-AI-Figure-1.png" /></p>
-<p><em>Language Modeling Approaches. (a) Masked Language Modeling predict hidden words in the sequence. (b) Causal Language Modeling, predict the next word in the sequence</em></p>
-<p>Prominent examples of conversational language models include OpenAI’s ChatGPT, which is a powerful language model capable of generating context-aware responses in a conversational setting. These models have found applications in virtual assistants, chatbots, customer support systems, and various other conversational interfaces.</p>
+</section>
+<section id="passgpt">
+<h3>PassGPT<a class="headerlink" href="#passgpt" title="Link to this heading">#</a></h3>
+<p>PassGPT is an LLM trained on password leaks for password generation. PassGPT outperforms existing methods based <strong>by guessing twice as many previously unseen passwords</strong>. PassGPT also contains the concept of guided password generation, where they leverage PassGPT sampling procedure to generate passwords matching arbitrary constraints.</p>
+<p><img alt="" src="https://raw.githubusercontent.com/WSU-AI-CyberSecurity/WSU-AI-CyberSecurity.github.io/main/assets/passgpt.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conversations</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">GPT2LMHeadModel</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">RobertaTokenizerFast</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RobertaTokenizerFast</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;javirandor/passgpt-10characters&quot;</span><span class="p">,</span>
+                                                  <span class="n">max_len</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+                                                  <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;max_length&quot;</span><span class="p">,</span> 
+                                                  <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                  <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                                  <span class="n">strip_accents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                                  <span class="n">mask_token</span><span class="o">=</span><span class="s2">&quot;&lt;mask&gt;&quot;</span><span class="p">,</span>
+                                                  <span class="n">unk_token</span><span class="o">=</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">,</span>
+                                                  <span class="n">pad_token</span><span class="o">=</span><span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">,</span>
+                                                  <span class="n">truncation_side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">GPT2LMHeadModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;javirandor/passgpt-10characters&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+<span class="n">NUM_GENERATIONS</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">def</span> <span class="nf">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+    <span class="n">start_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+    <span class="n">start_token</span> <span class="o">=</span> <span class="n">start_token</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Generate passwords sampling from the beginning of password token</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">start_token</span><span class="p">]),</span>
+                      <span class="c1"># do_sample=True,</span>
+                      <span class="n">num_return_sequences</span><span class="o">=</span><span class="n">NUM_GENERATIONS</span><span class="p">,</span>
+                      <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+                      <span class="n">pad_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token_id</span><span class="p">,</span>
+                      <span class="n">bad_words_ids</span><span class="o">=</span><span class="p">[[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">bos_token_id</span><span class="p">]])</span>
+    
+    <span class="c1"># Remove start of sentence token</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+    
+    <span class="n">decoded</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_decode</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">decoded_clean</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;/s&gt;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">decoded</span><span class="p">]</span> <span class="c1"># Get content before end of password token</span>
+    
+    <span class="c1"># Print your sampled passwords!</span>
+    <span class="k">return</span> <span class="n">decoded_clean</span>
 
 
-<span class="k">def</span> <span class="nf">ask_model</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">converse</span><span class="p">(</span>
-        <span class="n">Conversation</span><span class="p">(</span><span class="s2">&quot;Under the context of network and cyber security. &quot;</span> <span class="o">+</span> <span class="nb">input</span><span class="p">)</span>
-    <span class="p">)</span>
+<span class="n">seedgen</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="learning-the-behaviour-of-human-s-password-creation">
+<h3>Learning the behaviour of human’s password creation<a class="headerlink" href="#learning-the-behaviour-of-human-s-password-creation" title="Link to this heading">#</a></h3>
+<p>The following are generating the most likely password that people choose based on big data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;0876060007&#39;]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ask_model</span><span class="p">(</span><span class="s2">&quot;What is DDoS&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;pas&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;password&#39;]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ask_model</span><span class="p">(</span><span class="s2">&quot;How can we prevent it?&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;qw&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;qwerty&#39;]
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;ilo&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;iloveme123&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Johnny1994&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>You can also do a conditional password generation</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
+
+<span class="n">DEVICE</span> <span class="o">=</span> <span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span>
+<span class="n">DEVICE</span> <span class="o">=</span> <span class="s1">&#39;cpu&#39;</span>
+
+<span class="c1"># Map each of the desired character groups into their corresponding ids (as given by the tokenizer)</span>
+<span class="n">lowercase</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span>
+<span class="n">uppercase</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">)</span>
+<span class="n">digits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
+<span class="n">punctuation</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)</span>
+
+<span class="n">lowercase_tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">lowercase</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">input_ids</span>
+<span class="n">uppercase_tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">uppercase</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">input_ids</span>
+<span class="n">digits_tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">digits</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">input_ids</span>
+<span class="n">punctuation_tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">punctuation</span><span class="p">,</span> <span class="n">add_special_tokens</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">input_ids</span>
+
+
+<span class="c1"># All possible tokens in our model</span>
+<span class="n">all_tokens</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">))]</span>
+
+<span class="k">def</span> <span class="nf">conditional_generation</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">num_generations</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">generated</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">generations</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">while</span> <span class="n">generated</span> <span class="o">&lt;</span> <span class="n">num_generations</span><span class="p">:</span>
+        <span class="n">generation</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">bos_token_id</span><span class="p">])</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">current_length</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">template</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot;l&quot;</span><span class="p">:</span>
+                <span class="n">bad_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">all_tokens</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lowercase_tokens</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot;u&quot;</span><span class="p">:</span>
+                <span class="n">bad_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">all_tokens</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">uppercase_tokens</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span>
+                <span class="n">bad_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">all_tokens</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">digits_tokens</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="s2">&quot;p&quot;</span><span class="p">:</span>
+                <span class="n">bad_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">all_tokens</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punctuation_tokens</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bad_tokens</span> <span class="o">=</span> <span class="p">[[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token_id</span><span class="p">]]</span>
+
+            <span class="n">generation</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">generation</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">DEVICE</span><span class="p">),</span> <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="n">current_length</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">pad_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token_id</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="n">bad_words_ids</span><span class="o">=</span><span class="n">bad_tokens</span><span class="p">)</span>
+            <span class="n">current_length</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">generation</span><span class="o">.</span><span class="n">flatten</span><span class="p">():</span>
+            <span class="n">generations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">generation</span><span class="p">)</span>
+            <span class="n">generated</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_decode</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">generations</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conditional-password-generation">
+<h3>Conditional Password Generation<a class="headerlink" href="#conditional-password-generation" title="Link to this heading">#</a></h3>
+<p>One of the main advantages of Generative is the possibility of generating passwords under arbitrary constraints. In this template code, we have created five different groups of characters that we can sample from at each position:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">l</span></code>: lowercase letters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u</span></code>: uppercase letters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">d</span></code>: digits</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p</span></code>: punctuation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*</span></code>: any character in the vocabulary</p></li>
+<li></li>
+</ul>
+<p>You can create any template by combining these. For example, <code class="docutils literal notranslate"><span class="pre">lllldd</span></code> will generate passwords starting with four lowercase letters and finishing with two digits.</p>
+<p>Feel free to create your own character groups below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditional_generation</span><span class="p">(</span><span class="s2">&quot;lllldd&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;owen32&#39;, &#39;will14&#39;, &#39;bubb12&#39;, &#39;rgdl15&#39;, &#39;pinc04&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditional_generation</span><span class="p">(</span><span class="s2">&quot;u*****lldd&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;PSYCHOfr12&#39;, &#39;Lanenabb12&#39;, &#39;Pochacho99&#39;, &#39;SHADOWlu69&#39;, &#39;JayDanki07&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -704,7 +878,14 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tunning-a-model-for-cyber-security">Fine-tunning a model for Cyber Security</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-securebret">Case Study: SecureBret</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-llms-as-conversational-model">Using LLMs as Conversational Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-llms-as-offensive-generative-ai">Using LLMs as Offensive Generative AI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#offensive-generative-ai-model">Offensive Generative AI Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-model-for-cracking-password">Generative model for cracking password</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passgpt">PassGPT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-behaviour-of-human-s-password-creation">Learning the behaviour of human’s password creation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-password-generation">Conditional Password Generation</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

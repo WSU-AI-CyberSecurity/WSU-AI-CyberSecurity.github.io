@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c72df8c4" />
@@ -388,6 +388,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-password-generation">Conditional Password Generation</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defensive-generative-ai">Defensive Generative AI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detecting-deepfake">Detecting Deepfake</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -438,9 +442,52 @@ document.write(`
 <p><img alt="" src="https://user-images.githubusercontent.com/46252665/195998237-9bbed621-8002-4287-ac0d-19c4f603d919.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install transformers</span>
-<span class="c1">#!pip install torch</span>
-<span class="c1">#!pip install tokenizers</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>transformers
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>torch
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>tokenizers
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: transformers in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (4.23.0)
+Requirement already satisfied: filelock in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from transformers) (3.13.1)
+Requirement already satisfied: huggingface-hub&lt;1.0,&gt;=0.10.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from transformers) (0.20.2)
+Requirement already satisfied: numpy&gt;=1.17 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from transformers) (1.26.3)
+Requirement already satisfied: packaging&gt;=20.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from transformers) (23.2)
+Requirement already satisfied: pyyaml&gt;=5.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from transformers) (6.0.1)
+Requirement already satisfied: regex!=2019.12.17 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from transformers) (2023.12.25)
+Requirement already satisfied: requests in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from transformers) (2.31.0)
+Requirement already satisfied: tokenizers!=0.11.3,&lt;0.14,&gt;=0.11.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from transformers) (0.13.3)
+Requirement already satisfied: tqdm&gt;=4.27 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from transformers) (4.66.1)
+Requirement already satisfied: fsspec&gt;=2023.5.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from huggingface-hub&lt;1.0,&gt;=0.10.0-&gt;transformers) (2023.10.0)
+Requirement already satisfied: typing-extensions&gt;=3.7.4.3 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from huggingface-hub&lt;1.0,&gt;=0.10.0-&gt;transformers) (4.9.0)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from requests-&gt;transformers) (3.3.2)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from requests-&gt;transformers) (3.6)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from requests-&gt;transformers) (2.2.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from requests-&gt;transformers) (2023.11.17)
+Requirement already satisfied: torch in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (2.2.0)
+Requirement already satisfied: filelock in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (3.13.1)
+Requirement already satisfied: typing-extensions&gt;=4.8.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (4.9.0)
+Requirement already satisfied: sympy in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (1.12)
+Requirement already satisfied: networkx in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (3.2.1)
+Requirement already satisfied: jinja2 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (3.1.3)
+Requirement already satisfied: fsspec in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (2023.10.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (8.9.2.26)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.19.3 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (2.19.3)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (12.1.105)
+Requirement already satisfied: triton==2.2.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch) (2.2.0)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from nvidia-cusolver-cu12==11.4.5.107-&gt;torch) (12.3.101)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from jinja2-&gt;torch) (2.1.5)
+Requirement already satisfied: mpmath&gt;=0.19 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from sympy-&gt;torch) (1.3.0)
+Requirement already satisfied: tokenizers in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (0.13.3)
 </pre></div>
 </div>
 </div>
@@ -503,10 +550,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of the model checkpoint at ehsanaghaei/SecureBERT were not used when initializing RobertaModel: [&#39;lm_head.layer_norm.bias&#39;, &#39;lm_head.bias&#39;, &#39;lm_head.layer_norm.weight&#39;, &#39;lm_head.dense.bias&#39;, &#39;lm_head.dense.weight&#39;]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of the model checkpoint at ehsanaghaei/SecureBERT were not used when initializing RobertaModel: [&#39;lm_head.layer_norm.bias&#39;, &#39;lm_head.dense.weight&#39;, &#39;lm_head.dense.bias&#39;, &#39;lm_head.bias&#39;, &#39;lm_head.layer_norm.weight&#39;]
 - This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
 - This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of RobertaModel were not initialized from the model checkpoint at ehsanaghaei/SecureBERT and are newly initialized: [&#39;roberta.pooler.dense.weight&#39;, &#39;roberta.pooler.dense.bias&#39;]
+Some weights of RobertaModel were not initialized from the model checkpoint at ehsanaghaei/SecureBERT and are newly initialized: [&#39;roberta.pooler.dense.bias&#39;, &#39;roberta.pooler.dense.weight&#39;]
 You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 If you want to use `RobertaLMHeadModel` as a standalone, add `is_decoder=True.`
 </pre></div>
@@ -619,38 +666,46 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">RobertaTokenizerFast</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RobertaTokenizerFast</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;javirandor/passgpt-10characters&quot;</span><span class="p">,</span>
-                                                  <span class="n">max_len</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-                                                  <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;max_length&quot;</span><span class="p">,</span> 
-                                                  <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                                  <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                                  <span class="n">strip_accents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                                  <span class="n">mask_token</span><span class="o">=</span><span class="s2">&quot;&lt;mask&gt;&quot;</span><span class="p">,</span>
-                                                  <span class="n">unk_token</span><span class="o">=</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">,</span>
-                                                  <span class="n">pad_token</span><span class="o">=</span><span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">,</span>
-                                                  <span class="n">truncation_side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RobertaTokenizerFast</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+    <span class="s2">&quot;javirandor/passgpt-10characters&quot;</span><span class="p">,</span>
+    <span class="n">max_len</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;max_length&quot;</span><span class="p">,</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">strip_accents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">mask_token</span><span class="o">=</span><span class="s2">&quot;&lt;mask&gt;&quot;</span><span class="p">,</span>
+    <span class="n">unk_token</span><span class="o">=</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">,</span>
+    <span class="n">pad_token</span><span class="o">=</span><span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">,</span>
+    <span class="n">truncation_side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">GPT2LMHeadModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;javirandor/passgpt-10characters&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 
-<span class="n">NUM_GENERATIONS</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">NUM_GENERATIONS</span> <span class="o">=</span> <span class="mi">1</span>
+
+
 <span class="k">def</span> <span class="nf">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
     <span class="n">start_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
     <span class="n">start_token</span> <span class="o">=</span> <span class="n">start_token</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    
+
     <span class="c1"># Generate passwords sampling from the beginning of password token</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">start_token</span><span class="p">]),</span>
-                      <span class="c1"># do_sample=True,</span>
-                      <span class="n">num_return_sequences</span><span class="o">=</span><span class="n">NUM_GENERATIONS</span><span class="p">,</span>
-                      <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
-                      <span class="n">pad_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token_id</span><span class="p">,</span>
-                      <span class="n">bad_words_ids</span><span class="o">=</span><span class="p">[[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">bos_token_id</span><span class="p">]])</span>
-    
+    <span class="n">g</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">start_token</span><span class="p">]),</span>
+        <span class="c1"># do_sample=True,</span>
+        <span class="n">num_return_sequences</span><span class="o">=</span><span class="n">NUM_GENERATIONS</span><span class="p">,</span>
+        <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">pad_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token_id</span><span class="p">,</span>
+        <span class="n">bad_words_ids</span><span class="o">=</span><span class="p">[[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">bos_token_id</span><span class="p">]],</span>
+    <span class="p">)</span>
+
     <span class="c1"># Remove start of sentence token</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
-    
+
     <span class="n">decoded</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_decode</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-    <span class="n">decoded_clean</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;/s&gt;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">decoded</span><span class="p">]</span> <span class="c1"># Get content before end of password token</span>
-    
+    <span class="n">decoded_clean</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&lt;/s&gt;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">decoded</span>
+    <span class="p">]</span>  <span class="c1"># Get content before end of password token</span>
+
     <span class="c1"># Print your sampled passwords!</span>
     <span class="k">return</span> <span class="n">decoded_clean</span>
 
@@ -666,7 +721,7 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 <p>The following are generating the most likely password that people choose based on big data</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -678,7 +733,7 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;pas&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;pas&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -690,7 +745,7 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;qw&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;qw&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -702,7 +757,7 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;ilo&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;ilo&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -714,7 +769,7 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generate_password</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -729,8 +784,8 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
 
-<span class="n">DEVICE</span> <span class="o">=</span> <span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span>
-<span class="n">DEVICE</span> <span class="o">=</span> <span class="s1">&#39;cpu&#39;</span>
+<span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>
 
 <span class="c1"># Map each of the desired character groups into their corresponding ids (as given by the tokenizer)</span>
 <span class="n">lowercase</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span>
@@ -747,10 +802,11 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 <span class="c1"># All possible tokens in our model</span>
 <span class="n">all_tokens</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">))]</span>
 
+
 <span class="k">def</span> <span class="nf">conditional_generation</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">num_generations</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">generated</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">generations</span> <span class="o">=</span> <span class="p">[]</span>
-    
+
     <span class="k">while</span> <span class="n">generated</span> <span class="o">&lt;</span> <span class="n">num_generations</span><span class="p">:</span>
         <span class="n">generation</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">bos_token_id</span><span class="p">])</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">current_length</span> <span class="o">=</span> <span class="mi">1</span>
@@ -767,13 +823,20 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">bad_tokens</span> <span class="o">=</span> <span class="p">[[</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token_id</span><span class="p">]]</span>
 
-            <span class="n">generation</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">generation</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">DEVICE</span><span class="p">),</span> <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="n">current_length</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">pad_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token_id</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="n">bad_words_ids</span><span class="o">=</span><span class="n">bad_tokens</span><span class="p">)</span>
+            <span class="n">generation</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+                <span class="n">generation</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">DEVICE</span><span class="p">),</span>
+                <span class="n">do_sample</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">max_length</span><span class="o">=</span><span class="n">current_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">pad_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token_id</span><span class="p">,</span>
+                <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">bad_words_ids</span><span class="o">=</span><span class="n">bad_tokens</span><span class="p">,</span>
+            <span class="p">)</span>
             <span class="n">current_length</span> <span class="o">+=</span> <span class="mi">1</span>
-        
+
         <span class="k">if</span> <span class="ow">not</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">generation</span><span class="o">.</span><span class="n">flatten</span><span class="p">():</span>
             <span class="n">generations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">generation</span><span class="p">)</span>
             <span class="n">generated</span> <span class="o">+=</span> <span class="mi">1</span>
-    
+
     <span class="k">return</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">batch_decode</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">generations</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">:])</span>
 </pre></div>
 </div>
@@ -782,7 +845,7 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 </section>
 <section id="conditional-password-generation">
 <h3>Conditional Password Generation<a class="headerlink" href="#conditional-password-generation" title="Link to this heading">#</a></h3>
-<p>One of the main advantages of Generative is the possibility of generating passwords under arbitrary constraints. In this template code, we have created five different groups of characters that we can sample from at each position:</p>
+<p>One of the main advantages of Generative AI is the possibility of generating passwords under arbitrary constraints. In this template code, we have created five different groups of characters that we can sample from at each position:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">l</span></code>: lowercase letters</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">u</span></code>: uppercase letters</p></li>
@@ -812,9 +875,1255 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;PSYCHOfr12&#39;, &#39;Lanenabb12&#39;, &#39;Pochacho99&#39;, &#39;SHADOWlu69&#39;, &#39;JayDanki07&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;KTMRGEma12&#39;, &#39;Valenbir10&#39;, &#39;Brandonm93&#39;, &#39;Brickfor23&#39;, &#39;Bradbitc10&#39;]
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>facenet_pytorch<span class="w"> </span>opencv-python<span class="w"> </span>grad-cam
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+Requirement already satisfied: facenet_pytorch in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (2.5.3)
+Requirement already satisfied: opencv-python in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (4.9.0.80)
+Requirement already satisfied: grad-cam in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (1.5.0)
+Requirement already satisfied: numpy in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from facenet_pytorch) (1.26.3)
+Requirement already satisfied: requests in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from facenet_pytorch) (2.31.0)
+Requirement already satisfied: torchvision in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from facenet_pytorch) (0.17.0)
+Requirement already satisfied: pillow in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from facenet_pytorch) (10.2.0)
+Requirement already satisfied: torch&gt;=1.7.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from grad-cam) (2.2.0)
+Requirement already satisfied: ttach in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from grad-cam) (0.0.3)
+Requirement already satisfied: tqdm in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from grad-cam) (4.66.1)
+Requirement already satisfied: matplotlib in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from grad-cam) (3.8.2)
+Requirement already satisfied: scikit-learn in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from grad-cam) (1.4.0)
+Requirement already satisfied: filelock in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (3.13.1)
+Requirement already satisfied: typing-extensions&gt;=4.8.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (4.9.0)
+Requirement already satisfied: sympy in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (1.12)
+Requirement already satisfied: networkx in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (3.2.1)
+Requirement already satisfied: jinja2 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (3.1.3)
+Requirement already satisfied: fsspec in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (2023.10.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (8.9.2.26)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.19.3 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (2.19.3)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (12.1.105)
+Requirement already satisfied: triton==2.2.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from torch&gt;=1.7.1-&gt;grad-cam) (2.2.0)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from nvidia-cusolver-cu12==11.4.5.107-&gt;torch&gt;=1.7.1-&gt;grad-cam) (12.3.101)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from matplotlib-&gt;grad-cam) (1.2.0)
+Requirement already satisfied: cycler&gt;=0.10 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from matplotlib-&gt;grad-cam) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from matplotlib-&gt;grad-cam) (4.47.2)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from matplotlib-&gt;grad-cam) (1.4.5)
+Requirement already satisfied: packaging&gt;=20.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from matplotlib-&gt;grad-cam) (23.2)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from matplotlib-&gt;grad-cam) (3.1.1)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from matplotlib-&gt;grad-cam) (2.8.2)
+Requirement already satisfied: importlib-resources&gt;=3.2.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from matplotlib-&gt;grad-cam) (6.1.1)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from requests-&gt;facenet_pytorch) (3.3.2)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from requests-&gt;facenet_pytorch) (3.6)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from requests-&gt;facenet_pytorch) (2.2.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from requests-&gt;facenet_pytorch) (2023.11.17)
+Requirement already satisfied: scipy&gt;=1.6.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from scikit-learn-&gt;grad-cam) (1.12.0)
+Requirement already satisfied: joblib&gt;=1.2.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from scikit-learn-&gt;grad-cam) (1.3.2)
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from scikit-learn-&gt;grad-cam) (3.2.0)
+Requirement already satisfied: zipp&gt;=3.1.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from importlib-resources&gt;=3.2.0-&gt;matplotlib-&gt;grad-cam) (3.17.0)
+Requirement already satisfied: six&gt;=1.5 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;grad-cam) (1.16.0)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from jinja2-&gt;torch&gt;=1.7.1-&gt;grad-cam) (2.1.5)
+Requirement already satisfied: mpmath&gt;=0.19 in /home/soraxas/micromamba/envs/wsu/lib/python3.9/site-packages (from sympy-&gt;torch&gt;=1.7.1-&gt;grad-cam) (1.3.0)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="defensive-generative-ai">
+<h2>Defensive Generative AI<a class="headerlink" href="#defensive-generative-ai" title="Link to this heading">#</a></h2>
+<p>After having a look at how generative AI can be destructive, let’s have a look at using AI in a more defensive manner.</p>
+<p>Defensive Generative AI refers to a branch of artificial intelligence (AI) research that focuses on developing systems capable of defending against attacks targeting generative models. Generative models, such as generative adversarial networks (GANs) or variational autoencoders (VAEs), are AI architectures designed to generate new data samples that resemble a training dataset. These models have shown great potential in various applications, including image generation, text generation, and data synthesis.</p>
+<p>However, like any AI system, generative models are vulnerable to attacks. Adversarial attacks against generative models can involve <strong>manipulating input data</strong> to generate outputs that mislead or compromise the model’s performance. These attacks can have significant implications, such as <strong>generating fake images</strong> that appear real or altering text generation models to produce misleading or harmful content.</p>
+<p><img alt="" src="https://secureops.com/wp-content/uploads/2023/09/AI-1.jpg" /></p>
+<p>Defensive Generative AI aims to develop techniques and strategies to mitigate the risks associated with adversarial attacks on generative models. This may involve developing robust training methods, designing algorithms that can detect adversarial inputs, or incorporating additional security measures into generative models to enhance their resilience against attacks.</p>
+<section id="detecting-deepfake">
+<h3>Detecting Deepfake<a class="headerlink" href="#detecting-deepfake" title="Link to this heading">#</a></h3>
+<p><strong>Deepfake</strong> refers to a manipulated or synthesized media, typically videos or images, where a person’s likeness or voice is replaced with that of another individual using deep learning techniques, particularly generative adversarial networks (GANs) or similar deep learning architectures. The term “deepfake” is a combination of “deep learning” and “fake.”</p>
+<p>Deepfakes have gained notoriety for their potential to deceive or manipulate viewers by creating realistic but entirely fabricated content. They can be used to superimpose faces onto bodies in videos, alter facial expressions or lip movements to match different audio tracks, or even create entirely synthetic videos of people saying or doing things they never actually did.</p>
+<p><img alt="" src="https://www.gavstech.com/wp-content/uploads/2023/12/deepfake.png" /></p>
+<p>Lets load up a model that can detects fake images by focusing on various local region on the faces.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">![</span><span class="w"> </span>-f<span class="w"> </span>examples.zip<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>wget<span class="w"> </span>https://huggingface.co/spaces/aaronespasa/deepfake-detection/resolve/main/examples.zip?download<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-O<span class="w"> </span>examples.zip
+<span class="o">![</span><span class="w"> </span>-f<span class="w"> </span>resnetinceptionv1_epoch_32.pth<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>wget<span class="w"> </span>https://huggingface.co/spaces/aaronespasa/deepfake-detection/resolve/main/resnetinceptionv1_epoch_32.pth?download<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-O<span class="w"> </span>resnetinceptionv1_epoch_32.pth
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">facenet_pytorch</span> <span class="kn">import</span> <span class="n">MTCNN</span><span class="p">,</span> <span class="n">InceptionResnetV1</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">pytorch_grad_cam</span> <span class="kn">import</span> <span class="n">GradCAM</span>
+<span class="kn">from</span> <span class="nn">pytorch_grad_cam.utils.model_targets</span> <span class="kn">import</span> <span class="n">ClassifierOutputTarget</span>
+<span class="kn">from</span> <span class="nn">pytorch_grad_cam.utils.image</span> <span class="kn">import</span> <span class="n">show_cam_on_image</span>
+
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s2">&quot;examples.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+<span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>
+
+<span class="n">mtcnn</span> <span class="o">=</span> <span class="n">MTCNN</span><span class="p">(</span><span class="n">select_largest</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">post_process</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">DEVICE</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">DEVICE</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">InceptionResnetV1</span><span class="p">(</span>
+    <span class="n">pretrained</span><span class="o">=</span><span class="s2">&quot;vggface2&quot;</span><span class="p">,</span> <span class="n">classify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">DEVICE</span>
+<span class="p">)</span>
+
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="s2">&quot;resnetinceptionv1_epoch_32.pth&quot;</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="s2">&quot;model_state_dict&quot;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">DEVICE</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>InceptionResnetV1(
+  (conv2d_1a): BasicConv2d(
+    (conv): Conv2d(3, 32, kernel_size=(3, 3), stride=(2, 2), bias=False)
+    (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (conv2d_2a): BasicConv2d(
+    (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), bias=False)
+    (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (conv2d_2b): BasicConv2d(
+    (conv): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (bn): BatchNorm2d(64, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (maxpool_3a): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv2d_3b): BasicConv2d(
+    (conv): Conv2d(64, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (bn): BatchNorm2d(80, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (conv2d_4a): BasicConv2d(
+    (conv): Conv2d(80, 192, kernel_size=(3, 3), stride=(1, 1), bias=False)
+    (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (conv2d_4b): BasicConv2d(
+    (conv): Conv2d(192, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+    (bn): BatchNorm2d(256, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (repeat_1): Sequential(
+    (0): Block35(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (branch2): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(96, 256, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (1): Block35(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (branch2): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(96, 256, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (2): Block35(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (branch2): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(96, 256, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (3): Block35(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (branch2): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(96, 256, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (4): Block35(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (branch2): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn): BatchNorm2d(32, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(96, 256, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+  )
+  (mixed_6a): Mixed_6a(
+    (branch0): BasicConv2d(
+      (conv): Conv2d(256, 384, kernel_size=(3, 3), stride=(2, 2), bias=False)
+      (bn): BatchNorm2d(384, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU()
+    )
+    (branch1): Sequential(
+      (0): BasicConv2d(
+        (conv): Conv2d(256, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (1): BasicConv2d(
+        (conv): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (2): BasicConv2d(
+        (conv): Conv2d(192, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+    )
+    (branch2): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (repeat_2): Sequential(
+    (0): Block17(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(256, 896, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (1): Block17(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(256, 896, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (2): Block17(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(256, 896, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (3): Block17(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(256, 896, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (4): Block17(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(256, 896, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (5): Block17(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(256, 896, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (6): Block17(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(256, 896, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (7): Block17(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(256, 896, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (8): Block17(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(256, 896, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (9): Block17(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(896, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(128, 128, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0), bias=False)
+          (bn): BatchNorm2d(128, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(256, 896, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+  )
+  (mixed_7a): Mixed_7a(
+    (branch0): Sequential(
+      (0): BasicConv2d(
+        (conv): Conv2d(896, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (1): BasicConv2d(
+        (conv): Conv2d(256, 384, kernel_size=(3, 3), stride=(2, 2), bias=False)
+        (bn): BatchNorm2d(384, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+    )
+    (branch1): Sequential(
+      (0): BasicConv2d(
+        (conv): Conv2d(896, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (1): BasicConv2d(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+    )
+    (branch2): Sequential(
+      (0): BasicConv2d(
+        (conv): Conv2d(896, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (1): BasicConv2d(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (2): BasicConv2d(
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+        (bn): BatchNorm2d(256, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+    )
+    (branch3): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (repeat_3): Sequential(
+    (0): Block8(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(192, 192, kernel_size=(3, 1), stride=(1, 1), padding=(1, 0), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(384, 1792, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (1): Block8(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(192, 192, kernel_size=(3, 1), stride=(1, 1), padding=(1, 0), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(384, 1792, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (2): Block8(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(192, 192, kernel_size=(3, 1), stride=(1, 1), padding=(1, 0), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(384, 1792, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (3): Block8(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(192, 192, kernel_size=(3, 1), stride=(1, 1), padding=(1, 0), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(384, 1792, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+    (4): Block8(
+      (branch0): BasicConv2d(
+        (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (branch1): Sequential(
+        (0): BasicConv2d(
+          (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (1): BasicConv2d(
+          (conv): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+        (2): BasicConv2d(
+          (conv): Conv2d(192, 192, kernel_size=(3, 1), stride=(1, 1), padding=(1, 0), bias=False)
+          (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU()
+        )
+      )
+      (conv2d): Conv2d(384, 1792, kernel_size=(1, 1), stride=(1, 1))
+      (relu): ReLU()
+    )
+  )
+  (block8): Block8(
+    (branch0): BasicConv2d(
+      (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU()
+    )
+    (branch1): Sequential(
+      (0): BasicConv2d(
+        (conv): Conv2d(1792, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (1): BasicConv2d(
+        (conv): Conv2d(192, 192, kernel_size=(1, 3), stride=(1, 1), padding=(0, 1), bias=False)
+        (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+      (2): BasicConv2d(
+        (conv): Conv2d(192, 192, kernel_size=(3, 1), stride=(1, 1), padding=(1, 0), bias=False)
+        (bn): BatchNorm2d(192, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU()
+      )
+    )
+    (conv2d): Conv2d(384, 1792, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (avgpool_1a): AdaptiveAvgPool2d(output_size=1)
+  (dropout): Dropout(p=0.6, inplace=False)
+  (last_linear): Linear(in_features=1792, out_features=512, bias=False)
+  (last_bn): BatchNorm1d(512, eps=0.001, momentum=0.1, affine=True, track_running_stats=True)
+  (logits): Linear(in_features=512, out_features=1, bias=True)
+)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code define a function that takes an input image and output the corresponding prediction</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">input_image</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Predict the label of the input_image&quot;&quot;&quot;</span>
+    <span class="n">face</span> <span class="o">=</span> <span class="n">mtcnn</span><span class="p">(</span><span class="n">input_image</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">face</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No face detected&quot;</span><span class="p">)</span>
+    <span class="n">face</span> <span class="o">=</span> <span class="n">face</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># add the batch dimension</span>
+    <span class="n">face</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">,</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># convert the face into a numpy array to be able to plot it</span>
+    <span class="n">prev_face</span> <span class="o">=</span> <span class="n">face</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">int</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">prev_face</span> <span class="o">=</span> <span class="n">prev_face</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+
+    <span class="n">face</span> <span class="o">=</span> <span class="n">face</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">DEVICE</span><span class="p">)</span>
+    <span class="n">face</span> <span class="o">=</span> <span class="n">face</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">face</span> <span class="o">=</span> <span class="n">face</span> <span class="o">/</span> <span class="mf">255.0</span>
+    <span class="n">face_image_to_plot</span> <span class="o">=</span> <span class="n">face</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">int</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="n">target_layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">block8</span><span class="o">.</span><span class="n">branch1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">cam</span> <span class="o">=</span> <span class="n">GradCAM</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">target_layers</span><span class="o">=</span><span class="n">target_layers</span><span class="p">)</span>
+    <span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">ClassifierOutputTarget</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+
+    <span class="n">grayscale_cam</span> <span class="o">=</span> <span class="n">cam</span><span class="p">(</span><span class="n">input_tensor</span><span class="o">=</span><span class="n">face</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="n">targets</span><span class="p">,</span> <span class="n">eigen_smooth</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">grayscale_cam</span> <span class="o">=</span> <span class="n">grayscale_cam</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">visualization</span> <span class="o">=</span> <span class="n">show_cam_on_image</span><span class="p">(</span><span class="n">face_image_to_plot</span><span class="p">,</span> <span class="n">grayscale_cam</span><span class="p">,</span> <span class="n">use_rgb</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">face_with_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">prev_face</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">visualization</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">face</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="s2">&quot;real&quot;</span> <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="s2">&quot;fake&quot;</span>
+
+        <span class="n">real_prediction</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">output</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">fake_prediction</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+        <span class="n">confidences</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;real&quot;</span><span class="p">:</span> <span class="n">real_prediction</span><span class="p">,</span> <span class="s2">&quot;fake&quot;</span><span class="p">:</span> <span class="n">fake_prediction</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">confidences</span><span class="p">,</span> <span class="n">prev_face</span><span class="p">,</span> <span class="n">face_with_mask</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;examples/*&quot;</span><span class="p">):</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="n">fname</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Predicted by our model: </span><span class="si">{</span><span class="s1">&#39;&lt;Real&gt;&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;real&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="mf">0.5</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&lt;Fake&gt;&#39;</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+    <span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;The reason of the prediction&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_1.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/b963ca4a413d7fa66dbf933bf171bbc7f8e3f162891f789f2228f4477f79a62f.png" src="../_images/b963ca4a413d7fa66dbf933bf171bbc7f8e3f162891f789f2228f4477f79a62f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00010454654693603516, &#39;fake&#39;: 0.999895453453064}]
+</pre></div>
+</div>
+<img alt="../_images/42401e336d72c41b9795d8646c2b2c592a3340e70d707357e3ebed2888f57b49.png" src="../_images/42401e336d72c41b9795d8646c2b2c592a3340e70d707357e3ebed2888f57b49.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_3.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/2bb8dfa443f22a3f484ae440f146e63c8a6eeb2e18a562e07e3e8a9443eb5c30.png" src="../_images/2bb8dfa443f22a3f484ae440f146e63c8a6eeb2e18a562e07e3e8a9443eb5c30.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 5.233287811279297e-05, &#39;fake&#39;: 0.9999476671218872}]
+</pre></div>
+</div>
+<img alt="../_images/4ce5fb56a222279d25462188a1791e14896ed590028345702c223421ef2a6ae3.png" src="../_images/4ce5fb56a222279d25462188a1791e14896ed590028345702c223421ef2a6ae3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_2.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/f242145fab6b166c78b377fa26c0e4c83d6270f7af28f31deae8ae38eb907576.png" src="../_images/f242145fab6b166c78b377fa26c0e4c83d6270f7af28f31deae8ae38eb907576.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00011217594146728516, &#39;fake&#39;: 0.9998878240585327}]
+</pre></div>
+</div>
+<img alt="../_images/1f952c03fb3598a141fc4f2280c999d8b557d72d8f9bae13c5475f3bbe5dc140.png" src="../_images/1f952c03fb3598a141fc4f2280c999d8b557d72d8f9bae13c5475f3bbe5dc140.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_6.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/87c83d4684b9598ac776474e75124e0c911f5cafcdd3f7b4188ed62756670065.png" src="../_images/87c83d4684b9598ac776474e75124e0c911f5cafcdd3f7b4188ed62756670065.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00018721818923950195, &#39;fake&#39;: 0.9998127818107605}]
+</pre></div>
+</div>
+<img alt="../_images/ec35df752b10f6dc4f055d7154c3745f01749aeffd5ce86cccb30b37940de5c6.png" src="../_images/ec35df752b10f6dc4f055d7154c3745f01749aeffd5ce86cccb30b37940de5c6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_7.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/6eebbfd7e7f72ba6c1232e319b86c5dbe2d269e728130ca3cb3358e52be4d981.png" src="../_images/6eebbfd7e7f72ba6c1232e319b86c5dbe2d269e728130ca3cb3358e52be4d981.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00023192167282104492, &#39;fake&#39;: 0.999768078327179}]
+</pre></div>
+</div>
+<img alt="../_images/fd7972fb5e6719b9f7a6af9df16ed21f6b987b790922cc24753a04111705f440.png" src="../_images/fd7972fb5e6719b9f7a6af9df16ed21f6b987b790922cc24753a04111705f440.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_5.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/53592f300c96ffc980ff750d68d162a7ba4b66e24e48a3736210112352f47802.png" src="../_images/53592f300c96ffc980ff750d68d162a7ba4b66e24e48a3736210112352f47802.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00187760591506958, &#39;fake&#39;: 0.9981223940849304}]
+</pre></div>
+</div>
+<img alt="../_images/c9b8db9afc70c0324be67aaf86c25d4a46fe8f4ee99729ef3acc11d422b5089a.png" src="../_images/c9b8db9afc70c0324be67aaf86c25d4a46fe8f4ee99729ef3acc11d422b5089a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_mercedes.jpeg
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/432e95dded0cf53833f7af59edba82e0475c28c79722e42c40ef9db4bb8585da.png" src="../_images/432e95dded0cf53833f7af59edba82e0475c28c79722e42c40ef9db4bb8585da.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.8550797253847122, &#39;fake&#39;: 0.14492027461528778}]
+</pre></div>
+</div>
+<img alt="../_images/bdce00248c1bf2baa461a29fc58161d5785a363b076fe2c9be95c721fa607e37.png" src="../_images/bdce00248c1bf2baa461a29fc58161d5785a363b076fe2c9be95c721fa607e37.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_4.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/e1e8c28c15b716abc96329cd06b65d96c26bf8ca11f1cc401abdf81f49efced4.png" src="../_images/e1e8c28c15b716abc96329cd06b65d96c26bf8ca11f1cc401abdf81f49efced4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.21064341068267822, &#39;fake&#39;: 0.7893565893173218}]
+</pre></div>
+</div>
+<img alt="../_images/5ff0a272e2db8b756e36beb8474937474efab3867ff6a787eb227b4b4598d590.png" src="../_images/5ff0a272e2db8b756e36beb8474937474efab3867ff6a787eb227b4b4598d590.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_frame_19.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/a5e326414b9460ee75867aac3bebfc042962bd10c9fcc01bfbdb8d9698e0e1e9.png" src="../_images/a5e326414b9460ee75867aac3bebfc042962bd10c9fcc01bfbdb8d9698e0e1e9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999999760254799, &#39;fake&#39;: 2.3974520146907707e-08}]
+</pre></div>
+</div>
+<img alt="../_images/57e1872c3f2200867a11e08df39a3883213f3fbe4438b0ccdc509e62293b8828.png" src="../_images/57e1872c3f2200867a11e08df39a3883213f3fbe4438b0ccdc509e62293b8828.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_15.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/2d13b9772800b6506a76ff9bc4e155708a0d83ab7b199e5672f57f6f6f8bc356.png" src="../_images/2d13b9772800b6506a76ff9bc4e155708a0d83ab7b199e5672f57f6f6f8bc356.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.001075446605682373, &#39;fake&#39;: 0.9989245533943176}]
+</pre></div>
+</div>
+<img alt="../_images/200ade0e33082e00af0b9f715853c4955daab0f6c2a10ae3f30e101549740f07.png" src="../_images/200ade0e33082e00af0b9f715853c4955daab0f6c2a10ae3f30e101549740f07.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_frame_9.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/3de838ce59582f2bd900fd2f4856a01beaf7a8730bccb6164b48b6cefad7151b.png" src="../_images/3de838ce59582f2bd900fd2f4856a01beaf7a8730bccb6164b48b6cefad7151b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999986545436741, &#39;fake&#39;: 1.3454563259074348e-06}]
+</pre></div>
+</div>
+<img alt="../_images/c12d6eda6fb34e2d5f09a963931962b489768b8af22041593266ec3fa06d2144.png" src="../_images/c12d6eda6fb34e2d5f09a963931962b489768b8af22041593266ec3fa06d2144.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_lucia.jpeg
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/f3ef1c61ff3b8c9597654f85b543352caa1db4ac714a9972ba6f3d1835ccc94e.png" src="../_images/f3ef1c61ff3b8c9597654f85b543352caa1db4ac714a9972ba6f3d1835ccc94e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999999977415401, &#39;fake&#39;: 2.2584598635688735e-09}]
+</pre></div>
+</div>
+<img alt="../_images/a790c07844364fd626c50463d011d156ee5d0aa354c2eb76f3ccc563178251ea.png" src="../_images/a790c07844364fd626c50463d011d156ee5d0aa354c2eb76f3ccc563178251ea.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_17.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/25bfe982b7638391fe79de3b2d961277ee329db0f941822c13bcc63eca861486.png" src="../_images/25bfe982b7638391fe79de3b2d961277ee329db0f941822c13bcc63eca861486.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 2.384185791015625e-07, &#39;fake&#39;: 0.9999997615814209}]
+</pre></div>
+</div>
+<img alt="../_images/be9f290900861a9910413f5e8ec696a454af33bdbc78aa12c49d913b856cd301.png" src="../_images/be9f290900861a9910413f5e8ec696a454af33bdbc78aa12c49d913b856cd301.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_16.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/f10f6436428c665bc897d78afad2fb03b1c45083b50c921fa5bdcd541e1beb83.png" src="../_images/f10f6436428c665bc897d78afad2fb03b1c45083b50c921fa5bdcd541e1beb83.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.07662761211395264, &#39;fake&#39;: 0.9233723878860474}]
+</pre></div>
+</div>
+<img alt="../_images/be6d8f4e17273fd345b2be0569a5d2484e18845940b53e2d4269688ab5fc3c33.png" src="../_images/be6d8f4e17273fd345b2be0569a5d2484e18845940b53e2d4269688ab5fc3c33.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_frame_8.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/21e509c282e030eefb5a286da7b263a14b8c930ff403fee23b588cbf253a432d.png" src="../_images/21e509c282e030eefb5a286da7b263a14b8c930ff403fee23b588cbf253a432d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999997878268374, &#39;fake&#39;: 2.1217316259480867e-07}]
+</pre></div>
+</div>
+<img alt="../_images/3c9dc6a6c1753d569a201d3c754ff9d6e219e9e7c0d6c276811165a45dcf545f.png" src="../_images/3c9dc6a6c1753d569a201d3c754ff9d6e219e9e7c0d6c276811165a45dcf545f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_12.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/df90b620fe40ef06d640934af7540b47fcce1da78027e037935e530aa44d9f27.png" src="../_images/df90b620fe40ef06d640934af7540b47fcce1da78027e037935e530aa44d9f27.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 1.4781951904296875e-05, &#39;fake&#39;: 0.9999852180480957}]
+</pre></div>
+</div>
+<img alt="../_images/6c686f7f76e5a743f3d2b2cde053f160b3652084b550e41f396223af6fae4fd6.png" src="../_images/6c686f7f76e5a743f3d2b2cde053f160b3652084b550e41f396223af6fae4fd6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_13.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/481cb3afa6b90418904d918556addd61367d6a0a13abcdc935e4aaa50231d3b1.png" src="../_images/481cb3afa6b90418904d918556addd61367d6a0a13abcdc935e4aaa50231d3b1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00046050548553466797, &#39;fake&#39;: 0.9995394945144653}]
+</pre></div>
+</div>
+<img alt="../_images/f2ef47c0972d26d3dabdcf79e8fba73177bc48efc05355c208b69727e4ae414d.png" src="../_images/f2ef47c0972d26d3dabdcf79e8fba73177bc48efc05355c208b69727e4ae414d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_frame_20.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/c867a4429b7b073113f5ec16ff3272c724a8498f06f4f2feeabd8314ff9f2a8b.png" src="../_images/c867a4429b7b073113f5ec16ff3272c724a8498f06f4f2feeabd8314ff9f2a8b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999540159587923, &#39;fake&#39;: 4.598404120770283e-05}]
+</pre></div>
+</div>
+<img alt="../_images/8577645d6c64379ada6f68be73ed61cb3659b7dda4f6990bd4a9dcbe1977bb08.png" src="../_images/8577645d6c64379ada6f68be73ed61cb3659b7dda4f6990bd4a9dcbe1977bb08.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_11.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/6229828cce2a5c07f061961c56d7572f418396447f5629831c0d2e43807e9978.png" src="../_images/6229828cce2a5c07f061961c56d7572f418396447f5629831c0d2e43807e9978.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.014934957027435303, &#39;fake&#39;: 0.9850650429725647}]
+</pre></div>
+</div>
+<img alt="../_images/f0eb6bbd81ed23e0eccb3f9e18ef32544855a6b24f6a26428e03a872ebc38194.png" src="../_images/f0eb6bbd81ed23e0eccb3f9e18ef32544855a6b24f6a26428e03a872ebc38194.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_10.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/f119cf45e315c95bfdf64e33383e60a24427754c75f3eb2a0ba70f6dc8cd2458.png" src="../_images/f119cf45e315c95bfdf64e33383e60a24427754c75f3eb2a0ba70f6dc8cd2458.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 4.00543212890625e-05, &#39;fake&#39;: 0.9999599456787109}]
+</pre></div>
+</div>
+<img alt="../_images/281c0c1c6a56ef1577ca987b2d28d4079bf976cb964a37e5979c965b6f0598a4.png" src="../_images/281c0c1c6a56ef1577ca987b2d28d4079bf976cb964a37e5979c965b6f0598a4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_frame_3.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/b7b628cf9dd4e4727f338dee42311f2666b807100a3f3e69096b7c6a6e56f728.png" src="../_images/b7b628cf9dd4e4727f338dee42311f2666b807100a3f3e69096b7c6a6e56f728.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999999934243937, &#39;fake&#39;: 6.575606281700175e-09}]
+</pre></div>
+</div>
+<img alt="../_images/69199e1161613ac75bbd6abfd22d564bb50d827ee658dfd35442526a7a3fe593.png" src="../_images/69199e1161613ac75bbd6abfd22d564bb50d827ee658dfd35442526a7a3fe593.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_20.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/295a0ebe9c4fe61f0c837b5e520660980668cf4d4e045dfae62775205dbd4f7b.png" src="../_images/295a0ebe9c4fe61f0c837b5e520660980668cf4d4e045dfae62775205dbd4f7b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 5.030632019042969e-05, &#39;fake&#39;: 0.9999496936798096}]
+</pre></div>
+</div>
+<img alt="../_images/fe2b5ef5a16a4c20d9e2f6b975f81c63f6f8ac0e2f4dd23d6a0fd743432c6dee.png" src="../_images/fe2b5ef5a16a4c20d9e2f6b975f81c63f6f8ac0e2f4dd23d6a0fd743432c6dee.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_frame_2.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/53ecf2cbffdf5c281ea601d7b70ff9c52f38464b52eec7cfc4a900f96373ea96.png" src="../_images/53ecf2cbffdf5c281ea601d7b70ff9c52f38464b52eec7cfc4a900f96373ea96.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.03622013330459595, &#39;fake&#39;: 0.963779866695404}]
+</pre></div>
+</div>
+<img alt="../_images/1925e6e02766671ae95d9d374918474fd21f249314302c49168d3a6593fc4ac9.png" src="../_images/1925e6e02766671ae95d9d374918474fd21f249314302c49168d3a6593fc4ac9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_frame_13.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/d844a1774df5779cf4165bd6882d0832376466e1eda5f85f4469e855d8fdb860.png" src="../_images/d844a1774df5779cf4165bd6882d0832376466e1eda5f85f4469e855d8fdb860.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9992852220311761, &#39;fake&#39;: 0.0007147779688239098}]
+</pre></div>
+</div>
+<img alt="../_images/93badced8ad001d0ef1e392e0b5585f7125bd7495d1f8d54fab680a9836c6063.png" src="../_images/93badced8ad001d0ef1e392e0b5585f7125bd7495d1f8d54fab680a9836c6063.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_frame_1.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/62b8105b95b38e1c04bee1aae18b2d89d0477c68a755e4638d321b6b3da3679d.png" src="../_images/62b8105b95b38e1c04bee1aae18b2d89d0477c68a755e4638d321b6b3da3679d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999886736432018, &#39;fake&#39;: 1.1326356798235793e-05}]
+</pre></div>
+</div>
+<img alt="../_images/f3379742b38cb9320300519a5f8cea4f96b5aeac661c12fc4a065656334b738d.png" src="../_images/f3379742b38cb9320300519a5f8cea4f96b5aeac661c12fc4a065656334b738d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_frame_16.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/a95661e1ee97c4ec908cd9ecd1e800196076d2e1b05e743165a806d05dff12ae.png" src="../_images/a95661e1ee97c4ec908cd9ecd1e800196076d2e1b05e743165a806d05dff12ae.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.987897539511323, &#39;fake&#39;: 0.012102460488677025}]
+</pre></div>
+</div>
+<img alt="../_images/e14dee3359aa6962d03f7cd1a55ee06e9f1ed9cfdfe5586d62ebdfeff4706d4a.png" src="../_images/e14dee3359aa6962d03f7cd1a55ee06e9f1ed9cfdfe5586d62ebdfeff4706d4a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/real_frame_15.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/adfbefcee1cf4e53983b8703c5b1182613154a979eccf3f98e3b8728f9197657.png" src="../_images/adfbefcee1cf4e53983b8703c5b1182613154a979eccf3f98e3b8728f9197657.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.5079668760299683, &#39;fake&#39;: 0.49203312397003174}]
+</pre></div>
+</div>
+<img alt="../_images/70a4e988d38ce3c54d5f0ace247f4f29051566458491c62a31549ddbc97dfda6.png" src="../_images/70a4e988d38ce3c54d5f0ace247f4f29051566458491c62a31549ddbc97dfda6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_19.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/8b2fbba3501683039b43d6821983048e5033cd5b9a1ea4974a8ccbceaa38c34b.png" src="../_images/8b2fbba3501683039b43d6821983048e5033cd5b9a1ea4974a8ccbceaa38c34b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 4.172325134277344e-06, &#39;fake&#39;: 0.9999958276748657}]
+</pre></div>
+</div>
+<img alt="../_images/f62f036aed00c73184deacc543ac7bce07c08c9531aa1f982600385a2ada527a.png" src="../_images/f62f036aed00c73184deacc543ac7bce07c08c9531aa1f982600385a2ada527a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_9.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/ef59f8024f308333e9787f8d7c78efc54d822a7f9beb36576b4eeb89cc6fe6e9.png" src="../_images/ef59f8024f308333e9787f8d7c78efc54d822a7f9beb36576b4eeb89cc6fe6e9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 4.291534423828125e-06, &#39;fake&#39;: 0.9999957084655762}]
+</pre></div>
+</div>
+<img alt="../_images/4c5cbfc9431460e62296b318dd4d968a92b2c6ca9b5e26435c7f36c6c2f0d988.png" src="../_images/4c5cbfc9431460e62296b318dd4d968a92b2c6ca9b5e26435c7f36c6c2f0d988.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_dot_csv.jpeg
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/6f0d240d4cc067d4ef9568cf1efe8d198b1d66f765a7a68ba1b0edcea8b0bde4.png" src="../_images/6f0d240d4cc067d4ef9568cf1efe8d198b1d66f765a7a68ba1b0edcea8b0bde4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.025828897953033447, &#39;fake&#39;: 0.9741711020469666}]
+</pre></div>
+</div>
+<img alt="../_images/4347d5c7ca7518ee01d5c1937b1bffcd30d6caaf08b1c9b1344f72bc6a21acc0.png" src="../_images/4347d5c7ca7518ee01d5c1937b1bffcd30d6caaf08b1c9b1344f72bc6a21acc0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    examples/fake_frame_8.png
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/56cf26f3259c6e93c1e8f534f44f818ae41ab7738346c3de963e100ec53b9944.png" src="../_images/56cf26f3259c6e93c1e8f534f44f818ae41ab7738346c3de963e100ec53b9944.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.0, &#39;fake&#39;: 1.0}]
+</pre></div>
+</div>
+<img alt="../_images/df1591c56935c99143311e8abd22bf5b7f484bcf1b4ccb7b5a3090c36bd1a505.png" src="../_images/df1591c56935c99143311e8abd22bf5b7f484bcf1b4ccb7b5a3090c36bd1a505.png" />
 </div>
 </div>
 </section>
@@ -884,6 +2193,10 @@ Overall, the <code class="docutils literal notranslate"><span class="pre">&lt;ma
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passgpt">PassGPT</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-the-behaviour-of-human-s-password-creation">Learning the behaviour of human’s password creation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-password-generation">Conditional Password Generation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defensive-generative-ai">Defensive Generative AI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detecting-deepfake">Detecting Deepfake</a></li>
 </ul>
 </li>
 </ul>

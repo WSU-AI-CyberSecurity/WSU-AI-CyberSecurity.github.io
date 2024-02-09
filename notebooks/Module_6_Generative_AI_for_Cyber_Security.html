@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c72df8c4" />
@@ -390,6 +390,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defensive-generative-ai">Defensive Generative AI</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detecting-deepfake">Detecting Deepfake</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-try-some-image-from-popular-meme">Let’s try some image from popular meme</a></li>
 </ul>
 </li>
 </ul>
@@ -550,10 +551,10 @@ Requirement already satisfied: tokenizers in /home/soraxas/micromamba/envs/wsu/l
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of the model checkpoint at ehsanaghaei/SecureBERT were not used when initializing RobertaModel: [&#39;lm_head.layer_norm.bias&#39;, &#39;lm_head.dense.weight&#39;, &#39;lm_head.dense.bias&#39;, &#39;lm_head.bias&#39;, &#39;lm_head.layer_norm.weight&#39;]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of the model checkpoint at ehsanaghaei/SecureBERT were not used when initializing RobertaModel: [&#39;lm_head.layer_norm.weight&#39;, &#39;lm_head.dense.bias&#39;, &#39;lm_head.layer_norm.bias&#39;, &#39;lm_head.bias&#39;, &#39;lm_head.dense.weight&#39;]
 - This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
 - This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of RobertaModel were not initialized from the model checkpoint at ehsanaghaei/SecureBERT and are newly initialized: [&#39;roberta.pooler.dense.bias&#39;, &#39;roberta.pooler.dense.weight&#39;]
+Some weights of RobertaModel were not initialized from the model checkpoint at ehsanaghaei/SecureBERT and are newly initialized: [&#39;roberta.pooler.dense.weight&#39;, &#39;roberta.pooler.dense.bias&#39;]
 You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 If you want to use `RobertaLMHeadModel` as a standalone, add `is_decoder=True.`
 </pre></div>
@@ -1791,7 +1792,8 @@ To disable this warning, you can either:
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;examples/*&quot;</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">display_result</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
     <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
@@ -1802,14 +1804,17 @@ To disable this warning, you can either:
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;Predicted by our model: </span><span class="si">{</span><span class="s1">&#39;&lt;Real&gt;&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;real&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="mf">0.5</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&lt;Fake&gt;&#39;</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
-    <span class="p">)</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="s2">&quot;&lt;Real&gt;&quot;</span> <span class="k">if</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;real&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="s2">&quot;&lt;Fake&gt;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicted by our model: </span><span class="si">{</span><span class="n">pred</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;The reason of the prediction&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The reason of the prediction: </span><span class="si">{</span><span class="n">pred</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;examples/*&quot;</span><span class="p">):</span>
+    <span class="n">display_result</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1823,7 +1828,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00010454654693603516, &#39;fake&#39;: 0.999895453453064}]
 </pre></div>
 </div>
-<img alt="../_images/42401e336d72c41b9795d8646c2b2c592a3340e70d707357e3ebed2888f57b49.png" src="../_images/42401e336d72c41b9795d8646c2b2c592a3340e70d707357e3ebed2888f57b49.png" />
+<img alt="../_images/42067098da7d0c6f49eb13f2c0c816e977a18b6b659173b341c31061d8268816.png" src="../_images/42067098da7d0c6f49eb13f2c0c816e977a18b6b659173b341c31061d8268816.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_3.png
 ================================================================================
@@ -1833,7 +1838,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 5.233287811279297e-05, &#39;fake&#39;: 0.9999476671218872}]
 </pre></div>
 </div>
-<img alt="../_images/4ce5fb56a222279d25462188a1791e14896ed590028345702c223421ef2a6ae3.png" src="../_images/4ce5fb56a222279d25462188a1791e14896ed590028345702c223421ef2a6ae3.png" />
+<img alt="../_images/3e5639c8844b9cc5425a1f335b10c0e457affff78bfb2c49c72175feaf6308d5.png" src="../_images/3e5639c8844b9cc5425a1f335b10c0e457affff78bfb2c49c72175feaf6308d5.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_2.png
 ================================================================================
@@ -1843,7 +1848,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00011217594146728516, &#39;fake&#39;: 0.9998878240585327}]
 </pre></div>
 </div>
-<img alt="../_images/1f952c03fb3598a141fc4f2280c999d8b557d72d8f9bae13c5475f3bbe5dc140.png" src="../_images/1f952c03fb3598a141fc4f2280c999d8b557d72d8f9bae13c5475f3bbe5dc140.png" />
+<img alt="../_images/c6f8a30a13affc62470218a6fa9bf2d1d4d725a611dc25cd21fc015d08612df7.png" src="../_images/c6f8a30a13affc62470218a6fa9bf2d1d4d725a611dc25cd21fc015d08612df7.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_6.png
 ================================================================================
@@ -1853,7 +1858,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00018721818923950195, &#39;fake&#39;: 0.9998127818107605}]
 </pre></div>
 </div>
-<img alt="../_images/ec35df752b10f6dc4f055d7154c3745f01749aeffd5ce86cccb30b37940de5c6.png" src="../_images/ec35df752b10f6dc4f055d7154c3745f01749aeffd5ce86cccb30b37940de5c6.png" />
+<img alt="../_images/06965f4851a778d04ec2c59920fe4eb3265ec4a2bcac4faa7116af1cfafd31c9.png" src="../_images/06965f4851a778d04ec2c59920fe4eb3265ec4a2bcac4faa7116af1cfafd31c9.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_7.png
 ================================================================================
@@ -1863,7 +1868,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00023192167282104492, &#39;fake&#39;: 0.999768078327179}]
 </pre></div>
 </div>
-<img alt="../_images/fd7972fb5e6719b9f7a6af9df16ed21f6b987b790922cc24753a04111705f440.png" src="../_images/fd7972fb5e6719b9f7a6af9df16ed21f6b987b790922cc24753a04111705f440.png" />
+<img alt="../_images/e00af54033d8ad7ba62cef2ebfb62430620df069cf56b8f84de22fbb7ec23e1a.png" src="../_images/e00af54033d8ad7ba62cef2ebfb62430620df069cf56b8f84de22fbb7ec23e1a.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_5.png
 ================================================================================
@@ -1873,7 +1878,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00187760591506958, &#39;fake&#39;: 0.9981223940849304}]
 </pre></div>
 </div>
-<img alt="../_images/c9b8db9afc70c0324be67aaf86c25d4a46fe8f4ee99729ef3acc11d422b5089a.png" src="../_images/c9b8db9afc70c0324be67aaf86c25d4a46fe8f4ee99729ef3acc11d422b5089a.png" />
+<img alt="../_images/2d09ec241153fc4db1dc8f75d803c7cbecbce3011c731a14193f7b2811f64445.png" src="../_images/2d09ec241153fc4db1dc8f75d803c7cbecbce3011c731a14193f7b2811f64445.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_mercedes.jpeg
 ================================================================================
@@ -1883,7 +1888,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.8550797253847122, &#39;fake&#39;: 0.14492027461528778}]
 </pre></div>
 </div>
-<img alt="../_images/bdce00248c1bf2baa461a29fc58161d5785a363b076fe2c9be95c721fa607e37.png" src="../_images/bdce00248c1bf2baa461a29fc58161d5785a363b076fe2c9be95c721fa607e37.png" />
+<img alt="../_images/add3a23082baa0b9df3aab72b4cc141e80a86bae939e79c0dbe93e7c7177b53d.png" src="../_images/add3a23082baa0b9df3aab72b4cc141e80a86bae939e79c0dbe93e7c7177b53d.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_4.png
 ================================================================================
@@ -1893,7 +1898,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.21064341068267822, &#39;fake&#39;: 0.7893565893173218}]
 </pre></div>
 </div>
-<img alt="../_images/5ff0a272e2db8b756e36beb8474937474efab3867ff6a787eb227b4b4598d590.png" src="../_images/5ff0a272e2db8b756e36beb8474937474efab3867ff6a787eb227b4b4598d590.png" />
+<img alt="../_images/a27610f0244350eb7f2efc4079552a430a877c2b92f55160ff919ff8a7ad653c.png" src="../_images/a27610f0244350eb7f2efc4079552a430a877c2b92f55160ff919ff8a7ad653c.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_frame_19.png
 ================================================================================
@@ -1903,7 +1908,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999999760254799, &#39;fake&#39;: 2.3974520146907707e-08}]
 </pre></div>
 </div>
-<img alt="../_images/57e1872c3f2200867a11e08df39a3883213f3fbe4438b0ccdc509e62293b8828.png" src="../_images/57e1872c3f2200867a11e08df39a3883213f3fbe4438b0ccdc509e62293b8828.png" />
+<img alt="../_images/0ab06c88d7703512b7ae16a1381b5e6ba3cf3e0b4e430bf50aa567c328596c2d.png" src="../_images/0ab06c88d7703512b7ae16a1381b5e6ba3cf3e0b4e430bf50aa567c328596c2d.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_15.png
 ================================================================================
@@ -1913,7 +1918,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.001075446605682373, &#39;fake&#39;: 0.9989245533943176}]
 </pre></div>
 </div>
-<img alt="../_images/200ade0e33082e00af0b9f715853c4955daab0f6c2a10ae3f30e101549740f07.png" src="../_images/200ade0e33082e00af0b9f715853c4955daab0f6c2a10ae3f30e101549740f07.png" />
+<img alt="../_images/53c5018adb3eba547e60ac5be149c1f25c4762e1d7876735292a174476da8a54.png" src="../_images/53c5018adb3eba547e60ac5be149c1f25c4762e1d7876735292a174476da8a54.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_frame_9.png
 ================================================================================
@@ -1923,7 +1928,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999986545436741, &#39;fake&#39;: 1.3454563259074348e-06}]
 </pre></div>
 </div>
-<img alt="../_images/c12d6eda6fb34e2d5f09a963931962b489768b8af22041593266ec3fa06d2144.png" src="../_images/c12d6eda6fb34e2d5f09a963931962b489768b8af22041593266ec3fa06d2144.png" />
+<img alt="../_images/db835f08bf1efe769a5bfb8786c63acb21d650e7b7d86ed2df2e98587cad94ea.png" src="../_images/db835f08bf1efe769a5bfb8786c63acb21d650e7b7d86ed2df2e98587cad94ea.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_lucia.jpeg
 ================================================================================
@@ -1933,7 +1938,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999999977415401, &#39;fake&#39;: 2.2584598635688735e-09}]
 </pre></div>
 </div>
-<img alt="../_images/a790c07844364fd626c50463d011d156ee5d0aa354c2eb76f3ccc563178251ea.png" src="../_images/a790c07844364fd626c50463d011d156ee5d0aa354c2eb76f3ccc563178251ea.png" />
+<img alt="../_images/3118976809ed745c26ec4b3e67f386215714bd8d0aef5fc20fe2d4c3d66d7811.png" src="../_images/3118976809ed745c26ec4b3e67f386215714bd8d0aef5fc20fe2d4c3d66d7811.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_17.png
 ================================================================================
@@ -1943,7 +1948,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 2.384185791015625e-07, &#39;fake&#39;: 0.9999997615814209}]
 </pre></div>
 </div>
-<img alt="../_images/be9f290900861a9910413f5e8ec696a454af33bdbc78aa12c49d913b856cd301.png" src="../_images/be9f290900861a9910413f5e8ec696a454af33bdbc78aa12c49d913b856cd301.png" />
+<img alt="../_images/e1bfe582e687e1ae7218ea5ce057002aed20010c7b48031f0ad814cb7dc37dbe.png" src="../_images/e1bfe582e687e1ae7218ea5ce057002aed20010c7b48031f0ad814cb7dc37dbe.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_16.png
 ================================================================================
@@ -1953,7 +1958,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.07662761211395264, &#39;fake&#39;: 0.9233723878860474}]
 </pre></div>
 </div>
-<img alt="../_images/be6d8f4e17273fd345b2be0569a5d2484e18845940b53e2d4269688ab5fc3c33.png" src="../_images/be6d8f4e17273fd345b2be0569a5d2484e18845940b53e2d4269688ab5fc3c33.png" />
+<img alt="../_images/2a95b27d06a6b1ad257932bae4dc9cc0571c7cfe34653b0c9ff681c3d49550a1.png" src="../_images/2a95b27d06a6b1ad257932bae4dc9cc0571c7cfe34653b0c9ff681c3d49550a1.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_frame_8.png
 ================================================================================
@@ -1963,7 +1968,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999997878268374, &#39;fake&#39;: 2.1217316259480867e-07}]
 </pre></div>
 </div>
-<img alt="../_images/3c9dc6a6c1753d569a201d3c754ff9d6e219e9e7c0d6c276811165a45dcf545f.png" src="../_images/3c9dc6a6c1753d569a201d3c754ff9d6e219e9e7c0d6c276811165a45dcf545f.png" />
+<img alt="../_images/f696b482502332429654513502c127120f1c32ea0192c5dc156d5608b0dbe826.png" src="../_images/f696b482502332429654513502c127120f1c32ea0192c5dc156d5608b0dbe826.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_12.png
 ================================================================================
@@ -1973,7 +1978,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 1.4781951904296875e-05, &#39;fake&#39;: 0.9999852180480957}]
 </pre></div>
 </div>
-<img alt="../_images/6c686f7f76e5a743f3d2b2cde053f160b3652084b550e41f396223af6fae4fd6.png" src="../_images/6c686f7f76e5a743f3d2b2cde053f160b3652084b550e41f396223af6fae4fd6.png" />
+<img alt="../_images/8a29551d51fb5a957ecdf1a4e3c72869c7b502b794042432fd6c5664f6e026f9.png" src="../_images/8a29551d51fb5a957ecdf1a4e3c72869c7b502b794042432fd6c5664f6e026f9.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_13.png
 ================================================================================
@@ -1983,7 +1988,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.00046050548553466797, &#39;fake&#39;: 0.9995394945144653}]
 </pre></div>
 </div>
-<img alt="../_images/f2ef47c0972d26d3dabdcf79e8fba73177bc48efc05355c208b69727e4ae414d.png" src="../_images/f2ef47c0972d26d3dabdcf79e8fba73177bc48efc05355c208b69727e4ae414d.png" />
+<img alt="../_images/57d72b4587c96b77efd6880263a90966be4874b45f2083b65497dfd4cc1f0208.png" src="../_images/57d72b4587c96b77efd6880263a90966be4874b45f2083b65497dfd4cc1f0208.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_frame_20.png
 ================================================================================
@@ -1993,7 +1998,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999540159587923, &#39;fake&#39;: 4.598404120770283e-05}]
 </pre></div>
 </div>
-<img alt="../_images/8577645d6c64379ada6f68be73ed61cb3659b7dda4f6990bd4a9dcbe1977bb08.png" src="../_images/8577645d6c64379ada6f68be73ed61cb3659b7dda4f6990bd4a9dcbe1977bb08.png" />
+<img alt="../_images/16068aa8c2fb000a33e2f993f44b85ff108a5e4e8e947155c699d1fdc26b8da6.png" src="../_images/16068aa8c2fb000a33e2f993f44b85ff108a5e4e8e947155c699d1fdc26b8da6.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_11.png
 ================================================================================
@@ -2003,7 +2008,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.014934957027435303, &#39;fake&#39;: 0.9850650429725647}]
 </pre></div>
 </div>
-<img alt="../_images/f0eb6bbd81ed23e0eccb3f9e18ef32544855a6b24f6a26428e03a872ebc38194.png" src="../_images/f0eb6bbd81ed23e0eccb3f9e18ef32544855a6b24f6a26428e03a872ebc38194.png" />
+<img alt="../_images/c5de5af20ce19210a165adc0cc229452b53d9831b82bf81512af7f76004706d7.png" src="../_images/c5de5af20ce19210a165adc0cc229452b53d9831b82bf81512af7f76004706d7.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_10.png
 ================================================================================
@@ -2013,7 +2018,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 4.00543212890625e-05, &#39;fake&#39;: 0.9999599456787109}]
 </pre></div>
 </div>
-<img alt="../_images/281c0c1c6a56ef1577ca987b2d28d4079bf976cb964a37e5979c965b6f0598a4.png" src="../_images/281c0c1c6a56ef1577ca987b2d28d4079bf976cb964a37e5979c965b6f0598a4.png" />
+<img alt="../_images/9b88dea64acb1c32cf91fad1c7eb67547db185977c0b871adb12faf3d5f3d7b4.png" src="../_images/9b88dea64acb1c32cf91fad1c7eb67547db185977c0b871adb12faf3d5f3d7b4.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_frame_3.png
 ================================================================================
@@ -2023,7 +2028,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999999934243937, &#39;fake&#39;: 6.575606281700175e-09}]
 </pre></div>
 </div>
-<img alt="../_images/69199e1161613ac75bbd6abfd22d564bb50d827ee658dfd35442526a7a3fe593.png" src="../_images/69199e1161613ac75bbd6abfd22d564bb50d827ee658dfd35442526a7a3fe593.png" />
+<img alt="../_images/91330918608f6733fc238bad55e03dd049a2f21587d61b6960e68209de8d9255.png" src="../_images/91330918608f6733fc238bad55e03dd049a2f21587d61b6960e68209de8d9255.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_20.png
 ================================================================================
@@ -2033,7 +2038,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 5.030632019042969e-05, &#39;fake&#39;: 0.9999496936798096}]
 </pre></div>
 </div>
-<img alt="../_images/fe2b5ef5a16a4c20d9e2f6b975f81c63f6f8ac0e2f4dd23d6a0fd743432c6dee.png" src="../_images/fe2b5ef5a16a4c20d9e2f6b975f81c63f6f8ac0e2f4dd23d6a0fd743432c6dee.png" />
+<img alt="../_images/97c021df35c064cfe4ff673547612695048bff352c6138488b0a6554414af5ef.png" src="../_images/97c021df35c064cfe4ff673547612695048bff352c6138488b0a6554414af5ef.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_frame_2.png
 ================================================================================
@@ -2043,7 +2048,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.03622013330459595, &#39;fake&#39;: 0.963779866695404}]
 </pre></div>
 </div>
-<img alt="../_images/1925e6e02766671ae95d9d374918474fd21f249314302c49168d3a6593fc4ac9.png" src="../_images/1925e6e02766671ae95d9d374918474fd21f249314302c49168d3a6593fc4ac9.png" />
+<img alt="../_images/3b0aa418f4f9b27fa229f582a1b93b5decf659a6f1f4decacd3b7a08d0da5bda.png" src="../_images/3b0aa418f4f9b27fa229f582a1b93b5decf659a6f1f4decacd3b7a08d0da5bda.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_frame_13.png
 ================================================================================
@@ -2053,7 +2058,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9992852220311761, &#39;fake&#39;: 0.0007147779688239098}]
 </pre></div>
 </div>
-<img alt="../_images/93badced8ad001d0ef1e392e0b5585f7125bd7495d1f8d54fab680a9836c6063.png" src="../_images/93badced8ad001d0ef1e392e0b5585f7125bd7495d1f8d54fab680a9836c6063.png" />
+<img alt="../_images/f0ee9f9dbf095a0f872ac31dd410aa5eecb863533041ddda752c8c45f22c3a98.png" src="../_images/f0ee9f9dbf095a0f872ac31dd410aa5eecb863533041ddda752c8c45f22c3a98.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_frame_1.png
 ================================================================================
@@ -2063,7 +2068,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9999886736432018, &#39;fake&#39;: 1.1326356798235793e-05}]
 </pre></div>
 </div>
-<img alt="../_images/f3379742b38cb9320300519a5f8cea4f96b5aeac661c12fc4a065656334b738d.png" src="../_images/f3379742b38cb9320300519a5f8cea4f96b5aeac661c12fc4a065656334b738d.png" />
+<img alt="../_images/fdd1bd8d9cad456868ed1aeb15482038406fd3162147d98be7424d2f384131df.png" src="../_images/fdd1bd8d9cad456868ed1aeb15482038406fd3162147d98be7424d2f384131df.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_frame_16.png
 ================================================================================
@@ -2073,7 +2078,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.987897539511323, &#39;fake&#39;: 0.012102460488677025}]
 </pre></div>
 </div>
-<img alt="../_images/e14dee3359aa6962d03f7cd1a55ee06e9f1ed9cfdfe5586d62ebdfeff4706d4a.png" src="../_images/e14dee3359aa6962d03f7cd1a55ee06e9f1ed9cfdfe5586d62ebdfeff4706d4a.png" />
+<img alt="../_images/1918fe9276c7433864d35a86647eac7cdb0ff776693f780697d9d38960c8df43.png" src="../_images/1918fe9276c7433864d35a86647eac7cdb0ff776693f780697d9d38960c8df43.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/real_frame_15.png
 ================================================================================
@@ -2083,7 +2088,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.5079668760299683, &#39;fake&#39;: 0.49203312397003174}]
 </pre></div>
 </div>
-<img alt="../_images/70a4e988d38ce3c54d5f0ace247f4f29051566458491c62a31549ddbc97dfda6.png" src="../_images/70a4e988d38ce3c54d5f0ace247f4f29051566458491c62a31549ddbc97dfda6.png" />
+<img alt="../_images/971a0171264827df1ede19e3d0e4e723dc29797bc8075c49192036fc93b1bf5b.png" src="../_images/971a0171264827df1ede19e3d0e4e723dc29797bc8075c49192036fc93b1bf5b.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_19.png
 ================================================================================
@@ -2093,7 +2098,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 4.172325134277344e-06, &#39;fake&#39;: 0.9999958276748657}]
 </pre></div>
 </div>
-<img alt="../_images/f62f036aed00c73184deacc543ac7bce07c08c9531aa1f982600385a2ada527a.png" src="../_images/f62f036aed00c73184deacc543ac7bce07c08c9531aa1f982600385a2ada527a.png" />
+<img alt="../_images/bcc03812a31d6261bdf3698d0ab4c29c191f7796273b6f741548c5a6186f0d31.png" src="../_images/bcc03812a31d6261bdf3698d0ab4c29c191f7796273b6f741548c5a6186f0d31.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_9.png
 ================================================================================
@@ -2103,7 +2108,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 4.291534423828125e-06, &#39;fake&#39;: 0.9999957084655762}]
 </pre></div>
 </div>
-<img alt="../_images/4c5cbfc9431460e62296b318dd4d968a92b2c6ca9b5e26435c7f36c6c2f0d988.png" src="../_images/4c5cbfc9431460e62296b318dd4d968a92b2c6ca9b5e26435c7f36c6c2f0d988.png" />
+<img alt="../_images/71b6bcc65c17155cbe9de9887e977c80cf278dd40eac65e1ac3ecf0469d9784f.png" src="../_images/71b6bcc65c17155cbe9de9887e977c80cf278dd40eac65e1ac3ecf0469d9784f.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_dot_csv.jpeg
 ================================================================================
@@ -2113,7 +2118,7 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.025828897953033447, &#39;fake&#39;: 0.9741711020469666}]
 </pre></div>
 </div>
-<img alt="../_images/4347d5c7ca7518ee01d5c1937b1bffcd30d6caaf08b1c9b1344f72bc6a21acc0.png" src="../_images/4347d5c7ca7518ee01d5c1937b1bffcd30d6caaf08b1c9b1344f72bc6a21acc0.png" />
+<img alt="../_images/762165619ff3309e84f0c7fb424eba5e8786f4da82eff7186cd1f10394bc51d6.png" src="../_images/762165619ff3309e84f0c7fb424eba5e8786f4da82eff7186cd1f10394bc51d6.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
                     examples/fake_frame_8.png
 ================================================================================
@@ -2123,7 +2128,102 @@ To disable this warning, you can either:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.0, &#39;fake&#39;: 1.0}]
 </pre></div>
 </div>
-<img alt="../_images/df1591c56935c99143311e8abd22bf5b7f484bcf1b4ccb7b5a3090c36bd1a505.png" src="../_images/df1591c56935c99143311e8abd22bf5b7f484bcf1b4ccb7b5a3090c36bd1a505.png" />
+<img alt="../_images/10689662a2333786785a7b1ad24bd1d64422e51cee82fffc2f725543fc18971e.png" src="../_images/10689662a2333786785a7b1ad24bd1d64422e51cee82fffc2f725543fc18971e.png" />
+</div>
+</div>
+</section>
+<section id="let-s-try-some-image-from-popular-meme">
+<h3>Let’s try some image from popular meme<a class="headerlink" href="#let-s-try-some-image-from-popular-meme" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>https://i.ytimg.com/vi/wu-lMi1nw9s/maxresdefault.jpg<span class="w"> </span>-O<span class="w"> </span>starwar1.jpg
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+--2024-02-09 19:13:05--  https://i.ytimg.com/vi/wu-lMi1nw9s/maxresdefault.jpg
+Loaded CA certificate &#39;/etc/ssl/certs/ca-certificates.crt&#39;
+Resolving i.ytimg.com (i.ytimg.com)... 172.217.167.86, 142.250.66.246, 142.250.76.118, ...
+Connecting to i.ytimg.com (i.ytimg.com)|172.217.167.86|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 74326 (73K) [image/jpeg]
+Saving to: ‘starwar1.jpg’
+
+starwar1.jpg        100%[===================&gt;]  72.58K  --.-KB/s    in 0.05s   
+
+2024-02-09 19:13:06 (1.53 MB/s) - ‘starwar1.jpg’ saved [74326/74326]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_result</span><span class="p">(</span><span class="s2">&quot;starwar1.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    starwar1.jpg
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/6be13d4c87f8727e0dd0ed4e994a32d1e4398a93f6322c377601b158bfb4efd6.png" src="../_images/6be13d4c87f8727e0dd0ed4e994a32d1e4398a93f6322c377601b158bfb4efd6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Real&gt; [{&#39;real&#39;: 0.9961821485776454, &#39;fake&#39;: 0.003817851422354579}]
+</pre></div>
+</div>
+<img alt="../_images/d54d083a7687f431c81cf8cc4ba50fa0b8195fcfb8daa85423e7fe9adc864908.png" src="../_images/d54d083a7687f431c81cf8cc4ba50fa0b8195fcfb8daa85423e7fe9adc864908.png" />
+</div>
+</div>
+<p><strong>Now comes a fake one</strong></p>
+<p>Staring, <em>Nicolas Cage</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>https://pbs.twimg.com/media/EKi1flkXYAA5-A_?format<span class="o">=</span>jpg<span class="w"> </span>-O<span class="w"> </span>starwar2.jpg
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+--2024-02-09 19:13:06--  https://pbs.twimg.com/media/EKi1flkXYAA5-A_?format=jpg
+Loaded CA certificate &#39;/etc/ssl/certs/ca-certificates.crt&#39;
+Resolving pbs.twimg.com (pbs.twimg.com)... 117.18.237.70, 2606:2800:248:1347:709:24f:182c:618
+Connecting to pbs.twimg.com (pbs.twimg.com)|117.18.237.70|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 50381 (49K) [image/jpeg]
+Saving to: ‘starwar2.jpg’
+
+starwar2.jpg        100%[===================&gt;]  49.20K  --.-KB/s    in 0.02s   
+
+2024-02-09 19:13:07 (2.40 MB/s) - ‘starwar2.jpg’ saved [50381/50381]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_result</span><span class="p">(</span><span class="s2">&quot;starwar2.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+                    starwar2.jpg
+================================================================================
+</pre></div>
+</div>
+<img alt="../_images/d48d86cd581d9de8fa2db0648ca47972661562b1af4a718223956aabb12acf67.png" src="../_images/d48d86cd581d9de8fa2db0648ca47972661562b1af4a718223956aabb12acf67.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted by our model: &lt;Fake&gt; [{&#39;real&#39;: 0.0038504600524902344, &#39;fake&#39;: 0.9961495399475098}]
+</pre></div>
+</div>
+<img alt="../_images/f23c89915c29da807b1c3266e27c3581a9fee9fbe7c05d770325faf8ad5464b1.png" src="../_images/f23c89915c29da807b1c3266e27c3581a9fee9fbe7c05d770325faf8ad5464b1.png" />
 </div>
 </div>
 </section>
@@ -2197,6 +2297,7 @@ To disable this warning, you can either:
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defensive-generative-ai">Defensive Generative AI</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detecting-deepfake">Detecting Deepfake</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-try-some-image-from-popular-meme">Let’s try some image from popular meme</a></li>
 </ul>
 </li>
 </ul>

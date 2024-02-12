@@ -673,10 +673,10 @@ document.write(`
 
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Email&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;Is span?&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;predicted&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Email&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;Is spam?&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;predicted&quot;</span><span class="p">:</span> <span class="p">[]}</span>
 <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">pred_y</span><span class="p">):</span>
     <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Email&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spam_ori</span><span class="o">.</span><span class="n">Text</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
-    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Is span?&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">map_bool_to_checkmark</span><span class="p">(</span><span class="n">gt</span><span class="p">))</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Is spam?&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">map_bool_to_checkmark</span><span class="p">(</span><span class="n">gt</span><span class="p">))</span>
     <span class="n">data</span><span class="p">[</span><span class="s2">&quot;predicted&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">map_bool_to_checkmark</span><span class="p">(</span><span class="n">pred</span><span class="p">))</span>
     <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">:</span>
@@ -712,7 +712,7 @@ First 15 results:
     <tr style="text-align: right;">
       <th></th>
       <th>Email</th>
-      <th>Is span?</th>
+      <th>Is spam?</th>
       <th>predicted</th>
     </tr>
   </thead>

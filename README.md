@@ -1,8 +1,11 @@
-# Introductory to Machine Learning
+# Introductory to ML for Cybersecurity
 
 The interactive notebook can be accessed at [this link](https://wsu-ai-cybersecurity.github.io/).
 
+[![](https://github.com/user-attachments/assets/030999ad-2932-4ec1-b07e-240512bf5699)](https://wsu-ai-cybersecurity.github.io/)
+
 This workshop is part of the [Google Explore CSR Workshop](https://web.archive.org/web/20240812122054/https://mycace.org/google-explore/) held on February 13, 14 & 15th 2024.
+
 
 # Exploring Machine Learning in Cybersecurity Workshop
 
